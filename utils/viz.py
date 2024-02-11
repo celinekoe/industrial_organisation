@@ -1,18 +1,15 @@
 import matplotlib.pyplot as plt
 
-def plot_tags(tags_, title):
+def plot_tags_years_(tags_years_, val_label):
   plt.figure(figsize=(10, 6))
   
-  for tag, years_ in tags_.items():
+  for tag, years_ in tags_years_.items():
     years = list(years_.keys())
-    percents = list(years_.values())
-    plt.plot(years, percents, marker='o', label=tag)
-
-  if title:
-    plt.title(title)
+    values = list(years_.values())
+    plt.plot(years, values, marker='o', label=tag)
     
   plt.xlabel('Year')
-  plt.ylabel('Percent')
+  plt.ylabel(val_label)
   plt.legend()
   plt.grid(True)
   plt.show()
@@ -31,4 +28,43 @@ def plot_tag(tag, tag_, title=None):
   plt.ylabel('Percent')
   plt.legend()
   plt.grid(True)
+  plt.show()
+
+def plot_years(years_, label, val_label):
+  plt.figure(figsize=(10, 6))
+  
+  years = list(years_.keys())
+  values = list(years_.values())
+  plt.plot(years, values, marker='o', label=label)
+    
+  plt.xlabel('Year')
+  plt.ylabel(val_label)
+  plt.legend()
+  plt.grid(True)
+  plt.show()
+
+
+def chart_tag_values(tag_values, label):
+  # Data
+  categories = ['A', 'B', 'C', 'D']
+  values = [10, 15, 7, 20]
+
+  # Create bar chart
+  plt.bar(categories, values)
+
+  # Add labels and title
+  plt.xlabel('Categories')
+  plt.ylabel('Values')
+  plt.title('Bar Chart Example')
+
+  # Show plot
+  plt.show()
+
+def plot_pie(key_count, title=""):
+  keys = list(key_count.keys())
+  count = list(key_count.values())
+
+  plt.pie(count, labels=keys, autopct='%1.1f%%')
+  plt.axis('equal')
+  plt.title(title)
   plt.show()

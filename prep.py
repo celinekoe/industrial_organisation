@@ -1,40 +1,100 @@
+from math import isnan
+from pathlib import Path
+import pandas as pd
 import numpy as np
-import time
 
 from constants import tags_path, firms_path, year_range
-from utils.file import read_csv_as_list, read_csv_as_df, write_pickle
+from utils.ds import get_flat_list, get_top_n, sort_keys_by_value, filter_by_key_list
+from utils.file import read_dir_as_df, write_pickle
+from utils.log import timer
+from utils.tags import get_tags_years_percent, init_tags_years_, init_tags_, get_tags_percent, init_years_tags_, get_years_tags_percent, init_tags_rel_tags_, get_tags_rel_tags_percent
+from utils.validate import validate_firms
 
-start_time = time.time()
+def get_firm_tags(firm):
+  firm_tags = []
+  if isinstance(firm['Industries'], str):
+    firm_tags = [tag.strip() for tag in firm['Industries'].split(',')]
 
-tags = read_csv_as_list(tags_path)
-num_tags = len(tags)
-tags_years_count = {tag: {year: 0 for year in year_range} for tag in tags}
-years_count = {year: 0 for year in year_range}
-tags_count = {tag: 0 for tag in tags}
+  return firm_tags
 
-firms = read_csv_as_df(firms_path)
+def get_tags(firms):
+  firm_tags_list = []
 
-for firm_index, firm in firms.iterrows():
-  industries = [industry.strip() for industry in firm['Industries'].split(',')]
+  for firm_index, firm in firms.iterrows():
+    firm_tags = get_firm_tags(firm)
+    firm_tags_list.append(firm_tags)
 
-  founded_year = firm['Founded Year']
-  years_count[founded_year] = years_count[founded_year] + 1 
+  return get_flat_list(firm_tags_list)
 
-  firm_tags = np.zeros(num_tags)
-  for index, tag in enumerate(tags):
-    if tag in industries:
-      firm_tags[index] = 1
+def enrich_firms(firms):
+  founded_date = pd.to_datetime(firms['Founded Date'])
+  firms['Founded Year'] = founded_date.dt.year
 
-      tags_years_count[tag][founded_year] = tags_years_count[tag][founded_year] + 1 
-      tags_count[tag] = tags_count[tag] + 1
+  return firms
 
-  firm['Tags'] = firm_tags
+@timer
+def main():
+  firms = enrich_firms(read_dir_as_df("data/by_country/singapore"))
+  validate_firms(firms, skip=True)
 
-write_pickle("firms", firms)
-write_pickle("tags_years_count", tags_years_count)
-write_pickle("years_count", years_count)
-write_pickle("tags_count", tags_count)
+  tags = get_tags(firms)
+  tags_years_count = init_tags_years_(tags)
+  tags_count = init_tags_(tags)
+  years_tags_count = init_years_tags_(tags)
+  years_count = {year: 0 for year in year_range}
+  tags_rel_tags_count = init_tags_rel_tags_(tags)
 
-end_time = time.time()
-elapsed_time = end_time - start_time
-print(f"preprocess execution time: {elapsed_time:.2f} seconds")
+  for firm_index, firm in firms.iterrows():
+    firm_tags = get_firm_tags(firm)
+
+    founded_year = firm['Founded Year']
+    years_count[founded_year] = years_count[founded_year] + 1 
+
+    for index, tag in enumerate(tags):
+      if tag in firm_tags:
+        tags_years_count[tag][founded_year] = tags_years_count[tag][founded_year] + 1 
+        tags_count[tag] = tags_count[tag] + 1
+
+        years_tags_count[founded_year][tag] = years_tags_count[founded_year][tag] + 1
+
+    for outer_tag in firm_tags:
+      for inner_tag in firm_tags:
+        if outer_tag != inner_tag:
+          tags_rel_tags_count[outer_tag][inner_tag] = tags_rel_tags_count[outer_tag][inner_tag] + 1
+
+  tags_years_percent = get_tags_years_percent(tags, tags_years_count, years_count)
+  tags_percent = get_tags_percent(tags, tags_count)
+  tags_rel_tags_percent = get_tags_rel_tags_percent(tags, tags_rel_tags_count)
+
+  years_tags_percent = get_years_tags_percent(tags, years_tags_count, years_count)
+
+  for index in range(0, 1):
+    top_tag = get_top_n(sort_keys_by_value(tags_percent, desc=True), 1, start=index)[0]
+    top_rel_tags = get_top_n(sort_keys_by_value(tags_rel_tags_percent[top_tag], desc=True), 10)
+    test = filter_by_key_list(tags_rel_tags_percent[top_tag], top_rel_tags)
+    print(test)
+    # top_rel = get_top_n(sort_keys_by_value(tags_rel_tags_count[top_tag], desc=True), 10)[0]
+    # top_rel_tag_count = tags_rel_tags_count[top_tag][top_rel_tag]
+    # print(top_tag)
+    # print(rel_tag_count)
+    # print(rel_tag_count)
+    # print(top_rel_tag_count)
+    # print(top_rel_tag_count / rel_tag_count * 100)
+
+  # Start with most common tag
+  # Drop other tags
+  # Repeat?
+  # Okay, then I can repeat and nest
+
+  write_pickle("firms", firms)
+  write_pickle("tags", tags)
+  write_pickle("tags_count", tags_count)
+  write_pickle("tags_percent", tags_percent)
+  write_pickle("tags_years_count", tags_years_count)
+  write_pickle("tags_years_percent", tags_years_percent)
+  write_pickle("years_count", years_count)
+  write_pickle("years_tags_count", years_tags_count)
+  write_pickle("years_tags_percent", years_tags_percent)
+    
+if __name__ == "__main__":
+  main()
