@@ -5,6 +5,9 @@ from collections import defaultdict
 def filter_by_key_list(dict, key_list, incl=True):
   return {key: value for key, value in dict.items() if key in key_list}
 
+def value_list_from_key_list(dict, key_list, incl=True):
+  return [dict[key] for key in key_list if key in dict]
+
 def sort_keys_by_value(dict, desc=True):
   sorted_tuples = sorted(dict.items(), key=lambda key_value: key_value[1], reverse=desc)
   return extract_first(sorted_tuples)

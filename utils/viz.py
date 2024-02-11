@@ -43,28 +43,33 @@ def plot_years(years_, label, val_label):
   plt.grid(True)
   plt.show()
 
-
-def chart_tag_values(tag_values, label):
-  # Data
-  categories = ['A', 'B', 'C', 'D']
-  values = [10, 15, 7, 20]
-
-  # Create bar chart
-  plt.bar(categories, values)
-
-  # Add labels and title
-  plt.xlabel('Categories')
-  plt.ylabel('Values')
-  plt.title('Bar Chart Example')
-
-  # Show plot
+def plot_ts(keys, values, title="", ylabel=""):
+  plt.figure(figsize=(10, 6))
+  
+  years = list(years_.keys())
+  values = list(years_.values())
+  plt.plot(years, values, marker='o', label=label)
+    
+  plt.xlabel('Year')
+  plt.ylabel(val_label)
+  plt.legend()
+  plt.grid(True)
   plt.show()
 
-def plot_pie(key_count, title=""):
-  keys = list(key_count.keys())
-  count = list(key_count.values())
+def plot_bar(keys, values, title="", ylabel=""):
+  plt.bar(keys, values)
 
-  plt.pie(count, labels=keys, autopct='%1.1f%%')
+  plt.title(title)
+  plt.xlabel('Categories')
+  plt.ylabel(ylabel)
+
+  plt.show()
+
+def plot_pie(key_values, title=""):
+  keys = list(key_values.keys())
+  values = list(key_values.values())
+
+  plt.pie(values, labels=keys, autopct='%1.1f%%')
   plt.axis('equal')
   plt.title(title)
   plt.show()

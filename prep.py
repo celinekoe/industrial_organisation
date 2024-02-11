@@ -63,28 +63,12 @@ def main():
           tags_rel_tags_count[outer_tag][inner_tag] = tags_rel_tags_count[outer_tag][inner_tag] + 1
 
   tags_years_percent = get_tags_years_percent(tags, tags_years_count, years_count)
-  tags_percent = get_tags_percent(tags, tags_count)
-  tags_rel_tags_percent = get_tags_rel_tags_percent(tags, tags_rel_tags_count)
+  tags_percent = get_tags_percent(tags, tags_count, firms)
+  print(tags_percent['Biotechnology'])
 
   years_tags_percent = get_years_tags_percent(tags, years_tags_count, years_count)
 
-  for index in range(0, 1):
-    top_tag = get_top_n(sort_keys_by_value(tags_percent, desc=True), 1, start=index)[0]
-    top_rel_tags = get_top_n(sort_keys_by_value(tags_rel_tags_percent[top_tag], desc=True), 10)
-    test = filter_by_key_list(tags_rel_tags_percent[top_tag], top_rel_tags)
-    print(test)
-    # top_rel = get_top_n(sort_keys_by_value(tags_rel_tags_count[top_tag], desc=True), 10)[0]
-    # top_rel_tag_count = tags_rel_tags_count[top_tag][top_rel_tag]
-    # print(top_tag)
-    # print(rel_tag_count)
-    # print(rel_tag_count)
-    # print(top_rel_tag_count)
-    # print(top_rel_tag_count / rel_tag_count * 100)
 
-  # Start with most common tag
-  # Drop other tags
-  # Repeat?
-  # Okay, then I can repeat and nest
 
   write_pickle("firms", firms)
   write_pickle("tags", tags)

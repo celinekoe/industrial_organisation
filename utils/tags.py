@@ -12,14 +12,13 @@ def init_tags_years_(tags):
 def init_years_tags_(tags):
   return {year: {tag: 0 for tag in tags} for year in year_range}
 
-def get_tags_percent(tags, tags_count):    
+def get_tags_percent(tags, tags_count, firms):    
   tags_percent = init_tags_(tags)
-  tags_total = sum(tags_count.values())
 
   for tag in tags_count:
     for year in year_range:
       if tags_count[tag] > 0:
-        tags_percent[tag] = tags_count[tag] / tags_total * 100
+        tags_percent[tag] = tags_count[tag] / len(firms) * 100
 
   return tags_percent
 
