@@ -1,51 +1,46 @@
-from math import isnan
-from pathlib import Path
-import pandas as pd
-import numpy as np
+import argparse 
 
-from constants import tags_path, firms_path, year_range
-from utils.ds import get_flat_list, get_top_n, sort_keys_by_value, filter_by_key_list
-from utils.file import read_dir_as_df, write_pickle
-from utils.log import timer
-from utils.tags import get_tags_years_percent, init_tags_years_, init_tags_, get_tags_percent, init_years_tags_, get_years_tags_percent, init_tags_rel_tags_, get_tags_rel_tags_percent
-from utils.validate import validate_firms
+from utils.logger import timer
 
-def get_firm_tags(firm):
-  firm_tags = []
-  if isinstance(firm['Industries'], str):
-    firm_tags = [tag.strip() for tag in firm['Industries'].split(',')]
+import utils.firms as Firms
+import utils.tags as Tags
+import utils.file as File
+import utils.validator as Validator
 
-  return firm_tags
+def prep_args():
+  parser = argparse.ArgumentParser()
+  parser.add_argument('-c', '--country', action='store_true', help='Set parameter to country')
+  parser.add_argument('-n', '--name', type=str, help='Specify parameter by name')
+  parser.add_argument('-v', '--validate', action='store_true', default=False, help='Enable validation')
+  args = parser.parse_args()
 
-def get_tags(firms):
-  firm_tags_list = []
+  return vars(args)
 
-  for firm_index, firm in firms.iterrows():
-    firm_tags = get_firm_tags(firm)
-    firm_tags_list.append(firm_tags)
+def get_firms_path(args):
+  if args['country']:
+    return f"data/country/{args['name']}"
 
-  return get_flat_list(firm_tags_list)
-
-def enrich_firms(firms):
-  founded_date = pd.to_datetime(firms['Founded Date'])
-  firms['Founded Year'] = founded_date.dt.year
-
-  return firms
+def get_pickle_path(args, file_name):
+  if args['country']:
+    return f"{args['name']}_{file_name}"
 
 @timer
 def main():
-  firms = enrich_firms(read_dir_as_df("data/by_country/singapore"))
-  validate_firms(firms, skip=True)
+  args = prep_args()
 
-  tags = get_tags(firms)
-  tags_years_count = init_tags_years_(tags)
-  tags_count = init_tags_(tags)
-  years_tags_count = init_years_tags_(tags)
-  years_count = {year: 0 for year in year_range}
-  tags_rel_tags_count = init_tags_rel_tags_(tags)
+  firms_path = get_firms_path(args)
+  firms = Firms.enrich_firms(File.read_dir(firms_path))
+  Validator.validate_firms(firms, skip=(not args['validate']))
+
+  tags = Firms.get_firms_tags(firms)
+
+  tags_count = Tags.init_tags_(tags)
+  years_count = Tags.init_years_()
+
+  tags_years_count = Tags.init_tags_years_(tags)
 
   for firm_index, firm in firms.iterrows():
-    firm_tags = get_firm_tags(firm)
+    firm_tags = Firms.get_firm_tags(firm)
 
     founded_year = firm['Founded Year']
     years_count[founded_year] = years_count[founded_year] + 1 
@@ -55,30 +50,17 @@ def main():
         tags_years_count[tag][founded_year] = tags_years_count[tag][founded_year] + 1 
         tags_count[tag] = tags_count[tag] + 1
 
-        years_tags_count[founded_year][tag] = years_tags_count[founded_year][tag] + 1
+  tags_percent = Tags.get_tags_percent(tags, tags_count, firms)
+  tags_years_percent = Tags.get_tags_years_percent(tags, tags_years_count, years_count)
 
-    for outer_tag in firm_tags:
-      for inner_tag in firm_tags:
-        if outer_tag != inner_tag:
-          tags_rel_tags_count[outer_tag][inner_tag] = tags_rel_tags_count[outer_tag][inner_tag] + 1
+  if args['country']:
+    File.write_pickle(get_pickle_path(args, "firms"), firms)
+    File.write_pickle(get_pickle_path(args, "tags"), tags)
+    File.write_pickle(get_pickle_path(args, "tags_count"), tags_count)
+    File.write_pickle(get_pickle_path(args, "tags_percent"), tags_percent)
+    File.write_pickle(get_pickle_path(args, "years_count"), years_count)
+    File.write_pickle(get_pickle_path(args, "tags_years_count"), tags_years_count)
+    File.write_pickle(get_pickle_path(args, "tags_years_percent"), tags_years_percent)
 
-  tags_years_percent = get_tags_years_percent(tags, tags_years_count, years_count)
-  tags_percent = get_tags_percent(tags, tags_count, firms)
-  print(tags_percent['Biotechnology'])
-
-  years_tags_percent = get_years_tags_percent(tags, years_tags_count, years_count)
-
-
-
-  write_pickle("firms", firms)
-  write_pickle("tags", tags)
-  write_pickle("tags_count", tags_count)
-  write_pickle("tags_percent", tags_percent)
-  write_pickle("tags_years_count", tags_years_count)
-  write_pickle("tags_years_percent", tags_years_percent)
-  write_pickle("years_count", years_count)
-  write_pickle("years_tags_count", years_tags_count)
-  write_pickle("years_tags_percent", years_tags_percent)
-    
 if __name__ == "__main__":
   main()

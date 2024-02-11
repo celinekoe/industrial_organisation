@@ -1,6 +1,6 @@
-from utils.file import read_dir_as_df, write_pickle
-from utils.log import timer
-from utils.validate import validate_firms
+from utils.file import read_dir, write_pickle
+from utils.logger import timer
+from utils.validator import validate_firms
 
 import utils.ds as ds
 import utils.viz as viz
@@ -9,7 +9,7 @@ import utils.tags as Tags
 
 @timer
 def main():
-  firms = Firms.enrich_firms(read_dir_as_df("data/by_country/singapore"))
+  firms = Firms.enrich_firms(read_dir("data/by_country/singapore"))
   validate_firms(firms, skip=True)
 
   tags = Firms.get_firms_tags(firms)

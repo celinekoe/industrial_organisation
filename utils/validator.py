@@ -6,6 +6,7 @@ def validate_firms(firms, skip=False):
   if skip:
     return valid
   
+  missing_years = []
   for year in year_range:
     year_found = False
 
@@ -18,8 +19,8 @@ def validate_firms(firms, skip=False):
     
     if year_found == False:
       valid = False
-      print(f"year {year} not found")
-      
-      return valid
+      missing_years.append(year)
     
+  print(f"years {missing_years} not found")
+
   return valid

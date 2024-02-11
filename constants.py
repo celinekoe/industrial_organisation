@@ -6,6 +6,7 @@ year_range = range(start_year, end_year)
 top_count = 10
 exclude_top_count = 11
 
+data_dir = 'data'
 tags_path = 'data/tags.csv'
 firms_path = 'data/firms.csv'
 

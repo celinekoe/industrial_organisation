@@ -1,6 +1,20 @@
 import functools
 import time
 
+class BadLines:
+  def __init__(self):
+    self.bad_lines_count = 0
+
+  def reset(self):
+    self.bad_lines_count = 0
+
+  def incr(self):
+    self.bad_lines_count += 1
+
+  def print(self):
+    print(f"Bad lines count {self.bad_lines_count}")
+
+
 class Timer:
   def __init__(self):
     self.start_time = None

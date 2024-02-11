@@ -1,16 +1,19 @@
-from constants import tags_path, year_range  
+from constants import year_range  
 
 def init_tags_(tags):
   return {tag: 0 for tag in tags}
 
+def init_years_():
+  return {year: 0 for year in year_range}
+
 def init_tags_rel_tags_(tags):
-  return {tag: {tag: 0 for tag in tags} for tag in tags}
+  return {tag: init_tags_(tags) for tag in tags}
 
 def init_tags_years_(tags):
-  return {tag: {year: 0 for year in year_range} for tag in tags}
+  return {tag: init_years_() for tag in tags}
 
 def init_years_tags_(tags):
-  return {year: {tag: 0 for tag in tags} for year in year_range}
+  return {year: init_tags_(tags) for year in year_range}
 
 def get_tags_percent(tags, tags_count, firms):    
   tags_percent = init_tags_(tags)

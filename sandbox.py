@@ -1,6 +1,6 @@
 
 from utils.file import read_pickle
-from utils.log import timer
+from utils.logger import timer
 
 import utils.viz as viz
 
