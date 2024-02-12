@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import pickle
 
-import constants as Constants
+from constants import pickle_dir
 
 def get_file_lines(file_path):
   with open(file_path, 'r', encoding='utf-8') as file:
@@ -35,6 +35,7 @@ def read_dir(dir_path):
 
   df_list = []
   for file_name in dir.glob('*.csv'):
+    print(file_name)
     df = read_csv(file_name)
     df_list.append(df)
 
@@ -45,9 +46,9 @@ def read_dir(dir_path):
 
   return df_dir
 
-def read_csv_as_list(file_path):
-  return pd.read_csv(file_path, header=None).values.flatten().tolist()
+def read_dir_dir_names(dir_path):
+  return [f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))]
 
 def write_pickle(file_name, data):
-  with open(f"{Constants.data_dir}/{file_name}.pickle", 'wb') as f:
+  with open(f"{pickle_dir}/{file_name}.pickle", 'wb') as f:
     pickle.dump(data, f)

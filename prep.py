@@ -1,34 +1,18 @@
-import argparse 
 
-from utils.logger import timer
+import copy
+
+from constants import crunchbase_country_dir
+
+import utils.args as Args
+import utils.file as File
+import utils.logger as Logger
+import utils.validator as Validator
 
 import utils.firms as Firms
 import utils.tags as Tags
-import utils.file as File
-import utils.validator as Validator
 
-def prep_args():
-  parser = argparse.ArgumentParser()
-  parser.add_argument('-c', '--country', action='store_true', help='Set parameter to country')
-  parser.add_argument('-n', '--name', type=str, help='Specify parameter by name')
-  parser.add_argument('-v', '--validate', action='store_true', default=False, help='Enable validation')
-  args = parser.parse_args()
-
-  return vars(args)
-
-def get_firms_path(args):
-  if args['country']:
-    return f"data/country/{args['name']}"
-
-def get_pickle_path(args, file_name):
-  if args['country']:
-    return f"{args['name']}_{file_name}"
-
-@timer
-def main():
-  args = prep_args()
-
-  firms_path = get_firms_path(args)
+def prep(args):
+  firms_path = Args.get_crunchbase_path(args)
   firms = Firms.enrich_firms(File.read_dir(firms_path))
   Validator.validate_firms(firms, skip=(not args['validate']))
 
@@ -54,13 +38,29 @@ def main():
   tags_years_percent = Tags.get_tags_years_percent(tags, tags_years_count, years_count)
 
   if args['country']:
-    File.write_pickle(get_pickle_path(args, "firms"), firms)
-    File.write_pickle(get_pickle_path(args, "tags"), tags)
-    File.write_pickle(get_pickle_path(args, "tags_count"), tags_count)
-    File.write_pickle(get_pickle_path(args, "tags_percent"), tags_percent)
-    File.write_pickle(get_pickle_path(args, "years_count"), years_count)
-    File.write_pickle(get_pickle_path(args, "tags_years_count"), tags_years_count)
-    File.write_pickle(get_pickle_path(args, "tags_years_percent"), tags_years_percent)
+    File.write_pickle(Args.get_pickle_path(args, "firms"), firms)
+    File.write_pickle(Args.get_pickle_path(args, "tags"), tags)
+    File.write_pickle(Args.get_pickle_path(args, "tags_count"), tags_count)
+    File.write_pickle(Args.get_pickle_path(args, "tags_percent"), tags_percent)
+    File.write_pickle(Args.get_pickle_path(args, "years_count"), years_count)
+    File.write_pickle(Args.get_pickle_path(args, "tags_years_count"), tags_years_count)
+    File.write_pickle(Args.get_pickle_path(args, "tags_years_percent"), tags_years_percent)
+
+@Logger.timer
+def main(args):
+  if args['country']:
+    if args['all']:
+      dir_names = File.read_dir_dir_names(crunchbase_country_dir)
+      for dir_name in dir_names:
+        new_args = copy.deepcopy(args)
+        new_args.pop('all', None)
+        new_args['country'] = True
+        new_args['name'] = dir_name
+        prep(new_args)
+    else:
+      prep(args)
 
 if __name__ == "__main__":
-  main()
+  args = Args.get_args()
+  
+  main(args)

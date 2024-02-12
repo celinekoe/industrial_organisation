@@ -1,3 +1,4 @@
 - Get ASEAN data
 - Get Biotech data
-- Get interest rate data
+- Get interest rate data (US)
+- Split biotech data by country
