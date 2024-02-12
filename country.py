@@ -15,13 +15,16 @@ def main(args):
   top_tags_percent = ds.value_list_from_key_list(tags_percent, top_tags)
   
   tags_years_percent = File.read_pickle(f"{Args.get_pickle_path(args, 'tags_years_percent')}")
-  top_tags_yaers = ds.get_top_n(ds.sort_keys_by_value(tags_percent, desc=True), 5)
-  top_tags_years_percent = ds.filter_by_key_list(tags_years_percent, top_tags_yaers)
+  top_tags_years = ds.get_top_n(ds.sort_keys_by_value(tags_percent, desc=True), 5)
+  top_tags_years_percent = ds.filter_by_key_list(tags_years_percent, top_tags_years)
   
   if args['plot']:
-    Viz.plot_years(years_count, args['name'], 'Count')
-    Viz.plot_bar(top_tags, top_tags_percent, "Percent")
-    Viz.plot_tags_years_(top_tags_years_percent, 'Percent')
+    try: 
+      Viz.plot_years(years_count, args['name'], 'Count')
+      Viz.plot_bar(top_tags, top_tags_percent, 'Percent')
+      Viz.plot_tags_years_(top_tags_years_percent, 'Percent')
+    except KeyboardInterrupt:
+      print('Program interrupted')
 
   return
     

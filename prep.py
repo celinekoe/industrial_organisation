@@ -38,13 +38,13 @@ def prep(args):
   tags_years_percent = Tags.get_tags_years_percent(tags, tags_years_count, years_count)
 
   if args['country']:
-    File.write_pickle(Args.get_pickle_path(args, "firms"), firms)
-    File.write_pickle(Args.get_pickle_path(args, "tags"), tags)
-    File.write_pickle(Args.get_pickle_path(args, "tags_count"), tags_count)
-    File.write_pickle(Args.get_pickle_path(args, "tags_percent"), tags_percent)
-    File.write_pickle(Args.get_pickle_path(args, "years_count"), years_count)
-    File.write_pickle(Args.get_pickle_path(args, "tags_years_count"), tags_years_count)
-    File.write_pickle(Args.get_pickle_path(args, "tags_years_percent"), tags_years_percent)
+    File.write_pickle(args, "firms", firms)
+    File.write_pickle(args, "tags", tags)
+    File.write_pickle(args, "tags_count", tags_count)
+    File.write_pickle(args, "tags_percent", tags_percent)
+    File.write_pickle(args, "years_count", years_count)
+    File.write_pickle(args, "tags_years_count", tags_years_count)
+    File.write_pickle(args, "tags_years_percent", tags_years_percent)
 
 @Logger.timer
 def main(args):

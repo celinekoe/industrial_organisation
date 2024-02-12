@@ -43,19 +43,6 @@ def plot_years(years_, label, val_label):
   plt.grid(True)
   plt.show()
 
-def plot_ts(keys, values, title="", ylabel=""):
-  plt.figure(figsize=(10, 6))
-  
-  years = list(years_.keys())
-  values = list(years_.values())
-  plt.plot(years, values, marker='o', label=label)
-    
-  plt.xlabel('Year')
-  plt.ylabel(val_label)
-  plt.legend()
-  plt.grid(True)
-  plt.show()
-
 def plot_bar(keys, values, title="", ylabel=""):
   plt.bar(keys, values)
 

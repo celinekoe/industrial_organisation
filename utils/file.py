@@ -21,10 +21,6 @@ def get_dir_lines(dir_path):
 
   return line_count
 
-def read_pickle(file_name):
-  with open(f"data/{file_name}.pickle", 'rb') as f:
-    return pickle.load(f)
-
 def read_csv(file_path):
   return pd.read_csv(file_path, on_bad_lines='skip')
 
@@ -49,6 +45,17 @@ def read_dir(dir_path):
 def read_dir_dir_names(dir_path):
   return [f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))]
 
-def write_pickle(file_name, data):
-  with open(f"{pickle_dir}/{file_name}.pickle", 'wb') as f:
+# Pickle
+
+def get_pickle_path(args, file_name):
+  if args['country']:
+    return f"{pickle_dir}/{args['name']}_{file_name}.pkl"
+
+def read_pickle(file_name):
+  with open(f"{file_name}", 'rb') as f:
+    return pickle.load(f)
+
+def write_pickle(args, file_name, data):
+  file_path = get_pickle_path(args, file_name)
+  with open(f"{file_path}", 'wb') as f:
     pickle.dump(data, f)

@@ -26,7 +26,3 @@ def get_args():
 def get_crunchbase_path(args):
   if args['country']:
     return f"{crunchbase_country_dir}/{args['name']}"
-
-def get_pickle_path(args, file_name):
-  if args['country']:
-    return f"{args['name']}_{file_name}"
