@@ -3,7 +3,7 @@ from utils.logger import timer
 from utils.validator import validate_firms
 
 import utils.ds as ds
-import utils.viz as viz
+import utils.vis as vis
 import utils.firms as Firms
 import utils.tags as Tags
 

@@ -2,6 +2,7 @@
 import copy
 
 from constants import crunchbase_country_dir
+from models.country import Country
 
 import utils.args as Args
 import utils.file as File
@@ -11,9 +12,9 @@ import utils.validator as Validator
 import utils.firms as Firms
 import utils.tags as Tags
 
-def prep(args):
-  firms_path = Args.get_crunchbase_path(args)
-  firms = Firms.enrich_firms(File.read_dir(firms_path))
+def prep_country(args):
+  crunchbase_dir = File.get_crunchbase_dir(args)
+  firms = Firms.enrich_firms(File.read_dir(crunchbase_dir))
   Validator.validate_firms(firms, skip=(not args['validate']))
 
   tags = Firms.get_firms_tags(firms)
@@ -37,14 +38,18 @@ def prep(args):
   tags_percent = Tags.get_tags_percent(tags, tags_count, firms)
   tags_years_percent = Tags.get_tags_years_percent(tags, tags_years_count, years_count)
 
+  country = Country(args['name'])
+  country.set_firms(firms)
+  country.set_tags(tags)
+  country.set_tags_(tags_count, tags_percent)
+  country.set_years_(years_count)
+  country.set_tags_years_(tags_years_count, tags_years_percent)
+
+  country.pickle()
+
+def prep(args):
   if args['country']:
-    File.write_pickle(args, "firms", firms)
-    File.write_pickle(args, "tags", tags)
-    File.write_pickle(args, "tags_count", tags_count)
-    File.write_pickle(args, "tags_percent", tags_percent)
-    File.write_pickle(args, "years_count", years_count)
-    File.write_pickle(args, "tags_years_count", tags_years_count)
-    File.write_pickle(args, "tags_years_percent", tags_years_percent)
+    prep_country(args)
 
 @Logger.timer
 def main(args):

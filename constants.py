@@ -5,6 +5,8 @@ year_range = range(start_year, end_year)
 top_count = 10
 exclude_top_count = 11
 
+asean = ['indonesia', 'malaysia', 'philippines', 'singapore', 'thailand', 'vietnam']
+
 data_dir = 'data'
 crunchbase_dir = f"{data_dir}/crunchbase"
 crunchbase_country_dir = f"{data_dir}/crunchbase/country"

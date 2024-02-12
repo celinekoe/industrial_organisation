@@ -4,7 +4,7 @@ import os
 import pandas as pd
 import pickle
 
-from constants import pickle_dir
+from constants import crunchbase_country_dir, pickle_dir
 
 def get_file_lines(file_path):
   with open(file_path, 'r', encoding='utf-8') as file:
@@ -45,17 +45,26 @@ def read_dir(dir_path):
 def read_dir_dir_names(dir_path):
   return [f for f in os.listdir(dir_path) if os.path.isdir(os.path.join(dir_path, f))]
 
+# Crunchbase
+
+def get_crunchbase_dir(args):
+  if args['country']:
+    return f"{crunchbase_country_dir}/{args['name']}"
+
 # Pickle
 
-def get_pickle_path(args, file_name):
+def get_pickle_dir(args, file_name):
   if args['country']:
     return f"{pickle_dir}/{args['name']}_{file_name}.pkl"
 
+def read_country_pickle(args, country):
+  # country
+  return
+
 def read_pickle(file_name):
-  with open(f"{file_name}", 'rb') as f:
+  with open(f"{pickle_dir}/{file_name}.pkl", 'rb') as f:
     return pickle.load(f)
 
-def write_pickle(args, file_name, data):
-  file_path = get_pickle_path(args, file_name)
-  with open(f"{file_path}", 'wb') as f:
+def write_pickle(file_name, data):
+  with open(f"{pickle_dir}/{file_name}.pkl", 'wb') as f:
     pickle.dump(data, f)
