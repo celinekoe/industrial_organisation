@@ -2,25 +2,30 @@ import argparse
 import re
 import sys
 
-from constants import crunchbase_country_dir, pickle_dir
-
 def get_args():
   parser = argparse.ArgumentParser()
 
-  script_name = re.sub(r'\.py$', '', sys.argv[0])
+  script = re.sub(r'\.py$', '', sys.argv[0])
 
-  if script_name == 'prep':
-    parser.add_argument('-c', '--country', action='store_true', help='Load country directory')
-    parser.add_argument('-n', '--name', type=str, help='Specify file to load')
-    parser.add_argument('-a', '--all', action='store_true', help='Load all files')
-    parser.add_argument('-v', '--validate', action='store_true', default=False, help='Enable validation')
-  
-  if script_name == 'country':
+  if script == 'prep':
+    parser.add_argument('-c', '--country', action='store_true', help='Load country data')
+    parser.add_argument('-i', '--industry', action='store_true', help='Load industry data')
+    parser.add_argument('-m', '--macro', action='store_true', help='Load macro data')
+
+    parser.add_argument('-n', '--name', type=str, help='Specify directory to load')
+      
+  if script == 'country':
     parser.add_argument('-c', '--country', action='store_true', help='Load country data')
     parser.add_argument('-n', '--name', type=str, help='Specify country to analyse')
     parser.add_argument('-p', '--plot', action='store_true', default=False, help='Enable plots')
 
-  if script_name == 'tag':
+  if script == 'industry':
+    parser.add_argument('-i', '--industry', action='store_true', help='Load industry data')
+    parser.add_argument('-n', '--name', type=str, help='Specify industry to analyse')
+    parser.add_argument('-p', '--plot', action='store_true', default=False, help='Enable plots')
+    parser.add_argument('--top', type=int, default=10, help='Default number of labels to plot')
+
+  if script == 'tag':
     parser.add_argument('-c', '--country', action='store_true', help='Load country data')
     parser.add_argument('--region', type=str,help='Region to load')
     parser.add_argument('--countries', nargs='+',help='Countries to load')
@@ -30,7 +35,7 @@ def get_args():
 
     parser.add_argument('-n', '--name',  type=str, help='Tag to analyse')
     parser.add_argument('-p', '--plot', action='store_true', default=False, help='Enable plots')
-  
+
   args = parser.parse_args()
   args.name = args.name.lower() if args.name else None
 

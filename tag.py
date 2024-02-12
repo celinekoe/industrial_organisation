@@ -7,7 +7,7 @@ import utils.args as Args
 import utils.ds as ds
 import utils.file as File
 import utils.logger as Logger
-import utils.vis as vis
+import utils.visualiser as visualiser
 
 def run_tag(args):
   tag = args['name'].capitalize()
@@ -22,9 +22,9 @@ def run_tag(args):
     countries_count[country_name] = country_data['tags_count'][tag]
     countries_years_count[country_name] = country_data['tags_years_count'][tag]
 
-  vis.plot_pie(countries_count)
-  vis.plot_labels_years_(countries_years_count, 'Count')
-  vis.show()
+  visualiser.plot_pie(countries_count)
+  visualiser.plot_labels_years_(countries_years_count, 'Count')
+  visualiser.show()
 
   return
 

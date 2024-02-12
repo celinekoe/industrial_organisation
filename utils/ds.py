@@ -25,6 +25,7 @@ def get_key_count_from_list(list):
 def get_top_n(list, n, start=0):
   return list[start:start + n]
 
+
 def get_flat_list(parent_list, unique=True):
   flat_list = [item for child_list in parent_list for item in child_list]
   

@@ -4,7 +4,7 @@ from utils.logger import timer
 import utils.args as Args
 import utils.file as File
 import utils.ds as ds
-import utils.vis as Viz
+import utils.visualiser as Viz
 
 @timer
 def main(args):
