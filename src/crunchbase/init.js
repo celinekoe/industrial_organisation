@@ -35,11 +35,11 @@ const download = async (page, exportCsvButton) => {
   // puppeteer usage as normal
   puppeteer.launch({ headless: false, timeout: 0 }).then(async browser => {
     const page = await browser.newPage()
-
+  
     await page.setCookie(
       { name: 'authcookie', value: authCookie, domain: 'www.crunchbase.com' },
     );
-  
+
     await page.goto(url)
 
     const fromInput = await page.$('#mat-input-1')
@@ -49,28 +49,26 @@ const download = async (page, exportCsvButton) => {
 
     if (!fromInput || !toInput) {
       console.log('input ids changed, try again')
-      
-      return
+    } else {
+      // loop through cb rank in increments to get around export limits
+      for (let i = rangeStart; i <= rangeEnd; i += rangeIncrement) {
+        const fromRange = i
+        const toRange = i + rangeIncrement - 1
+        console.log(`i: ${i}`)
+
+        await fromInput.click()
+        await clearInput(page)
+        await newInput(page, fromRange.toString())
+
+        await toInput.click()
+        await clearInput(page)
+        await newInput(page, toRange.toString())
+
+        await searchButton.click()
+        await download(page, exportCsvButton)
+      }
     }
-
-    // loop through cb rank in increments to get around export limits
-    for (let i = rangeStart; i <= rangeEnd; i += rangeIncrement) {
-      const fromRange = i
-      const toRange = i + rangeIncrement - 1
-      console.log(`i: ${i}`)
-
-      await fromInput.click()
-      await clearInput(page)
-      await newInput(page, fromRange.toString())
-
-      await toInput.click()
-      await clearInput(page)
-      await newInput(page, toRange.toString())
-
-      await searchButton.click()
-      await download(page, exportCsvButton)
-    }
-      
+    
     // await browser.close()
   })
 })()
