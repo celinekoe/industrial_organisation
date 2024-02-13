@@ -23,9 +23,10 @@ node init.js
 ```
 Puppeteer will start Chrome browser to start exporting rows
 Crunchbase Query Builder needs to be setup as seen in query_builder.png for the script to run correctly
-You can modify the query, but you'll also have to modify the script accordingly
+Save the query and Crunchbase will automatically reload those preferences each time Chrome starts
+You're free to modify the query, but you'll also have to modify the script accordingly
 I used cb rank to partition the data since it guarantees that there will be less rows than the crunchbase's export limit
-Adjust range increment as appropriate if the data is sparse
+Adjust range increment as appropriate if the data is sparse. The larger the range increment the faster the export will be
 
 After running, you will have to wait a bit for the 'Allow Multiple Downloads' prompt to appear
 Click that before doing other things
