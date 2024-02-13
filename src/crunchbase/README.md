@@ -32,21 +32,9 @@ After running, you will have to wait a bit for the 'Allow Multiple Downloads' pr
 Click that before doing other things
 Script will occasionally fail due to timeout. Just set rangeStart to the next set of data to download
 
-### Check Data
-Copy the downloaded csvs to the appropriate data folder
-Check if the data is correct by running the following script to return the total line count:
-```
-./check_data.sh country/united_states
-```
-Compare the total line count to the results in Query Builder
-
 ### Rename Data Files
-Install rename utility:
+Run script:
 ```
-brew install rename
+./rename.sh united_states
 ```
-Rename files so you won't get confused by the generic file names later
-This command renames all files in a folder:
-```
-rename 'our $i; $i++; $_ = sprintf("us_$i.%s", $1)' *
-```
+This only renames files in a country folder, the script needs to be tweaked for other use cases

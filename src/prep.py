@@ -21,12 +21,12 @@ def prep_industry(args):
 
   File.write_pickle(f"{args['name']}_firms", firms)
 
-def prep_gdp():
-  country_gdp = File.read_ceic_dir(Const.ceic_gdp_dir)
-  File.write_pickle(f"country_gdp", country_gdp)
+def prep_real_gdp():
+  real_gdp = File.read_real_gdp(Const.real_gdp_dir)
+  File.write_pickle(f"real_gdp", real_gdp)
 
 def prep_fed_rate():
-  fed_rate = File.read_ceic_dir(Const.ceic_fed_rate_dir)
+  fed_rate = File.read_fed_rate(Const.fed_rate_dir)
   File.write_pickle(f"fed_rate", fed_rate)
 
 def prep_pop():
@@ -51,7 +51,7 @@ def main(args):
     prep_industry(args)
 
   if args['macro']:
-    # prep_gdp()
+    prep_real_gdp()
     prep_fed_rate()
     # prep_pop()    
 

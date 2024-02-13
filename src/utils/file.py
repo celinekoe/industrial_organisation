@@ -11,6 +11,9 @@ def get_file_lines(file_path):
   with open(file_path, 'r', encoding='utf-8') as file:
     return sum(1 for line in file)
 
+def print_bad_line_count(df, line_count):
+  print(f"Bad line count: {line_count - len(df) - 1}")
+
 def get_dir_lines(dir_path):
   
   dir = Path(dir_path)
@@ -37,8 +40,8 @@ def read_dir(dir_path):
 
     line_count += get_file_lines(file_name)
 
-  df_dir = pd.concat(df_list, ignore_index=True).drop_duplicates()
-  print(f"Bad line count: {line_count - len(df_dir)}")
+  df_dir = pd.concat(df_list, ignore_index=True).drop_duplicates(subset=['Organization Name', 'Description']).reset_index(drop=True)
+  print_bad_line_count(df_dir, line_count)
 
   return df_dir
 
@@ -53,7 +56,24 @@ def write_csv(file_path, data):
 
 # CEIC
 
-def read_ceic_dir(dir_path):
+def read_real_gdp(dir_path):
+  dir = Path(dir_path)
+  line_count = 0
+
+  df_list = []
+  for file_name in dir.glob('*.csv'):
+    df = read_csv(file_name)
+    df.set_index('Year', inplace=True)
+    df_list.append(df)
+
+    line_count += get_file_lines(file_name)
+  
+  df_dir = pd.concat(df_list)
+  print_bad_line_count(df_dir, line_count)
+
+  return df_dir
+
+def read_fed_rate(dir_path):
   dir = Path(dir_path)
   line_count = 0
 
@@ -61,27 +81,23 @@ def read_ceic_dir(dir_path):
   for file_name in dir.glob('*.csv'):
     df = read_csv(file_name)
     df_list.append(df)
+
     line_count += get_file_lines(file_name)
 
-  df_dir = pd.concat(df_list, ignore_index=True)
-  
-  if 'Year' in df_dir.columns:
-    df_dir.set_index('Year', inplace=True)
-  if 'Month' in df_dir.columns:
-    df_dir['Year'] = pd.to_datetime(df_dir['Month'], format='%m/%Y').dt.year
+  df_dir = pd.concat(df_list)
+  print_bad_line_count(df_dir, line_count)
 
-    year_data = {
-      'Year': df_dir['Year'].unique(),
-      'Fed Rate': [df_dir[df_dir['Year'] == year]['United States'].mean() for year in df_dir['Year'].unique()]
-    }
+  df_dir['Year'] = pd.to_datetime(df_dir['Month'], format='%m/%Y').dt.year
 
-    year_df = pd.DataFrame(year_data)
-    year_df.set_index('Year', inplace=True)
-    df_dir = year_df
+  year_data = {
+    'Year': df_dir['Year'].unique(),
+    'Fed Rate': [df_dir[df_dir['Year'] == year]['United States'].mean() for year in df_dir['Year'].unique()]
+  }
 
-  print(f"Bad line count: {line_count - len(df_dir)}")
+  year_df = pd.DataFrame(year_data)
+  year_df.set_index('Year', inplace=True)
 
-  return df_dir[sorted(df_dir.columns.tolist())]
+  return year_df
 
 # Crunchbase
 

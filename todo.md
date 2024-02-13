@@ -1,10 +1,29 @@
-todo
-find . -name '*.csv' | xargs wc -l
-find . -name '*_us_*.csv' | sort | xargs wc -l
-find . -name '*_us_*.csv' -type f | wc -l
+Rename files
+Download us research data
+Plot science v nonscience
+Nice stack chart
+Can call it a day here
+Focus on other stuff tomorrow
+The remainder is just to do a bunch of regressions
 
-~Set up Jupyter lab~
-Get categories from crunchbase
+science vs research data time series
+Get percentages for us
+Just see the graph of what's on top changing over time
+Might want to use log?
+I think I can just do the plotting for now
+Get investor data later
+
+Survey of Earned Doctorates
+https://ncses.nsf.gov/pubs/nsf24300/data-tables
+Research doctorate recipients from U.S. colleges and universities: 1958–2022
+Research doctorate recipients, by historical broad field of doctorate and citizenship status: Selected years, 1977–2022
+(Interpolate missing years)
+
+National Patterns of R&D Resources
+https://ncses.nsf.gov/data-collections/national-patterns/2021-2022#data
+U.S. gross domestic product and R&D
+U.S. R&D expenditures, by performing sector and source of funds: 1953–2022
+U.S. R&D expenditures, by state, performing sector, and source of funds: 2021
 
 figure out how to make sense of this mess of data
 I still haven't figured out how to classify hard soft
@@ -23,4 +42,3 @@ I want to see closure rates
 I want to get gdp data and check growth rates
 I can get investor data for the public side
 
-ok, I have a rough idea of  what I want to do, Ijust need to get the data, painfully

@@ -43,14 +43,12 @@ def plot_years(years_, label, val_label):
   plt.legend()
   plt.grid(True)
 
-def plot_bar(keys, values, title="", ylabel=""):
-  plt.bar(keys, values)
+def bar(series, title="", ylabel=""):
+  plt.bar(series)
 
   plt.title(title)
   plt.xlabel('Categories')
   plt.ylabel(ylabel)
-
-
 
 def pie(series, n=10, title=""):
   top_labels = series.nlargest(n-1).index
@@ -68,6 +66,17 @@ def plot(series, ylab='Count'):
   plt.figure(figsize=(10, 6))
   
   plt.plot(series.index, series.values)
+    
+  plt.xlabel('Year')
+  plt.ylabel(ylab)
+  plt.legend()
+  plt.grid(True)
+
+def plot_two(series1, series2, ylab='Count'):
+  plt.figure(figsize=(10, 6))
+  
+  plt.plot(series1.index, series1.values)
+  plt.plot(series2.index, series2.values)
     
   plt.xlabel('Year')
   plt.ylabel(ylab)
