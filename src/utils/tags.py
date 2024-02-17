@@ -1,6 +1,6 @@
 import pandas as pd
 
-from constants import year_range  
+from constants.dirs import year_range  
 
 def init_tags_(tags):
   return {tag: 0 for tag in tags}

@@ -58,8 +58,6 @@ def enrich_founded_year(firms, domain_created_year_map):
   firms['Founded Year'].fillna(firms['Domain Created Year'], inplace=True)
   return firms
 
-def enrich_science(firms, science_map):
-  science_tag_groups = [key for key, value in science_map.items() if value]
-  print(science_tag_groups)
-  firms['Science'] = firms['Tag Groups'].apply(lambda tag_groups: any(tag_group in science_tag_groups for tag_group in tag_groups))
+def enrich_science(firms, stem_tags):
+  firms['Science'] = firms['Tags'].apply(lambda tags: any(tag in stem_tags for tag in tags))
   return firms

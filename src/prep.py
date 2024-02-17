@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import copy
 
-import constants as Const
+import constants.dirs as Const
 import utils.args as Args
 import utils.file as File
 import utils.logger as Logger

@@ -5,7 +5,7 @@ import os
 import pandas as pd
 import pickle
 
-from constants import crunchbase_country_dir, crunchbase_industry_dir, pickle_dir
+from constants.dirs import crunchbase_country_dir, crunchbase_industry_dir, pickle_dir
 
 def get_file_lines(file_path):
   with open(file_path, 'r', encoding='utf-8') as file:

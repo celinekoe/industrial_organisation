@@ -14,6 +14,10 @@ const download = async (page, exportCsvButton) => {
   await exportCsvButton.click()
 }
 
+const delay = async (ms) => {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 (async () => {
   // puppeteer-extra is a drop-in replacement for puppeteer,
   // it augments the installed puppeteer with plugin functionality
@@ -23,14 +27,16 @@ const download = async (page, exportCsvButton) => {
   const StealthPlugin = require('puppeteer-extra-plugin-stealth')
   puppeteer.use(StealthPlugin())
 
-  const authCookie = 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJjZjdkZTA2ZS02NjBiLTQ1ZmMtODk5Zi0yMmFhZDE5NGU4MDAiLCJpc3MiOiJ1c2Vyc2VydmljZV8wZjdkYWE0MF83MTciLCJzdWIiOiI4ODQ4MTZkNS03NjNlLTQ3OTEtODY3My0xOWZkYzA3YjgxMDEiLCJleHAiOjE3MDc4MTQ4NzgsImlhdCI6MTcwNzgxNDU3OCwicHJpdmF0ZSI6IlhBbVRTc2V5enVsWjVuRE5BTnlJOTBoQUxkVVRpSUJwSzBlTUFkTWNrdlhsZFVIN29GWDZPY3dDRi8rR0cvVTVyZFN4cnRWUlNiWU5VVGJwaEoyczBLR3JwKzRBZFBoTFViYUk2bUN1cW9QV0NnMU1sQktQVzhYVmRoNDRjWTRkOElaMGdOVzBOUG14cVFJa2tCZXoyeDM5NU9uWmR4RjQzT3ZvRW9lVW1RbGZKTXI5elhGcFE4dG1WVFQwY3gyenlQa28yVjMxbXRDMzdvb0xXbEZQTGR6WVJMZm9yMGxMMVdJRTdRUFZ6cjVTRUNSUFl5MERPWDVicWZRdzVrMUU3UFFzUWRFNk51MXVJSHhwZXMrSGMyeWVLaE85NXdOd2tZVHk4aXpLREx6RmNvQVBibnJsKytNM21HZVkvbGJuZzVTVlA4RE5HdHc2V1BjV2oxMEozbk90b1c5U0E5M1BNT3l5NGF6cnd2aCtTRTQwaG16c08vQVNrY0xtaXd0OHdjYjR2SFYyb1N4eitpWHE4M1ZpVThqYlBnVlFzc1hWbmRQRHFpbVhvUXlaLzRDais1R0J4KzdiNzBUbzhmaVpHZzU3czV0aGp5L0RFRGpoSitZK3UwOEZuVDRmQ0x0UDRramhFRDhOa1N3WWdDRUg2SzJNME52YXFMb1BLVGppTmJuY0hOV2Q4TVl4b3FIOW9VczA1ZW84UUgwTkRHajUvZTFzMzVCZllCNnlaZFdVUG00OGdMM1N0WE1LRDB0ZFFFWmVOb2FMYi9Sd3ZKOTVqNkhraUxXY09OaitNZldQc0RIZ0dHcHFQMEhsMXZXTll5eTZkOU5McE1XZ3JxZEx2eEtRZGhOQjl2L0RoWFFLQkVwVFJ5UUdKTEZ2dmRoeWttcGU2U1J4VmN0Zjlwbk93YjJkK3ljM1FVaUVKbGhiQWNEN3RtVE9IczFzUjAvZzlrNWFzNys2aEFGV0R2M2xQNE15RUtYeW5GTDFqTVIzWmNOZGxlRHIxdnpSZ2twS09GNzMwZnVwdktxamEyajdxWEcwM1JoUm5ab3h5eUdBVi85QWdscGN5YS92a0xScTA5aTk0SzhCNXIxUWMvZGVSa1QvYmdoakQ1WGlSZjByOENmY1BGZjZZdEY1Zjk2WlpqWkxUcThvd2t5V3k5ak9DMVJBNVVPMWp3VWtTMTFOIiwicHVibGljIjp7InNlc3Npb25faGFzaCI6Ii0xMjM5NTAxNDc2In19.mL-76eY6KdtFQbq221TeQzBomYZWteIT6PhlgLwlreKk2Mxifuj6dYaG5kfwfWMU4PqB8OXTSY8yvG65fWELXA'
+  const authCookie = 'eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiJiM2ViODRlMC0wZGM2LTQyMzEtOGJjOS1lMjkzY2E3MTYyY2MiLCJpc3MiOiJ1c2Vyc2VydmljZV83MGJjNjZjOV83MTciLCJzdWIiOiI4ODQ4MTZkNS03NjNlLTQ3OTEtODY3My0xOWZkYzA3YjgxMDEiLCJleHAiOjE3MDgxODYzMjcsImlhdCI6MTcwODE4NjAyNywicHJpdmF0ZSI6IlhBbVRTc2V5enVsWjVuRE5BTnlJOTBoQUxkVVRpSUJwSzBlTUFkTWNrdlhsZFVIN29GWDZPY3dDRi8rR0cvVTVyZFN4cnRWUlNiWU5VVGJwaEoyczBLR3JwKzRBZFBoTFViYUk2bUN1cW9QV0NnMU1sQktQVzhYVmRoNDRjWTRkOElaMGdOVzBOUG14cVFJa2tCZXoyeDM5NU9uWmR4RjQzT3ZvRW9lVW1RbGZKTXI5elhGcFE4dG1WVFQwY3gyenlQa28yVjMxbXRDMzdvb0xXbEZQTGR6WVJMZm9yMGxMMVdJRTdRUFZ6cjVTRUNSUFl5MERPWDVicWZRdzVrMUU3UFFzUWRFNk51MXVJSHhwZXMrSGMyeWVLaE85NXdOd2tZVHk4aXpLREx6RmNvQVBibnJsKytNM21HZVkvbGJuZzVTVlA4RE5HdHc2V1BjV2oxMEozbk90b1c5U0E5M1BNT3l5NGF6cnd2aCtTRTQwaG16c08vQVNrY0xtaXd0OHdjYjR2SFYyb1N4eitpWHE4M1ZpVThqYlBnVlFzc1hWbmRQRHFpbVhvUXlaLzRDais1R0J4KzdiNzBUbzhmaVpHZzU3czV0aGp5L0RFRGpoSitZK3UwOEZuVDRmQ0x0UDRramhFRDhOa1N6UFI1Nm9ySjdEV0NuZk80bjdYUkZ6UWlIWlFzTURxTE1aWGRyMzlSbXYwakp6Tmg0THh5YlIwN09GNXFRSHVodHpuOXRNdnNhUm9FSStERmxyM1RyeXFKRjhDMDRxdXhadEprK1c2QXg4dWlYaWsvMXpoSFREdTdIWk9MYWpGQm5hcUp4cXNjQXcwUU5mYWwraGFuaGlKeWVDNzlUSzJzWC9aVENBcCtscVhEWmF0UHF0V00yRWxiSDhIaHN3ZUFEOCtQbmNqRTNHTXd4aWR4ci9ReFBDY0VnNnJCNnF3dFBNazlmNlg3R2JxU2J4M0luSksvdXltLzZoVzRrQkRweWgzZjYzT1FqaHhGVG9Bc05qMjNtOXNCNlgxUkFIS29pWWhXSTZCQnZCVVU4NWZuanpQQUFIOFJpRFpCaFM0a1BLcUpEc1BVYndoVG5xUk9HQUNMWjlKT25XYkUxTE9PMGtueWt2bmZrcGVGTDRpR3BOWEpCQ1Z3dEVLV3Zta3I1VlhUQVNjWVpKS2VFcm1nZzlkUFAyIiwicHVibGljIjp7InNlc3Npb25faGFzaCI6Ii0xMjM5NTAxNDc2In19.fNbYs8oxCeaHlC-nQQe9HWmI3z2L-gABL93J2hXTZGrtxD1IQPX2EEF5BE9EWPH6Xwq4lfUzOOnM-cDOqKIx-g'
 
-  const url = 'https://www.crunchbase.com/lists/all/8d5bde75-2d8b-445b-9dd5-6fbef3886416/organization.companies'
+  // const url = 'https://www.crunchbase.com/lists/all/8d5bde75-2d8b-445b-9dd5-6fbef3886416/organization.companies'
+  const url = 'https://www.crunchbase.com/lists/funding/e82bb51d-0b57-49f7-a4b3-c731a3487b6f/funding_rounds'
 
   // get last cb rank and round up to nearest increment of 1000
-  const rangeStart = 0
-  const rangeEnd = 3234000
-  const rangeIncrement = 1000
+  const rangeStart = 347200
+  const rangeEnd = 627000
+  const rangeIncrement = 600
+  const delayMs = 2000 // delay before attempting to get input
 
   // puppeteer usage as normal
   puppeteer.launch({ headless: false, timeout: 0 }).then(async browser => {
@@ -42,12 +48,16 @@ const download = async (page, exportCsvButton) => {
 
     await page.goto(url)
 
+    await delay(delayMs)
+
     const fromInput = await page.$('#mat-input-1')
     const toInput = await page.$('#mat-input-2')
     const searchButton = await page.$('search-button button')
     const exportCsvButton = await page.$('export-csv-button button')
 
     if (!fromInput || !toInput) {
+      console.log(fromInput)
+      console.log(toInput)
       console.log('input ids changed, try again')
     } else {
       // loop through cb rank in increments to get around export limits
