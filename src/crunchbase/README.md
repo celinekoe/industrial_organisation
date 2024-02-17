@@ -35,6 +35,6 @@ Script will occasionally fail due to timeout. Just set rangeStart to the next se
 ### Rename Data Files
 Run script:
 ```
-./rename.sh united_states
+./rename.sh country/united_states united_states
+./rename.sh funding_rounds funding_rounds
 ```
-This only renames files in a country folder, the script needs to be tweaked for other use cases
