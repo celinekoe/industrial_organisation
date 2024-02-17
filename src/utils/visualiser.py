@@ -2,6 +2,17 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 import pandas as pd
 
+def plot(series, ylab):
+  plt.figure(figsize=(10, 6))
+  
+  plt.plot(series.index, series.values)
+    
+  plt.xlabel('Year')
+  plt.ylabel(ylab)
+  plt.grid(True)
+
+def plot_stacked():
+  return
 
 def plot_labels_years_(labels_years_, val_label):
   plt.figure(figsize=(10, 6))
@@ -62,22 +73,14 @@ def pie(series, n=10, title=""):
 
   plt.title(title)
 
-def plot(series, ylab='Count'):
-  plt.figure(figsize=(10, 6))
-  
-  plt.plot(series.index, series.values)
-    
-  plt.xlabel('Year')
-  plt.ylabel(ylab)
-  plt.legend()
-  plt.grid(True)
-
 def plot_two(series1, series2, ylab='Count'):
   plt.figure(figsize=(10, 6))
   
   plt.plot(series1.index, series1.values)
   plt.plot(series2.index, series2.values)
     
+  plt.yscale('log')
+
   plt.xlabel('Year')
   plt.ylabel(ylab)
   plt.legend()

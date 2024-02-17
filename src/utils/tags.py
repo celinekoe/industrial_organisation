@@ -1,3 +1,5 @@
+import pandas as pd
+
 from constants import year_range  
 
 def init_tags_(tags):
@@ -56,3 +58,23 @@ def get_years_tags_percent(tags, years_tags_count, years_count):
         years_tags_percent[year][tag] = years_tags_count[year][tag] / years_count[year] * 100
 
   return years_tags_percent
+
+def get_tag_group_count(firms):
+  tag_group_count = {}
+
+  for tag_groups in firms['Tag Groups']:
+    for tag_group in tag_groups:
+        tag_group_count[tag_group] = tag_group_count.get(tag_group, 0) + 1
+  
+  return pd.Series(tag_group_count).sort_values(ascending=False)
+
+def get_tag_group_tag_count(firms, tag_group):
+  tag_group_firms = firms[firms['Tag Groups'].apply(lambda x: tag_group in x)]
+  tag_count = {}
+
+  for tags in tag_group_firms['Tags']:
+    for tag in tags:
+      if tag != tag_group:
+        tag_count[tag] = tag_count.get(tag, 0) + 1
+  
+  return pd.Series(tag_count).sort_values(ascending=False)

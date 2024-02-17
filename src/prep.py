@@ -1,4 +1,6 @@
 
+import pandas as pd
+import numpy as np
 import copy
 
 import constants as Const
@@ -6,14 +8,27 @@ import utils.args as Args
 import utils.file as File
 import utils.logger as Logger
 
+import utils.domain as Domain
 import utils.firms as Firms
 
 def prep_country(args):
   country_dir = File.get_country_dir(f"{args['country_name']}")
   firms = Firms.enrich_firms(File.read_dir(country_dir))
-  print(firms)
 
   File.write_pickle(f"{args['country_name']}_firms", firms)
+
+def prep_domain(args):  
+  domain_created_year_map = File.read_pickle('domain_created_year_map')
+  if domain_created_year_map is None:
+    domain_created_year_map = {}
+
+  firms = File.read_pickle(f"{args['country_name']}_firms")
+  undated_firms = firms[pd.isna(firms['Founded Year'])] # Only get the domain created year of firms we don't have date information for
+  undated_firms = undated_firms[undated_firms['Website'].notnull()]
+
+  domain_created_year_map = Domain.get_domain_created_year_map(undated_firms['Website'], domain_created_year_map, p=200, c=10)
+
+  File.write_pickle(f"domain_created_year_map", domain_created_year_map)
 
 def prep_industry(args):
   tag_dir = File.get_tag_dir(args['name'])
@@ -23,6 +38,8 @@ def prep_industry(args):
 
 def prep_real_gdp():
   real_gdp = File.read_real_gdp(Const.real_gdp_dir)
+  print(real_gdp)
+
   File.write_pickle(f"real_gdp", real_gdp)
 
 def prep_fed_rate():
@@ -46,6 +63,9 @@ def main(args):
         prep_country(new_args)
     else:
       prep_country(args)
+
+  if args['domain']:
+    prep_domain(args)
 
   if args['industry']:
     prep_industry(args)

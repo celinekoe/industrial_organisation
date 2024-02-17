@@ -14,6 +14,8 @@ def get_args():
 
     parser.add_argument('-i', '--industry', action='store_true', help='Load industry data')
     parser.add_argument('-m', '--macro', action='store_true', help='Load macro data')
+
+    parser.add_argument('-d', '--domain', action='store_true', help='Load domain data')
       
   if script == 'country':
     parser.add_argument('-c', '--country', action='store_true', help='Load country data')

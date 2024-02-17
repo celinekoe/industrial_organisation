@@ -12,7 +12,7 @@ def get_file_lines(file_path):
     return sum(1 for line in file)
 
 def print_bad_line_count(df, line_count):
-  print(f"Bad line count: {line_count - len(df) - 1}")
+  print(f"Bad line count: {line_count - len(df)}")
 
 def get_dir_lines(dir_path):
   
@@ -66,10 +66,15 @@ def read_real_gdp(dir_path):
     df.set_index('Year', inplace=True)
     df_list.append(df)
 
-    line_count += get_file_lines(file_name)
+    line_count += get_file_lines(file_name) - 1
   
-  df_dir = pd.concat(df_list)
+  df_dir = pd.concat(df_list, axis=1, join='outer')
   print_bad_line_count(df_dir, line_count)
+
+  df_dir.reset_index(inplace=True)
+  df_dir.sort_values(by='Year', inplace=True)
+  df_dir.set_index('Year', inplace=True)
+  df_dir = df_dir.reindex(sorted(df_dir.columns), axis=1)
 
   return df_dir
 
@@ -82,7 +87,7 @@ def read_fed_rate(dir_path):
     df = read_csv(file_name)
     df_list.append(df)
 
-    line_count += get_file_lines(file_name)
+    line_count += get_file_lines(file_name) - 1
 
   df_dir = pd.concat(df_list)
   print_bad_line_count(df_dir, line_count)
@@ -114,8 +119,12 @@ def get_pickle_dir(args, file_name):
     return f"{pickle_dir}/{args['name']}_{file_name}.pkl"
 
 def read_pickle(file_name):
-  with open(f"{pickle_dir}/{file_name}.pkl", 'rb') as f:
-    return pickle.load(f)
+  try:
+    with open(f"{pickle_dir}/{file_name}.pkl", 'rb') as f:
+      return pickle.load(f)
+  except FileNotFoundError:
+    print(f"{pickle_dir}/{file_name}.pkl not found")
+    return None
 
 def write_pickle(file_name, data):
   with open(f"{pickle_dir}/{file_name}.pkl", 'wb') as f:
