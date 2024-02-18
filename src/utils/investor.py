@@ -2,8 +2,6 @@ import utils.location as LocationUtils
 import utils.string as StringUtils
 
 from constants.investors import public_investor_types, public_investors
-import utils.file as FileUtils
-
 
 def get_public(investor_type):
   investor_types = StringUtils.string_to_list(investor_type)

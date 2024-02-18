@@ -10,6 +10,7 @@ import utils.logger as Logger
 
 import utils.firm as Firms
 import utils.investor as Investors
+import utils.funding as FundingUtils
 
 def prep_country(args):
   country_dir = File.get_country_dir(f"{args['country_name']}")
@@ -37,6 +38,13 @@ def prep_investors():
 
   File.write_pickle(f"investors", investors)
 
+def prep_funding():
+  funding_dir = File.get_funding_dir()
+  funding = FundingUtils.enrich(File.read_funding_dir(funding_dir))
+  print(f"funding: {funding}")
+
+  File.write_pickle(f"funding", funding)
+
 def prep_real_gdp():
   real_gdp = File.read_real_gdp(Const.real_gdp_dir)
   print(real_gdp)
@@ -55,7 +63,7 @@ def prep_pop():
 def main(args):
   if args['country']:
     if args['country_all']:
-      dir_names = File.read_companies_dir_dir_names(Const.crunchbase_country_dir)
+      dir_names = File.read_companies_dir_dir_names(Const.country_dir)
       for dir_name in dir_names:
         new_args = copy.deepcopy(args)
         new_args.pop('all', None)
@@ -67,6 +75,9 @@ def main(args):
 
   if args['domain']:
     prep_domain(args)
+
+  if args['funding']:
+    prep_funding()
 
   if args['investors']:
     prep_investors()

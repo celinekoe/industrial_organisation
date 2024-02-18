@@ -21,7 +21,7 @@ The COVID-19 pandemic[6], Russia's invasion of Ukraine[7], and increasing US-Chi
 [9] 
 [10]
 [11]
-[12] Show the emerging industrial policy consensus
+[12] Describe the emerging industrial policy consensus
 [13] Define industrial policy
 [14] https://www.youtube.com/watch?v=0iVUbPwaxR4
 [15] Show comparison of project sizes
@@ -32,9 +32,7 @@ The fundamental theorem of economics is that resources are scarce. Therefore it 
 [17] "For the first forty postwar years, profits to financial firms moved in a range of between 10 and 15 percent of total profits of publicly held corporations. (...) By 2002, they passed 40 percent. In 2007, at their peak they hit almost half. Since then they havea retreated - but not even down to their 2002 level. The staggering figure - almost half of total corporate profits for financial intermediation - significantly undercounts the reality of how big a hunk of everything finance has taken. It doesn't include many financial firms that were not publicly held corporations - consider venture partnerships and private equity operations. It doesn't include the many wholly owned financing subsidiaries of industrial firms (...) Nor does it include big law and accounting firms that are an integral part of finance but are counted as professional services. Aside from this finance-led massive redistribution of income to the very top, ahve the rest of us gotten anything out of this hypertrophy of finance? Certainly we have not gotten faster commercial and industrial economic growth than in the 1950s and 1960s. Nor have we gotten more rapid structural economic transformation than in the 1880s or the 1960s." Stephen S. Cohen, J. Bradford Delong, Concrete Economics: The Hamilton Approach to Economic Growth and Policy (2016)
 [18] Describe real innovation as source of growth
 
-(...)
-
-This article attempts to answer broad questions about investment which might be relevant to a government decision-maker in deciding whether to invest in a particular industry, primarily using company, investor, and funding data from Crunchbase. Crunchbase is an online database, originally founded in 2007 to track startups featured on TechCrunch[19], though it has since expanded its database to include data from non-startup companies. The questions will attempt to answer:
+This paper attempts to answer broad questions about investment which might be relevant to a government decision-maker in deciding whether to invest in a particular industry, primarily using company, investor, and funding data from Crunchbase. Crunchbase is an online database, originally founded in 2007 to track startups featured on TechCrunch[19], though it has since expanded its database to include data from non-startup companies. The questions will attempt to answer:
 
 [19] https://www.crunchbase.com/organization/crunchbase
 
@@ -42,6 +40,7 @@ This article attempts to answer broad questions about investment which might be 
 - Real GDP
 - Real GDP growth
 - Interest rates
+- Investments
 
 2. Broad trends in research funding and higher education over time
 - Has private research funding changed over time? Has public research funding changed over time?
@@ -63,6 +62,10 @@ This article attempts to answer broad questions about investment which might be 
  
 [20] H. van Lente et al., Comparing technological hype cycles: Towards a theory (2013)
 [21] https://paulgraham.com/badeconomy.html
+
+I chose to answer broad questions due to the limitations of the data. The ideal data set would contain accurate labels of whether a company is a technologically innovative company (in the broad sense of technology including e.g. Biotechnology), and if so, what meso-technologies they are innovating in. I suspect it is possible to label the dataset, or at least a chosen industry-level subset of the dataset, using a combination of Compustat to get R&D spending and machine learning to get technology labels, but that is out of scope for this paper.
+
+I have also naively assumed that the number of companies founded is more relevant output in measuring the development of an industry, as opposed to e.g. revenue or profit. This is for simplicity of analysis, since revenue is only available on Crunchbase as an estimated revenue range, and is further missing from a large fraction of companies. There may be distortions in the analysis as a result, due to different industries having different structural charactertics regarding firm entry and firm size. However, the number of companies founded should still be a reasonable metric since we would expect it to strongly correlate with the "promise" of an industry, particularly when we compare changes within the same industry.
 
 ### Literature Review
 
@@ -112,10 +115,8 @@ Lighthill Report (1973)
 https://www.noahpinion.blog/p/the-new-industrial-policy-explained
 https://www.noahpinion.blog/p/a-few-economists-are-starting-to
 
-(...)
-
 ### Data
-Company, investor, and funding data was obtained from Crunchbase. Macroeconomic data has been sourced from CEIC. The company dataset of represents all (...) US companies available from Crunchbase, then filtered to only include for-profit companies founded between 1960 and 2019. Where the founding date was not available, I supplemented the data with the date of the domain registration from WHOIS. The start year was chosen as the earliest 'round' year where all macroeconomic data was available. The end year was chosen slightly arbitrarily due to suspected data truncation issues - past 2019, the number of companies founded dropped too sharply to be due to market conditions. The classification of industries and "industry groups" (Groups of related industries, e.g. Biotechnology and Genetics are in the same industry group) was also obtained from Crunchbase. The investor and funding data set represents all investors and funding rounds available from Crunchbase.
+Company, investor, and funding data was obtained from Crunchbase. Macroeconomic data has been sourced from CEIC, while US researching funding and higher education data has been sourced from NCSES. The company dataset of represents all (...) US companies available from Crunchbase, then filtered to only include for-profit companies founded between 1960 and 2019. Where the founding date was not available, I supplemented the data with the date of the domain registration from WHOIS. The start year was chosen as the earliest 'round' year where all macroeconomic data was available. The end year was chosen slightly arbitrarily due to suspected data truncation issues - past 2019, the number of companies founded dropped too sharply to be reasonably attributed to negative market conditions. The classification of industries and "industry groups" (Groups of related industries, e.g. Biotechnology and Genetics are in the same industry group) was also obtained from Crunchbase. The investor and funding data set represents all investors and funding rounds available from Crunchbase.
 
 The following are the columns used for analysis:
 
@@ -138,7 +139,7 @@ Macroeconomic:
 - Read GDP Growth Rate
 - Interest Rate
 
-The following are the industry groups used for analysis
+The following are the industry groups used for analysis:
 
 Industry Groups
 - Artificial Intelligence
@@ -150,7 +151,12 @@ Industry Groups
 - Financial Services
 - Manufacturing
 
-I chose the above industry groups to represent a range of "hyped" technologies from my personal experience (Artificial Intelligence, Biotechnology, Sustainability, Blockchain and Cryptocurrency), as well as the broad sectors of the US economy (Engineering, Administrative and Financial Services, Manufacturing). The industries included in the industry groups may preclude industries which should logically be included e.g. Pharmaceuticals is not included in Biotechnology. Thus I may supplement analysis of these industry groups with other industries where it is sensible. I also chose the above industry groups to partition companies into groups which are conceptually coherent e.g. I used Biotechnology instead of Health Care since Health Care includes industries which are more service-oriented like Nursing and Residential Care.
+I chose the above industry groups to represent a range of "hyped" technologies from my personal experience (Artificial Intelligence, Biotechnology, Sustainability, Blockchain and Cryptocurrency), as well as the broad sectors of the US economy (Engineering, Administrative and Financial Services, Manufacturing). The industries included in the industry groups may preclude industries which should logically be included e.g. Pharmaceuticals is not included in Biotechnology. (TODO) I have supplemented analysis of these industry groups with other industries where it is sensible. I also chose the above industry groups to partition companies into groups which are conceptually coherent e.g. I used Biotechnology instead of Health Care since Health Care includes industries which are more service-oriented like Nursing and Residential Care. I have also noticed while skimming the data that companies may be labelled such that they seem more or less technical that they really are e.g. a marketing company by description be labelled with 'Artificial Intelligence'. (TODO) I have attempted to mitigate this where feasible.
+
+Another potential issue of the data is that it's unclear how representative the Crunchbase data set is of the US economy as a whole[Data1]. While the data set includes companies founded as early as (...)(!), which suggests a large and diverse set of included companies, the size of the data set precludes manually checking for data issues. (TODO) I have attempted to validate the data by repeating the analysis on the subset of publically traded firms, which is generally accepted as representative of the US economy[Data2].
+
+[Data1] Find existing validation of Crunchbase data
+[Data2] Describe the relation between publically traded firms and the US economy
 
 ### Results
 

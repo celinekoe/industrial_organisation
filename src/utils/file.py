@@ -7,8 +7,7 @@ import pickle
 
 import constants.dirs as DirConstants
 
-# Csv
-
+# CSV
 def read_csv(file_path):
   return pd.read_csv(file_path, on_bad_lines='skip')
 
@@ -20,15 +19,17 @@ def print_bad_row_count(df, row_count):
   print(f"Bad row count: {row_count - len(df)}")
 
 # Crunchbase
-
 def get_country_dir(name):
-  return f"{DirConstants.crunchbase_country_dir}/{name}"
+  return f"{DirConstants.country_dir}/{name}"
   
 def get_industry_dir(name):
-  return f"{DirConstants.crunchbase_industry_dir}/{name}"
+  return f"{DirConstants.industry_dir}/{name}"
 
 def get_investors_dir():
-  return f"{DirConstants.crunchbase_investors_dir}"
+  return f"{DirConstants.investors_dir}"
+
+def get_funding_dir():
+  return f"{DirConstants.funding_dir}"
 
 def read_dir(dir_path):
   dir = Path(dir_path)
@@ -55,6 +56,14 @@ def read_companies_dir(dir_path):
 def read_investors_dir(dir_path):
   df, row_count = read_dir(dir_path)
   df = df.drop_duplicates(subset=['Organization/Person Name', 'Description']).reset_index(drop=True)
+
+  print_bad_row_count(df, row_count)
+
+  return df
+
+def read_funding_dir(dir_path):
+  df, row_count = read_dir(dir_path)
+  df = df.reset_index(drop=True)
 
   print_bad_row_count(df, row_count)
 
