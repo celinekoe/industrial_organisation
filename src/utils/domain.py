@@ -1,7 +1,7 @@
 from functools import partial
 from multiprocessing import Pool
 
-import utils.firms as Firms
+import utils.firm as Firms
 
 def process_chunk(chunk, old_map):
   new_map_chunk = {}

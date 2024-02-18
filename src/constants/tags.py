@@ -51,7 +51,7 @@ tag_groups = [
   'Video'
 ]
 
-tag_group_tag_map = {
+industry_group_industry_map = {
   'Administrative Services': [
     "Archiving Service",
     "Call Center",

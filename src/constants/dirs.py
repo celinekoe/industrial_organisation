@@ -1,8 +1,11 @@
 
 data_dir = '../data'
+
 crunchbase_dir = f"{data_dir}/crunchbase"
 crunchbase_country_dir = f"{crunchbase_dir}/country"
 crunchbase_industry_dir = f"{crunchbase_dir}/industry"
+crunchbase_investors_dir = f"{crunchbase_dir}/investors"
+
 ceic_dir = f"{data_dir}/ceic"
 real_gdp_dir = f"{ceic_dir}/real_gdp"
 fed_rate_dir = f"{ceic_dir}/fed_rate"

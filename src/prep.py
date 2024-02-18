@@ -1,19 +1,19 @@
 
 import pandas as pd
-import numpy as np
 import copy
 
 import constants.dirs as Const
 import utils.args as Args
+import utils.domain as Domain
 import utils.file as File
 import utils.logger as Logger
 
-import utils.domain as Domain
-import utils.firms as Firms
+import utils.firm as Firms
+import utils.investor as Investors
 
 def prep_country(args):
   country_dir = File.get_country_dir(f"{args['country_name']}")
-  firms = Firms.enrich_firms(File.read_dir(country_dir))
+  firms = Firms.enrich_firms(File.read_companies_dir(country_dir))
 
   File.write_pickle(f"{args['country_name']}_firms", firms)
 
@@ -30,11 +30,12 @@ def prep_domain(args):
 
   File.write_pickle(f"domain_created_year_map", domain_created_year_map)
 
-def prep_industry(args):
-  tag_dir = File.get_tag_dir(args['name'])
-  firms = Firms.enrich_firms(File.read_dir(tag_dir))
+def prep_investors():
+  investors_dir = File.get_investors_dir()
+  investors = Investors.enrich(File.read_investors_dir(investors_dir))
+  print(f"investors: {investors}")
 
-  File.write_pickle(f"{args['name']}_firms", firms)
+  File.write_pickle(f"investors", investors)
 
 def prep_real_gdp():
   real_gdp = File.read_real_gdp(Const.real_gdp_dir)
@@ -54,7 +55,7 @@ def prep_pop():
 def main(args):
   if args['country']:
     if args['country_all']:
-      dir_names = File.read_dir_dir_names(Const.crunchbase_country_dir)
+      dir_names = File.read_companies_dir_dir_names(Const.crunchbase_country_dir)
       for dir_name in dir_names:
         new_args = copy.deepcopy(args)
         new_args.pop('all', None)
@@ -67,8 +68,8 @@ def main(args):
   if args['domain']:
     prep_domain(args)
 
-  if args['industry']:
-    prep_industry(args)
+  if args['investors']:
+    prep_investors()
 
   if args['macro']:
     prep_real_gdp()
@@ -76,6 +77,6 @@ def main(args):
     # prep_pop()    
 
 if __name__ == "__main__":
-  args = Args.get_args()
+  args = Args.get_prep_args()
   
   main(args)

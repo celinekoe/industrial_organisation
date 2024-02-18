@@ -1,34 +1,18 @@
-Chill a bit more
-Get all tags
-Get peaks
-Get non government investors
-Get all funding rounds
-The alternative is to look up against existing firm data
-Can do both, since I can figure out how to use the data while I'm fetching the data in the first place
 
-let listItems = document.querySelectorAll('mat-list-item[data-cy="industry"]') 
+Write - Good enough for now
+Clean up bubble functions
+Process funding
+Process unemployment and real gdp growth data
+Get Singapore data
+It's also probably trivial to get Singapore data
+Identify which peak came first
 
-let textContents = [];
-for (var i = 0; i < listItems.length; i++) {
-    textContents.push(listItems[i].textContent.trim());
-}
 
-console.log(textContents);
-
-listItems = document.querySelectorAll('mat-list-item[data-cy="industry"]') 
-textContents = [];
-for (var i = 0; i < listItems.length; i++) {
-    textContents.push(listItems[i].textContent.trim());
-}
-
-console.log(textContents);
-
-let get_industries = () => {
-  let listItems = document.querySelectorAll('mat-list-item[data-cy="industry"]') 
-  let textContents = []
-  for (let i = 0; i < listItems.length; i++) {
-      textContents.push(listItems[i].textContent.trim())
-  }
-
-  console.log(textContents)
-}
+1) Research Question
+2) Motivation
+3) Description of Industry
+4) Important Literature
+5) (Potential) Data Sources
+6) Empirical Model and Identification Strategy
+7) (Potential) Results
+8) Discussion and Limitations
