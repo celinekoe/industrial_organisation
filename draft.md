@@ -5,64 +5,64 @@
 ### Introduction
 >By 2005 or so, it will become clear that the Internet’s impact on the economy has been no greater than the fax machine's. - Paul Krugman, Why most economists' predictions are wrong (1998)[1]
 
-What distinguishes real innovation from a technological fad? What separates Amazon from Pets.com, Novo Nordisk from Theranos, SpaceX from Concorde[2]? We might guarantee the rightness of our prediction by stating, innovation which suceeds is an innovation, and innovation which fails is a fad. But if failure is the distinguishing factor, how do we explain the Internet after the Dot Com Bubble, solar power after Solyndra, or OpenAI after the AI winter[3]? We might imagine that it is impossible to determine whether an innovation would succeed or fail until it does, thus we defer investment to the market, and avoid the pretense of knowledge[4]. But who is the market? Is the market the fresh-faced MBA, who with confident humility states that the market is efficient and therefore they should defer to the market[5]? Then who is the market?
+What distinguishes real innovation from a technological fad? What separates Amazon from Pets.com, Novo Nordisk from Theranos, SpaceX from Concorde[2]? We might guarantee the rightness of our prediction by stating simply: innovation which suceeds is innovation, and innovation which fails is a fad. But if failure is our dividing line, how do we explain the Google after the Dot Com Bubble, solar power after Solyndra, or OpenAI after the AI winter[3]? Do we avoid the pretense of knowledge by deferring investment to the market[4]? But who is the market? Is the market the fresh-faced MBA, who with confident humility states that the market is efficient and therefore they should defer to the market[5]? Then who is the market?
 
 [1] http://web.archive.org/web/19980610100009/www.redherring.com/mag/issue55/economics.html#?hn
 [2] Describe Amazon, Pets.com, Novo Nordisk, Theranos, SpaceX, Concorde
 [3] Describe the Dot Com Bubble, Solyndra, AI winter
 [4] https://www.nobelprize.org/prizes/economic-sciences/1974/hayek/lecture/
-[5] Describe the (increasingly?) common thought pattern of 'I can do no better than the group'
+[5] 
 
-The COVID-19 pandemic[6], Russia's invasion of Ukraine[7], and increasing US-China hostilities[8] have contributed to the weakening of the free trade consensus already weakened by the decline of US manufacturing[10], the Great Financial Crisis[11], and perceived market ineffectiveness at addressing climate change[12]. In it's place is an emerging consensus[13] on the importance of industrial policy[14] to national development, resulting in the passage of the CHIPS Act and Inflation Reduction Act. But the problem remains. How much should be invested where? Whether it's lowly manager of a rusting automobile plant in Detroit, or an academic polishing their spectacles in a high tower, someone must decide. Do we (...)[15]. Do we invest generously, trusting blindly that all scientific progress leads to equal societal progress? When the particle physicists ask for $3 billion for a new particle collider[16], do we still hold that blind faith [17]?
+The COVID-19 pandemic[6], Russia's invasion of Ukraine[7], and increasing US-China hostilities[8] have contributed to the weakening of the free trade and free market consensus already weakened by the decline of US manufacturing[9], the Great Financial Crisis[10], and perceived market ineffectiveness at addressing climate change[11]. In it's place is an emerging consensus[12] on the importance of industrial policy[13] for national development, resulting in the US in the passage of the CHIPS Act and Inflation Reduction Act. But the problem still remains: How much should be invested where? Whether by lowly manager of a rusting automobile plant in Detroit, or by an academic sitting in a high tower, someone must decide. Do we dare greatly by trusting that all scientific progress leads to societal progress in equal measure? When the particle physicists ask for $3 billion for a new particle collider[14], do we still dare to hold that blind faith[15]?
 
 [6] Describe effect of COVID on trade
 [7] Describe effect of war on trade
 [8] Describe effect of US-China hostilities on trade
-[9] Show the free trade consensus has been weakening
-[10] 
+[9] 
+[10]
 [11]
-[12]
-[13] Show the emerging industrial policy consensus
-[14] Define industrial policy
-[15] Describe the effects of underinvestment
-[16] https://www.youtube.com/watch?v=0iVUbPwaxR4
-[17] Show comparison of project sizes
+[12] Show the emerging industrial policy consensus
+[13] Define industrial policy
+[14] https://www.youtube.com/watch?v=0iVUbPwaxR4
+[15] Show comparison of project sizes
 
-The fundamental theorem of economics is that resources are scarce. Thus it is the job of economists to determine how to allocate scarce resources. Resources invested into Uber and WeWork[16], skimmed off by (...) and expensed on the consumption of luxuries, are resources not invested into the real innovation that makes economies grow[17]. Not only money, time, talent (...)[18].
+The fundamental theorem of economics is that resources are scarce. Therefore it is the job of economists, not merely to say that resources will be allocated, but to actually determine how to allocate scarce resources. Money, time, and talent invested into Uber and WeWork[16] - skimmed off by entrepreneurs and venture capitalists[17] and expensed on the consumption of luxuries - are money, time, and talent not invested into the real innovation that makes economies grow[18].
 
 [16] Describe losses of Uber and WeWork. Jeffrey Funk, What's Behind Technological Hype
-[17] Describe real innovation as source of growth
-[18] Describe talented young people going into finance instead of 'real' economy.
+[17] "For the first forty postwar years, profits to financial firms moved in a range of between 10 and 15 percent of total profits of publicly held corporations. (...) By 2002, they passed 40 percent. In 2007, at their peak they hit almost half. Since then they havea retreated - but not even down to their 2002 level. The staggering figure - almost half of total corporate profits for financial intermediation - significantly undercounts the reality of how big a hunk of everything finance has taken. It doesn't include many financial firms that were not publicly held corporations - consider venture partnerships and private equity operations. It doesn't include the many wholly owned financing subsidiaries of industrial firms (...) Nor does it include big law and accounting firms that are an integral part of finance but are counted as professional services. Aside from this finance-led massive redistribution of income to the very top, ahve the rest of us gotten anything out of this hypertrophy of finance? Certainly we have not gotten faster commercial and industrial economic growth than in the 1950s and 1960s. Nor have we gotten more rapid structural economic transformation than in the 1880s or the 1960s." Stephen S. Cohen, J. Bradford Delong, Concrete Economics: The Hamilton Approach to Economic Growth and Policy (2016)
+[18] Describe real innovation as source of growth
 
-This paper attempts to address some broad questions about investment across industries and actors using Crunchbase company, investor, and funding round data:
+(...)
 
-Research Funding
-- Has private research funding changed over time?
-- Has public research funding changed over time?
+This article attempts to answer broad questions about investment which might be relevant to a government decision-maker in deciding whether to invest in a particular industry, primarily using company, investor, and funding data from Crunchbase. Crunchbase is an online database, originally founded in 2007 to track startups featured on TechCrunch[19], though it has since expanded its database to include data from non-startup companies. The questions will attempt to answer:
 
-Education
-- Have there been less STEM graduates, relative to (...)?
-- Have there been less STEM doctorates, relative to (...)?
+[19] https://www.crunchbase.com/organization/crunchbase
 
-Private Investors
-- Who are the largest private investors?
-- Where are the largest private investments?
-- Have private investments changed over time?
-- Are different investor types different?
+1. Broad correlations between the founding of companies and variables of interest
+- Real GDP
+- Real GDP growth
+- Interest rates
 
-Public Investors
-- Who are the largest private investors?
-- Where are the largest public investments?
-- Have public investments changed over time?
-- Are public investments different from private investment?
+2. Broad trends in research funding and higher education over time
+- Has private research funding changed over time? Has public research funding changed over time?
+- Have there been less STEM graduates, relative to real gdp?
+- Have there been less STEM doctorates, relative to real gdp?
+
+3. Broad trends in private and public investment over time 
+- Who are the largest private investors? Who are the largest public investors?
+- Where are the largest private investments? Where are the largest public investments?
+- Do different investor types invest in different industries?
+- Have private investments changed over time? Have public investments changed over time?
 - Does public investment lead or lag private investment?
 
-Investment Patterns
-- What are some patterns of investment? e.g. Constant, peak, slow peak, fast peak, multiple peaks, decline
-- Are sharp increases in investment associated with sharp crashes?
-
-Recessions
-- Are firms founded inside recessions different from firms started outside recessions?
+4. Broad patterns in investment across industries
+- What are some patterns of investment? e.g. Constant, slow peak, fast peak, multiple peaks, decline [20]
+- Are sharp peaks in investment associated with sharp crashes?
+- Are recessions (negatively) correlated to investment?
+- Are firms founded inside recessions different from firms started outside recessions? [21]
+ 
+[20] H. van Lente et al., Comparing technological hype cycles: Towards a theory (2013)
+[21] https://paulgraham.com/badeconomy.html
 
 ### Literature Review
 
@@ -72,17 +72,20 @@ Recessions
 
 (...), Blinkered by bibliometrics (2017)
 
-(...)
-
 #### Innovation and Growth
 (...)
 
 #### Is Innovation Slowing?
+
+(...), Are Ideas Getting Harder to Find (2017)
+
 (...)
 
 #### Innovation and Funding
 
 (...), Going Public When You Can In Biotechnology (2002)
+
+(...), Killing the Golden Goose? The Decline of Science in Corporate R&D (2015)
 
 #### Technological Hype
 
@@ -93,6 +96,9 @@ H. van Lente et al., Comparing technological hype cycles: Towards a theory (2013
 (...)
 
 A. Ruef and J. Markardm, What happens after a hype? How changing expectations affected innovation activities in the case of stationary fuel cells (2010)
+(...)
+
+M. Steinert, L. Leifer, Scrutinizing Gartner’s Hype Cycle Approach (2010)
 (...)
 
 James Hendler, Avoiding Another AI Winter (2008)
