@@ -36,5 +36,6 @@ Script will occasionally fail due to timeout. Just set rangeStart to the next se
 Run script:
 ```
 ./rename.sh country/united_states united_states
+./rename.sh investors investors
 ./rename.sh funding_rounds funding_rounds
 ```
