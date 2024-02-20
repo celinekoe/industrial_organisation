@@ -1,7 +1,7 @@
 from functools import partial
 from multiprocessing import Pool
 
-import utils.firm as Firms
+import models.firm as Firms
 
 def process_chunk(chunk, old_map):
   new_map_chunk = {}
@@ -19,10 +19,10 @@ def merge_results(results):
       result_map.update(result)
   return result_map
 
-def get_domain_created_year_map(urls, domain_created_year_map, p=4, c=10):
+def get_domain_created_year_map(urls, domain_created_year, p=4, c=10):
   chunks = [urls[i:i+c] for i in range(0, len(urls), c)]
 
-  partial_process_chunk = partial(process_chunk, old_map=domain_created_year_map)
+  partial_process_chunk = partial(process_chunk, old_map=domain_created_year)
 
   with Pool(p) as pool:
     results = pool.map(partial_process_chunk, chunks)
@@ -30,7 +30,7 @@ def get_domain_created_year_map(urls, domain_created_year_map, p=4, c=10):
   # Merge results from all processes
   result_map = merge_results(results)
 
-  domain_created_year_map.update(result_map)
-  # print(domain_created_year_map)
+  domain_created_year.update(result_map)
+  # print(domain_created_year)
 
-  return domain_created_year_map
+  return domain_created_year

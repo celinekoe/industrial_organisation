@@ -84,7 +84,7 @@ def read_real_gdp(dir_path):
     df.set_index('Year', inplace=True)
     df_list.append(df)
 
-    line_count += get_csv_rows(file_name) - 1
+    line_count += get_csv_rows(file_name)
   
   df_dir = pd.concat(df_list, axis=1, join='outer')
   print_bad_row_count(df_dir, line_count)
@@ -96,25 +96,38 @@ def read_real_gdp(dir_path):
 
   return df_dir
 
+def read_real_gdp_growth(dir_path):
+  df, row_count = read_dir(dir_path)
+  df = df.reset_index(drop=True)
+
+  print_bad_row_count(df, row_count)
+
+  return df
+
 def read_fed_rate(dir_path):
-  dir = Path(dir_path)
-  line_count = 0
+  df, row_count = read_dir(dir_path)
+  df = df.reset_index(drop=True)
 
-  df_list = []
-  for file_name in dir.glob('*.csv'):
-    df = read_csv(file_name)
-    df_list.append(df)
+  print_bad_row_count(df, row_count)
 
-    line_count += get_csv_rows(file_name) - 1
+  # dir = Path(dir_path)
+  # line_count = 0
 
-  df_dir = pd.concat(df_list)
-  print_bad_row_count(df_dir, line_count)
+  # df_list = []
+  # for file_name in dir.glob('*.csv'):
+  #   df = read_csv(file_name)
+  #   df_list.append(df)
 
-  df_dir['Year'] = pd.to_datetime(df_dir['Month'], format='%m/%Y').dt.year
+  #   line_count += get_csv_rows(file_name) - 1
+
+  # df_dir = pd.concat(df_list)
+  # print_bad_row_count(df_dir, line_count)
+
+  df['Year'] = pd.to_datetime(df['Month'], format='%m/%Y').dt.year
 
   year_data = {
-    'Year': df_dir['Year'].unique(),
-    'Fed Rate': [df_dir[df_dir['Year'] == year]['United States'].mean() for year in df_dir['Year'].unique()]
+    'Year': df['Year'].unique(),
+    'Fed Rate': [df[df['Year'] == year]['United States'].mean() for year in df['Year'].unique()]
   }
 
   year_df = pd.DataFrame(year_data)
