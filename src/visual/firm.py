@@ -18,12 +18,9 @@ def plot(firms, macro, industry=None):
                   CommonUtils.prepend_string('Firm: Count', industry), 'Count',
                   highlight=macro.recessions)
   Visualiser.plot(firm_year_count_growth,
-                  CommonUtils.prepend_string('Firm: Count: Growth', industry),
-                  'Count',
+                  CommonUtils.prepend_string('Firm: Count: Growth', industry), 'Growth %',
                   highlight=macro.recessions)
   
-  return firm_year_count, firm_year_count_growth
-
 def plot_macro(firms, macro, industry=None):
   firm_year_count, firm_year_count_growth = \
     DataframeUtils.get_year_count(firms, FirmConstants.year_label,
@@ -34,6 +31,16 @@ def plot_macro(firms, macro, industry=None):
     'Growth %',
     industry
   )
+
+def plot_year_count(year_count, macro, industry=None):
+  Visualiser.plot(year_count,
+                  CommonUtils.prepend_string('Firm: Count', industry), 'Count',
+                  highlight=macro.recessions)
+  
+def plot_year_count_growth(year_count_growth, macro, industry=None):
+  Visualiser.plot(year_count_growth,
+                  CommonUtils.prepend_string('Firm: Count: Growth', industry), 'Growth %',
+                  highlight=macro.recessions)
 
 # STEM
 
@@ -117,27 +124,14 @@ def stack_STEM_public_funded(firms):
 
 # Industry Group
 
-def plot_industry_group(firms, industry_group, macro, compare=True):
+def plot_industry_group(firms, industry_group, macro):
   industry_group_firms = DataframeUtils.filter_industry_group(firms, industry_group)
-  industry_group_params = [industry_group_firms, macro, industry_group]
 
-  industry_group_year_count, industry_group_year_count_growth = plot(*industry_group_params)
-
-  if compare:
-    plot_macro(*industry_group_params)
-    plot_public_funded(*industry_group_params)
-    plot_public_funded_macro(*industry_group_params)
-
-  return industry_group_year_count, industry_group_year_count_growth
+  plot(industry_group_firms, macro, industry_group)
+  plot_macro(industry_group_firms, macro, industry_group)
+  plot_public_funded(industry_group_firms, macro, industry_group)
+  plot_public_funded_macro(industry_group_firms, macro, industry_group)
 
 def plot_industry_group_industries(firms, industry_group, macro):
   industry_group_firms = DataframeUtils.filter_industry_group(firms, industry_group)
   print("TODO")
-
-# Industry
-
-def plot_industry(firms, industry=None, industry_group=None):
-  # industry_group_industries = DataframeUtils.get_industry_group_industries(industry_group)
-  # for industry in industry_group_industries:
-  #   visualise_industry(firms, industry, fed_rate)
-  return

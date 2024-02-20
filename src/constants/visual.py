@@ -10,9 +10,12 @@ def mid_color(color1, color2, alpha=0.5):
   
   return mid_color
 
-output = False
 start_year = 1960
 end_year = 2019
+bubble_scale = 0.5,
+bubble_min_size = 100,
+
+
 
 STEM_stack_labels = [IndustryConstants.not_STEM_label, IndustryConstants.STEM_label]
 STEM_colors = ['lightgreen', 'green']

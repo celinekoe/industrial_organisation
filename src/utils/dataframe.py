@@ -34,7 +34,7 @@ def get_year_count(df, year_col, start_year=None, end_year=None):
   return year_count, year_count_growth
 
 def get_grouped_year_count(df, year_col, group_col, rename_col_dict=None, start_year=None, end_year=None):
-  grouped_year_count = get_grouped_count(df, [year_col, group_col]) \
+  grouped_year_count = _get_grouped_count(df, [year_col, group_col]) \
     .unstack() \
     .reset_index() \
     .set_index(year_col)

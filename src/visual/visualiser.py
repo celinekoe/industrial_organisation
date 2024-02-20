@@ -21,7 +21,7 @@ def plot_labels(plt, title, ylab, legend=False, grid=True):
     plt.grid(True)
 
 def plot(series, title='', ylab='', highlight=None, year_start=None):
-  plt.figure(figsize=(10, 6))
+  # plt.figure(figsize=(10, 6))
   
   if year_start:
     series = series.loc[year_start:]
@@ -35,11 +35,10 @@ def plot(series, title='', ylab='', highlight=None, year_start=None):
     
   plot_labels(plt, title, ylab)
 
-  if VisualConstants.output:
-    plt.show()
+  plt.show()
 
 def plot_dict(dict, title='', ylab='', log_scale=True, colors=None, highlight=None):
-  plt.figure(figsize=(10, 6))
+  # plt.figure(figsize=(10, 6))
 
   if log_scale:
     plt.yscale('log')
@@ -54,8 +53,7 @@ def plot_dict(dict, title='', ylab='', log_scale=True, colors=None, highlight=No
 
   plot_labels(plt, title, ylab, legend=True)
 
-  if VisualConstants.output:
-    plt.show()
+  plt.show()
 
 def stack(df, title='', ylab='', labels=None, colors=None,  year_start=None):
   if year_start:
@@ -74,8 +72,7 @@ def stack(df, title='', ylab='', labels=None, colors=None,  year_start=None):
 
   plot_labels(plt, title, ylab, legend=True, grid=False)
 
-  if VisualConstants.output:
-    plt.show()
+  plt.show()
 
 def granger_causality(series, max_lag):
   y_series = series[0]
@@ -120,12 +117,28 @@ def regression(series, series_label, group_label=''):
 
   left_space = 0.3
   max_lag = 2
-  granger_tests = granger_causality([y_series[1:], x_series[1:]], max_lag)
+  # granger_tests = granger_causality([y_series[1:], x_series[1:]], max_lag)
+  granger_tests = granger_causality([y_series, x_series], max_lag)
   for lag in range(1, max_lag + 1):
     plt.text(left_space * lag, -0.2, f'Lag: {lag}', fontsize=10, color='black', transform=plt.gca().transAxes)
     plt.text(left_space * lag, -0.25, f'f-statistic: {granger_tests[lag][0]:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
     plt.text(left_space * lag, -0.3, f'p-value: {granger_tests[lag][1]:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
 
   plt.grid(True)
-  if VisualConstants.output:
-    plt.show()
+  plt.show()
+
+def regression_bomb(series):
+  y_series = series[0]
+  x_series = series[1]
+
+  slope, intercept, r_value, p_value, std_err = stats.linregress(x_series, y_series)
+
+  max_lag = 2
+  granger_tests = granger_causality([y_series, x_series], max_lag)
+
+  for lag in range(1, max_lag + 1):
+    if p_value < 0.05 or granger_tests[lag][1] < 0.05:
+      return True
+  
+  return False
+

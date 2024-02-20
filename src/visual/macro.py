@@ -8,10 +8,7 @@ class Macro:
     self.recessions = self.real_gdp_growth[self.real_gdp_growth < 0].index.tolist()
 
   def _get_first_valid_index(self, series):
-    invalid_indices = series.index[(series.isnull()) | (series == 0)]
-    last_invalid_index = invalid_indices[-1]
-    first_valid_index = last_invalid_index + 1
-
+    first_valid_index = series.first_valid_index()
     return series.index.get_loc(first_valid_index)
 
   def plot(self):
@@ -26,3 +23,10 @@ class Macro:
     series_fed_rate_label = [series_label, 'Interest Rate']
 
     Visualiser.regression(series_fed_rate, series_fed_rate_label, group_label)
+
+  def regression_bomb(self, series):
+    valid_index = self._get_first_valid_index(series)
+
+    series_fed_rate = [series[valid_index:], self.fed_rate[valid_index:]]
+
+    return Visualiser.regression_bomb(series_fed_rate)

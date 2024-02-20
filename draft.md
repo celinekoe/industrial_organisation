@@ -36,29 +36,29 @@ This paper attempts to answer broad questions about investment which might be re
 
 [19] https://www.crunchbase.com/organization/crunchbase
 
-1. Broad correlations between the founding of companies and variables of interest
+#### 1. Broad correlations between the founding of companies and variables of interest
 - Real GDP
 - Real GDP growth
 - Interest rates
 - Investments
 
-2. Broad trends in research funding and higher education over time
+#### 2. Broad trends in research funding and higher education over time
 - Has private research funding changed over time? Has public research funding changed over time?
 - Have there been less STEM graduates, relative to real gdp?
 - Have there been less STEM doctorates, relative to real gdp?
 
-3. Broad trends in private and public investment over time 
+#### 3. Broad trends in private and public investment over time 
 - Who are the largest private investors? Who are the largest public investors?
 - Where are the largest private investments? Where are the largest public investments?
 - Do different investor types invest in different industries?
 - Have private investments changed over time? Have public investments changed over time?
-- Does public investment lead or lag private investment?
+- Does public investment lead or lag private investment? *
 
-4. Broad patterns in investment across industries
-- What are some patterns of investment? e.g. Constant, slow peak, fast peak, multiple peaks, decline [20]
-- Are sharp peaks in investment associated with sharp crashes?
-- Are recessions (negatively) correlated to investment?
-- Are firms founded inside recessions different from firms started outside recessions? [21]
+#### 4. Broad patterns in investment across industries
+- What are some patterns of investment? e.g. Constant, slow peak, fast peak, multiple peaks, decline [20] *
+- Are sharp peaks in investment associated with sharp crashes? *
+- Are recessions (negatively) correlated to investment? *
+- Are firms founded inside recessions different from firms started outside recessions? [21] *
  
 [20] H. van Lente et al., Comparing technological hype cycles: Towards a theory (2013)
 [21] https://paulgraham.com/badeconomy.html
@@ -116,7 +116,7 @@ https://www.noahpinion.blog/p/the-new-industrial-policy-explained
 https://www.noahpinion.blog/p/a-few-economists-are-starting-to
 
 ### Data
-Company, investor, and funding data was obtained from Crunchbase. Macroeconomic data has been sourced from CEIC, while US researching funding and higher education data has been sourced from NCSES. The company dataset of represents all (...) US companies available from Crunchbase, then filtered to only include for-profit companies founded between 1960 and 2019. Where the founding date was not available, I supplemented the data with the date of the domain registration from WHOIS. The start year was chosen as the earliest 'round' year where all macroeconomic data was available. The end year was chosen slightly arbitrarily due to suspected data truncation issues - past 2019, the number of companies founded dropped too sharply to be reasonably attributed to negative market conditions. The classification of industries and "industry groups" (Groups of related industries, e.g. Biotechnology and Genetics are in the same industry group) was also obtained from Crunchbase. The investor and funding data set represents all investors and funding rounds available from Crunchbase.
+Company, investor, and funding data was obtained from Crunchbase. Macroeconomic data has been sourced from CEIC, while US research funding and higher education data has been sourced from NCSES. The company dataset includes all 1.3 million US companies available from Crunchbase, which is filtered in processing to only include for-profit companies founded between 1960 and 2019. Where the founding date was not available, I supplemented the data with the date of domain registration from WHOIS. The start year was chosen as the earliest 'round' year where all macroeconomic data is available. The end year was chosen slightly arbitrarily due to suspected data truncation issues - past 2019, the number of companies founded dropped too sharply to be reasonably attributed to negative market conditions. The classification of industries and "industry groups" (Groups of related industries, e.g. Biotechnology and Genetics are in the same industry group) was also obtained from Crunchbase. The investor and funding data set represents all 270,000 investors and 630,000 funding rounds available from Crunchbase. Funding data is also filtered to only included funding rounds between 1960 and 2019.
 
 The following are the columns used for analysis:
 

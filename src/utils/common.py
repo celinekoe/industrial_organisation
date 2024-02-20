@@ -14,8 +14,18 @@ def prepend_string(string, prepend):
 
 # Dict
 
-def sort_dict(dictt, desc=True):
-  return dict(sorted(dictt.items(), key=lambda item: item[1], reverse=desc))
+def sort_dict(dict_):  
+  return dict(sorted(dict_.items(), key=lambda item: item[1], reverse=True))
+
+def sum_dict(dict_):
+  new_dict = {}
+  for key, value in dict_.items():
+    new_dict[key] = value.sum()
+
+  return new_dict
+
+def top_n(dict, n):
+  return first_n(sort_dict(dict), n)
 
 def first_n(dict, n):
   new_dict = {}
