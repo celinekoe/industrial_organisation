@@ -3,7 +3,7 @@ import constants.funding as FundingConstants
 import constants.visual as VisualConstants
 
 import utils.dataframe as DataUtils
-import utils.visual.visualiser as Visualiser
+import visual.visualiser as Visualiser
 
 def stack_STEM_public_funded(funding):
   funding_STEM_year_sum_percent = DataUtils.get_STEM_year_percent(funding, FundingConstants.year_label, FundingConstants.raised_label)

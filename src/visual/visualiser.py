@@ -7,6 +7,9 @@ import pandas as pd
 import statsmodels.tsa.stattools as stattools 
 import scipy.stats as stats
 
+import constants.visual as VisualConstants
+import utils.common as CommonUtils
+
 def plot_labels(plt, title, ylab, legend=False, grid=True):
   plt.title(title)
   plt.xlabel('Year')
@@ -32,7 +35,8 @@ def plot(series, title='', ylab='', highlight=None, year_start=None):
     
   plot_labels(plt, title, ylab)
 
-  plt.show()
+  if VisualConstants.output:
+    plt.show()
 
 def plot_dict(dict, title='', ylab='', log_scale=True, colors=None, highlight=None):
   plt.figure(figsize=(10, 6))
@@ -50,7 +54,8 @@ def plot_dict(dict, title='', ylab='', log_scale=True, colors=None, highlight=No
 
   plot_labels(plt, title, ylab, legend=True)
 
-  plt.show()
+  if VisualConstants.output:
+    plt.show()
 
 def stack(df, title='', ylab='', labels=None, colors=None,  year_start=None):
   if year_start:
@@ -69,17 +74,18 @@ def stack(df, title='', ylab='', labels=None, colors=None,  year_start=None):
 
   plot_labels(plt, title, ylab, legend=True, grid=False)
 
-  plt.show()
+  if VisualConstants.output:
+    plt.show()
 
 def granger_causality(series, max_lag):
   y_series = series[0]
   x_series = series[1]
 
   # Suppress printing of granger causality results
-  # original_stdout = sys.stdout
-  # sys.stdout = open(os.devnull, 'w')
+  original_stdout = sys.stdout
+  sys.stdout = open(os.devnull, 'w')
   granger_result = stattools.grangercausalitytests(pd.concat([y_series, x_series], axis=1), maxlag=max_lag)
-  # sys.stdout = original_stdout
+  sys.stdout = original_stdout
 
   granger_tests = {}
 
@@ -89,7 +95,7 @@ def granger_causality(series, max_lag):
 
   return granger_tests
 
-def regression(series, series_label, title=''):
+def regression(series, series_label, group_label=''):
   y_series = series[0]
   x_series = series[1]
 
@@ -100,16 +106,17 @@ def regression(series, series_label, title=''):
 
   y_label = series_label[0]
   x_label = series_label[1]
-  title = f"{y_label}, {x_label}"
+  title = CommonUtils.prepend_string(f"{y_label}, {x_label}", group_label)
 
   plt.xlabel(x_label)
   plt.ylabel(y_label)
   plt.title(title)
   plt.legend()
 
-  plt.text(0, -0.2, f'slope: {slope:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
-  plt.text(0, -0.25, f'r-value: {r_value:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
-  plt.text(0, -0.3, f'p-value: {p_value:.4f}', fontsize=10, color='black', transform=plt.gca().transAxes)
+  plt.text(0, -0.2, f'Points: {len(y_series)}', fontsize=10, color='black', transform=plt.gca().transAxes)
+  plt.text(0, -0.25, f'Slope: {slope:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
+  plt.text(0, -0.3, f'r-value: {r_value:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
+  plt.text(0, -0.35, f'p-value: {p_value:.4f}', fontsize=10, color='black', transform=plt.gca().transAxes)
 
   left_space = 0.3
   max_lag = 2
@@ -120,4 +127,5 @@ def regression(series, series_label, title=''):
     plt.text(left_space * lag, -0.3, f'p-value: {granger_tests[lag][1]:.2f}', fontsize=10, color='black', transform=plt.gca().transAxes)
 
   plt.grid(True)
-  plt.show()
+  if VisualConstants.output:
+    plt.show()

@@ -10,8 +10,10 @@ def mid_color(color1, color2, alpha=0.5):
   
   return mid_color
 
+output = False
 start_year = 1960
 end_year = 2019
+
 STEM_stack_labels = [IndustryConstants.not_STEM_label, IndustryConstants.STEM_label]
 STEM_colors = ['lightgreen', 'green']
 public_funded_stack_labels = [InvestorConstants.private_funded_label, InvestorConstants.public_funded_label]

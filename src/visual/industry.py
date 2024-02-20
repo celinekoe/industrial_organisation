@@ -1,8 +1,24 @@
 import constants.firm as FirmConstants
+import constants.industry as IndustryConstants
 import constants.investor as InvestorConstants
 
 import utils.dataframe as DataUtils
-import utils.visual.visualiser as Visualiser
+import visual.visualiser as Visualiser
+
+class Industry:
+  def __init__(self):
+    self.industry_groups = self.get_industry_groups()
+
+  def get_industry_groups():
+    return list(IndustryConstants.industry_group_industry_map.keys())
+
+def get_industry_group_industries(industry_group):
+  return IndustryConstants.industry_group_industry_map[industry_group]
+
+def get_industries():
+  industries = [industry for industry_group_industries in IndustryConstants.industry_group_industry_map.values() for industry in industry_group_industries]
+  industries = list(set(industries))
+  return sorted(industries)
 
 def visualise_bubble(industry_firms, industry, industry_year_count, fed_rate):
   industry_public_year_count = DataUtils.get_public_year_count(industry_firms)

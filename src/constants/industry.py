@@ -1,5 +1,5 @@
-STEM_label = "STEM"
-not_STEM_label = "Not STEM"
+STEM_label = 'STEM'
+not_STEM_label = 'Not STEM'
 
 industry_group_industry_map = {
   'Administrative Services': [

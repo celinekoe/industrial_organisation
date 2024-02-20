@@ -1,3 +1,5 @@
+# String
+
 def string_to_list(string):
   items = []
   if isinstance(string, str):
@@ -5,8 +7,21 @@ def string_to_list(string):
 
   return items
 
-def list_in_list(list1, list2):
-  return any(item in list2 for item in list1)
+def prepend_string(string, prepend):
+  if prepend:
+    string = f'{prepend}: {string}'
+  return string
+
+# Dict
+
+def sort_dict(dictt, desc=True):
+  return dict(sorted(dictt.items(), key=lambda item: item[1], reverse=desc))
+
+def first_n(dict, n):
+  new_dict = {}
+  for key, value in list(dict.items())[:n]:
+    new_dict[key] = value
+  return new_dict
 
 def flip_list_dict(dict):
   flipped_dict = {}
