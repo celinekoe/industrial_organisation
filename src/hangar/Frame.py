@@ -1,6 +1,6 @@
 import numpy as np
 
-import constants.config as Config
+import config as Config
 
 import hangar.Navigation as Navigation
 import hangar.Optics as Optics
@@ -69,10 +69,6 @@ class Bomber:
 
     try:
       if max_count > count_threshold:
-        explosion = Optics.explosion(self.year_count_share_growth_map[i])
-        if explosion:
-          self.explosions.append(i)
-
         share_adf_p, lag = Optics.adf(self.year_count_share_map[i])
         if Optics.accept_null(share_adf_p):
           self.walks.append(i)

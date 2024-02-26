@@ -1,11 +1,7 @@
 import statsmodels.tsa.stattools as stattools 
 import statsmodels.tsa.ar_model as ar_model
-import warnings
 
-import constants.config as Config
-import matplotlib.pyplot as plt
-
-import utils.dataframe as dfUtils
+import config as Config
 
 def _get_valid_loc(series):
   valid_loc = 0
@@ -47,29 +43,12 @@ def get_rolling_subsets(series):
 
   return rolling_subsets
 
-def explosion(growth_series):
-  explosion = False
-
-  max_growth = growth_series.max() / 100
-  if max_growth > Config.growth_threshold:
-      explosion = True
-
-  return explosion
-
 def adf(series):
   valid_series = _get_valid_series(series)
 
   result = stattools.adfuller(valid_series, autolag='AIC')
   p_value = result[1]
   lags = result[2]
-
-  return p_value, lags
-
-def kpss(series):
-  valid_series = _get_valid_series(series)
-
-  warnings.filterwarnings("ignore", category=UserWarning)
-  kpss_stat, p_value, lags, critical_values = stattools.kpss(valid_series)
 
   return p_value, lags
 

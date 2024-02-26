@@ -1,5 +1,4 @@
 
-import csv
 from pathlib import Path
 import os
 import pandas as pd
@@ -109,19 +108,6 @@ def read_fed_rate(dir_path):
   df = df.reset_index(drop=True)
 
   print_bad_row_count(df, row_count)
-
-  # dir = Path(dir_path)
-  # line_count = 0
-
-  # df_list = []
-  # for file_name in dir.glob('*.csv'):
-  #   df = read_csv(file_name)
-  #   df_list.append(df)
-
-  #   line_count += get_csv_rows(file_name) - 1
-
-  # df_dir = pd.concat(df_list)
-  # print_bad_row_count(df_dir, line_count)
 
   df['Year'] = pd.to_datetime(df['Month'], format='%m/%Y').dt.year
 

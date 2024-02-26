@@ -1,9 +1,9 @@
-import hangar.Airframe as Airframe
+import hangar.Frame as Frame
 
 import constants.firm as FirmConstants
 import constants.fund as FundConstants
 
-class FirmBomber(Airframe.Bomber):
+class FirmBomber(Frame.Bomber):
   def __init__(self, firms=None, macro=None, return_after=None, refurb=None):
     super().__init__(macro)
     if refurb:
@@ -21,7 +21,7 @@ class FirmBomber(Airframe.Bomber):
   def report(self):
     super().report()
 
-class FundBomber(Airframe.Bomber):
+class FundBomber(Frame.Bomber):
   def __init__(self, funds=None, macro=None, return_after=None, refurb=None):
     super().__init__(macro)
     if refurb:

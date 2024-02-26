@@ -25,6 +25,8 @@ def enrich(funding):
 
   funding['Investors'] = funding['Investor Names'].apply(CommonUtils.string_to_list)
 
+  # TODO
+  # firms = DateUtils.set_year(firms, FirmConstants.founded_date_label, FirmConstants.year_label)
   funding[FundConstants.year_label] = funding[FundConstants.date_label].astype(str).str[:4] # use this instead of datetime as there are pre-epoch date
   funding[FundConstants.year_label] = pd.to_numeric(funding[FundConstants.year_label], errors='coerce')
 
