@@ -5,10 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 import statsmodels.tsa.stattools as stattools 
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 import scipy.stats as stats
 
 import constants.visual as VisualConstants
 import utils.common as CommonUtils
+
 
 def plot_labels(plt, title, ylab, legend=False, grid=True):
   plt.title(title)
@@ -80,10 +82,13 @@ def granger_causality(series, max_lag):
 
   # Suppress printing of granger causality results
   original_stdout = sys.stdout
-  sys.stdout = open(os.devnull, 'w')
-  granger_result = stattools.grangercausalitytests(pd.concat([y_series, x_series], axis=1), maxlag=max_lag)
-  sys.stdout = original_stdout
-
+  
+  try:
+    sys.stdout = open(os.devnull, 'w')
+    granger_result = stattools.grangercausalitytests(pd.concat([y_series, x_series], axis=1), maxlag=max_lag)
+  finally:
+    sys.stdout = original_stdout
+ 
   granger_tests = {}
 
   for lag in range(1, max_lag + 1):
@@ -98,12 +103,12 @@ def regression(series, series_label, group_label=''):
 
   slope, intercept, r_value, p_value, std_err = stats.linregress(x_series, y_series)
 
-  plt.scatter(x_series, y_series, color='blue', label='Data')
-  plt.plot(x_series, intercept + slope * x_series, color='red', label='Regression line')
-
   y_label = series_label[0]
   x_label = series_label[1]
   title = CommonUtils.prepend_string(f"{y_label}, {x_label}", group_label)
+
+  plt.scatter(x_series, y_series, color='blue', label='Data')
+  plt.plot(x_series, intercept + slope * x_series, color='red', label='Regression line')
 
   plt.xlabel(x_label)
   plt.ylabel(y_label)
@@ -117,7 +122,6 @@ def regression(series, series_label, group_label=''):
 
   left_space = 0.3
   max_lag = 2
-  # granger_tests = granger_causality([y_series[1:], x_series[1:]], max_lag)
   granger_tests = granger_causality([y_series, x_series], max_lag)
   for lag in range(1, max_lag + 1):
     plt.text(left_space * lag, -0.2, f'Lag: {lag}', fontsize=10, color='black', transform=plt.gca().transAxes)
@@ -132,13 +136,28 @@ def regression_bomb(series):
   x_series = series[1]
 
   slope, intercept, r_value, p_value, std_err = stats.linregress(x_series, y_series)
+  if p_value < 0.05:
+    return True
 
   max_lag = 2
   granger_tests = granger_causality([y_series, x_series], max_lag)
 
   for lag in range(1, max_lag + 1):
-    if p_value < 0.05 or granger_tests[lag][1] < 0.05:
+    if granger_tests[lag][1] < 0.05:
       return True
   
   return False
 
+def cf(series, lags):
+  plot_acf(series, lags=lags)
+  plt.title('Autocorrelation Function (ACF)')
+  plt.xlabel('Lag')
+  plt.ylabel('Autocorrelation')
+  plt.show()
+
+  # Plot PACF
+  plot_pacf(series, lags=lags)
+  plt.title('Partial Autocorrelation Function (PACF)')
+  plt.xlabel('Lag')
+  plt.ylabel('Partial Autocorrelation')
+  plt.show()

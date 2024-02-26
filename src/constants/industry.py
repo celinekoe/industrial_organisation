@@ -1,3 +1,5 @@
+industry_group_label = 'Industry Groups'
+industry_label = 'Industries'
 STEM_label = 'STEM'
 not_STEM_label = 'Not STEM'
 

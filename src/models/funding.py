@@ -1,7 +1,7 @@
 import pandas as pd
 
 import constants.firm as FirmConstants
-import constants.funding as FundingConstants
+import constants.fund as FundConstants
 import constants.investor as InvestorConstants
 import constants.industry as IndustryConstants
 import utils.common as CommonUtils
@@ -15,7 +15,7 @@ def enrich_industry_group(industries, industry_industry_group_map):
   return list(set(industry_groups))
 
 def enrich(funding):
-  funding['Country'] =  funding['Organization Location'].apply(LocationUtils.get_country)
+  funding['Country'] = funding['Organization Location'].apply(LocationUtils.get_country)
 
   funding[FirmConstants.industries_label] =  funding['Organization Industries'].apply(CommonUtils.string_to_list)
 
@@ -25,8 +25,8 @@ def enrich(funding):
 
   funding['Investors'] = funding['Investor Names'].apply(CommonUtils.string_to_list)
 
-  funding[FundingConstants.year_label] = funding[FundingConstants.date_label].astype(str).str[:4] # use this instead of datetime as there are pre-epoch date
-  funding[FundingConstants.year_label] = pd.to_numeric(funding[FundingConstants.year_label], errors='coerce')
+  funding[FundConstants.year_label] = funding[FundConstants.date_label].astype(str).str[:4] # use this instead of datetime as there are pre-epoch date
+  funding[FundConstants.year_label] = pd.to_numeric(funding[FundConstants.year_label], errors='coerce')
 
   return funding
 
@@ -42,9 +42,9 @@ def enrich_public_funded(funding, public_funded_investors):
   return funding
 
 def filter_announced_year(funding, start_year, end_year):
-  funding = funding[pd.notna(funding[FundingConstants.year_label])]
-  funding = funding[funding[FundingConstants.year_label] >= start_year]
-  funding = funding[funding[FundingConstants.year_label] < end_year]
+  funding = funding[pd.notna(funding[FundConstants.year_label])]
+  funding = funding[funding[FundConstants.year_label] >= start_year]
+  funding = funding[funding[FundConstants.year_label] < end_year]
 
   return funding
 

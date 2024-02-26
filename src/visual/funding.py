@@ -1,14 +1,14 @@
 
-import constants.funding as FundingConstants
+import constants.fund as FundConstants
 import constants.visual as VisualConstants
 
 import utils.dataframe as DataUtils
 import visual.visualiser as Visualiser
 
 def stack_STEM_public_funded(funding):
-  funding_STEM_year_sum_percent = DataUtils.get_STEM_year_percent(funding, FundingConstants.year_label, FundingConstants.raised_label)
-  funding_public_year_sum_percent = DataUtils.get_public_funded_year_percent(funding, FundingConstants.year_label, FundingConstants.raised_label)
-  funding_STEM_public_funded_year_sum_percent = DataUtils.get_STEM_public_year_percent(funding, FundingConstants.year_label, FundingConstants.raised_label)
+  funding_STEM_year_sum_percent = DataUtils.get_STEM_year_percent(funding, FundConstants.year_label, FundConstants.raised_label)
+  funding_public_year_sum_percent = DataUtils.get_public_funded_year_percent(funding, FundConstants.year_label, FundConstants.raised_label)
+  funding_STEM_public_funded_year_sum_percent = DataUtils.get_STEM_public_year_percent(funding, FundConstants.year_label, FundConstants.raised_label)
 
   Visualiser.stack(funding_STEM_year_sum_percent,
                    'STEM Funding: Sum: Percent', '%',

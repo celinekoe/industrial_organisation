@@ -1,16 +1,23 @@
 import numpy as np
 import pandas as pd
 
+import constants.config as Config
 import constants.industry as IndustryConstants
 import constants.investor as InvestorConstants
 
-# Fill
+# Create Series
 
-def fill_range(series, start_year, end_year):
-    filled_index = pd.Index(range(start_year, end_year + 1))
-    series = series.reindex(filled_index, fill_value=None)
+def list_to_series(index_list, value_list):
+  series = pd.Series(value_list, index=index_list)
+  filled_series = fill_range(series)
 
-    return series
+  return filled_series
+
+def fill_range(series):
+  filled_index = pd.Index(range(Config.start_year, Config.end_year))
+  series = series.reindex(filled_index, fill_value=None)
+
+  return series
 
 # Count
 
@@ -27,7 +34,7 @@ def get_grouped_count_percent(df, group_col):
 def get_year_count(df, year_col, start_year=None, end_year=None):
   year_count = _get_grouped_count(df, [year_col])
   if start_year and end_year:
-    year_count = fill_range(year_count, start_year, end_year)
+    year_count = fill_range(year_count)
   
   year_count_growth = get_growth(year_count)
 
@@ -39,7 +46,7 @@ def get_grouped_year_count(df, year_col, group_col, rename_col_dict=None, start_
     .reset_index() \
     .set_index(year_col)
   if start_year and end_year:
-    grouped_year_count = fill_range(grouped_year_count, start_year, end_year)
+    grouped_year_count = fill_range(grouped_year_count)
 
   grouped_year_count_growth = grouped_year_count.pct_change() * 100
 
@@ -75,7 +82,7 @@ def get_grouped_sum_percent(df, group_col, sum_col):
 def get_year_sum(df, year_col, sum_col, start_year=None, end_year=None):
   year_sum = get_grouped_sum(df, [year_col], sum_col)
   if start_year and end_year:
-    year_count = fill_range(year_count, start_year, end_year)
+    year_sum = fill_range(year_sum)
 
   year_sum_growth = get_growth(year_sum)
 
@@ -97,7 +104,13 @@ def get_growth(series):
   
   return growth
 
-# Percent
+# Share
+
+def get_year_share(year_count, year_total):
+  year_count_share = year_count / year_total
+  year_count_share_growth = get_growth(year_count_share)
+
+  return year_count_share, year_count_share_growth
 
 def get_STEM_public_year_percent(df, year_col, sum_col=None):
   if not sum_col:
@@ -126,11 +139,11 @@ def get_public_funded_year_percent(firms, year_col, sum_col=None):
 
 # Filter
 def filter_industry_group(firms, industry_group):
-  industry_group_firms = firms[firms['Tag Groups'].apply(lambda firm_industry_group: industry_group in firm_industry_group)]
+  industry_group_firms = firms[firms[IndustryConstants.industry_group_label].apply(lambda firm_industry_group: industry_group in firm_industry_group)]
   return industry_group_firms
 
 def filter_industry(firms, industry):
-  industry_firms = firms[firms['Tags'].apply(lambda firm_industry: industry in firm_industry)]
+  industry_firms = firms[firms[IndustryConstants.industry_label].apply(lambda firm_industry: industry in firm_industry)]
   return industry_firms
 
 def filter_STEM(firms, STEM=True):

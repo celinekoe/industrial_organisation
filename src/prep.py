@@ -31,7 +31,7 @@ def prep_domain(args):
   undated_firms = firms[pd.isna(firms['Founded Year'])] # Only get the domain created year of firms we don't have date information for
   undated_firms = undated_firms[undated_firms['Website'].notnull()]
 
-  domain_created_year = Domain.get_domain_created_year_map(undated_firms['Website'], domain_created_year, p=200, c=10)
+  domain_created_year = Domain.get_domain_created_year_map(undated_firms['Website'], domain_created_year, pool_size=200, chunk_size=10)
 
   File.write_pickle(f"domain_created_year", domain_created_year)
 
@@ -52,16 +52,7 @@ def prep_funding():
 @Logger.timer
 def main(args):
   if args['country']:
-    if args['country_all']:
-      dir_names = File.read_companies_dir_dir_names(Const.country_dir)
-      for dir_name in dir_names:
-        new_args = copy.deepcopy(args)
-        new_args.pop('all', None)
-        new_args['country'] = True
-        new_args['country_name'] = dir_name
-        prep_country(new_args)
-    else:
-      prep_country(args)
+    prep_country(args)
 
   if args['domain']:
     prep_domain(args)

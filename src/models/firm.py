@@ -14,9 +14,9 @@ def enrich_firms(firms):
 
   firms = DateUtils.set_year(firms, FirmConstants.founded_date_label, FirmConstants.year_label)
 
-  firms['Tags'] =  firms['Industries'].apply(CommonUtils.string_to_list)
-  firms['Tag Groups'] =  firms['Industry Groups'].apply(CommonUtils.string_to_list)
-  firms[IndustryConstants.STEM_label] = firms['Tags'].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
+  firms[IndustryConstants.industry_label] =  firms[IndustryConstants.industry_label].apply(CommonUtils.string_to_list)
+  firms[IndustryConstants.industry_group_label] =  firms[IndustryConstants.industry_group_label].apply(CommonUtils.string_to_list)
+  firms[IndustryConstants.STEM_label] = firms[IndustryConstants.industry_label].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
 
   return firms
 
