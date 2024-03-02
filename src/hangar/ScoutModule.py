@@ -27,36 +27,14 @@ class Scouter():
 
       i_year_count, i_year_count_growth = self._scout_one(i_df, self.year_col)
 
-      i_year_count_lagged = i_year_count.shift(1)
-      i_year_count_beta = i_year_count / i_year_count_lagged
-      i_year_count_beta = i_year_count_beta.replace([np.inf, -np.inf], None)
-
       i_year_count_growth_lagged = i_year_count_growth.shift(1)
       i_year_count_growth_beta = i_year_count_growth / i_year_count_growth_lagged
       i_year_count_growth_beta = i_year_count_growth_beta.replace([np.inf, -np.inf], None)
 
-      i_year_count_share, i_year_count_share_growth = dfUtils.get_year_share(i_year_count, self.year_count)
-
-      i_year_count_share_lagged = i_year_count_share.shift(1)
-      i_year_count_share_beta = i_year_count_share / i_year_count_share_lagged
-      i_year_count_share_beta = i_year_count_share_beta.replace([np.inf, -np.inf], None)
-
-      i_year_count_share_growth_lagged = i_year_count_share_growth.shift(1)
-      i_year_count_share_growth_beta = i_year_count_share_growth / i_year_count_share_growth_lagged
-      i_year_count_share_growth_beta = i_year_count_share_growth_beta.replace([np.inf, -np.inf], None)
-
       self.i_map[i] = i_df
 
       self.year_count_map[i] = i_year_count
-      self.year_count_beta_map[i] = i_year_count_beta
 
       self.year_count_growth_map[i] = i_year_count_growth
-      self.year_count_growth_lagged_map[i] = i_year_count_lagged
       self.year_count_growth_beta_map[i] = i_year_count_growth_beta
-
-      self.year_count_share_map[i] = i_year_count_share
-      self.year_count_share_beta_map[i] = i_year_count_share_beta
-
-      self.year_count_share_growth_map[i] = i_year_count_share_growth
-      self.year_count_share_growth_beta_map[i] = i_year_count_share_growth_beta
 

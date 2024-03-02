@@ -1,16 +1,20 @@
 country = 'united_states'
 
-start_year = 1960
+window_size = 3
+
+# start_year = 1960
+start_year = 1990 - window_size + 1 # Include window
 end_year = 2020 # Exclusive
 year_range = range(start_year, end_year)
 
-min_count = 200
-min_industries = 5
-
-# Rolling AR
-lag = 1
-# window_size = 14 # window_size = r_0 * T, r_0 = 0.01 + 1.8/sqrt(T)
-window_size = 3
+# Panel
+const_exog_label = 'const'
+entity_label = 'entity'
+entity_exog_label = 'industry'
+time_label = 'time'
+time_exog_label = 'year'
+time_exog_norm_label = 'year_norm'
+p_value = 0.05
 
 ylim = (0, 1)
 ylim_detailed = (-1, 2.5)

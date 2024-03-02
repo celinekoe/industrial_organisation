@@ -2,7 +2,10 @@ import numpy as np
 import pandas as pd
 
 import config as Config
-import constants.labels as Labels
+
+# Data Frame
+def map_to_df(map):
+  return pd.DataFrame(map) 
 
 # Fill
 
