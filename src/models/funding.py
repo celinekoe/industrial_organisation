@@ -1,10 +1,10 @@
 import pandas as pd
 
-import constants.firm as FirmConstants
-import constants.fund as FundConstants
-import constants.investor as InvestorConstants
+import constants.labels as Labels
 import constants.industry as IndustryConstants
-import utils.common as CommonUtils
+
+import utils.date as DateUtils
+import utils.datatype as dtUtils
 import utils.location as LocationUtils
 
 def enrich_industry_group(industries, industry_industry_group_map):
@@ -15,40 +15,34 @@ def enrich_industry_group(industries, industry_industry_group_map):
   return list(set(industry_groups))
 
 def enrich(funding):
-  funding['Country'] = funding['Organization Location'].apply(LocationUtils.get_country)
+  funding[Labels.country] = funding[Labels.fund_location].apply(LocationUtils.get_country)
 
-  funding[FirmConstants.industries_label] =  funding['Organization Industries'].apply(CommonUtils.string_to_list)
+  funding[Labels.industries] =  funding[Labels.fund_industries].apply(dtUtils.string_to_list)
 
-  industry_industry_group_map = CommonUtils.flip_list_dict(IndustryConstants.industry_group_industry_map)
-  funding[FirmConstants.industry_groups_label] =  funding[FirmConstants.industries_label].apply(enrich_industry_group, args=(industry_industry_group_map,))
-  funding[IndustryConstants.STEM_label] = funding[FirmConstants.industries_label].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
+  industry_industry_group_map = dtUtils.flip_list_dict(IndustryConstants.industry_group_industry_map)
+  funding[Labels.industry_groups] =  funding[Labels.industries].apply(enrich_industry_group, args=(industry_industry_group_map,))
+  funding[Labels.STEM] = funding[Labels.industries].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
 
-  funding['Investors'] = funding['Investor Names'].apply(CommonUtils.string_to_list)
-
-  # TODO
-  # firms = DateUtils.set_year(firms, FirmConstants.founded_date_label, FirmConstants.year_label)
-  funding[FundConstants.year_label] = funding[FundConstants.date_label].astype(str).str[:4] # use this instead of datetime as there are pre-epoch date
-  funding[FundConstants.year_label] = pd.to_numeric(funding[FundConstants.year_label], errors='coerce')
+  funding = DateUtils.set_year(funding, Labels.fund_announced_date, Labels.fund_announced_year)
 
   return funding
 
 def get_public_funded(investors, public_funded_investors):
-  for investor in investors:
-    if investor in public_funded_investors:
-      return True
+  if isinstance(investors, str):
+    investors = dtUtils.string_to_list(investors)
+    for investor in investors:
+      if investor in public_funded_investors:
+        return True
   
   return False
 
 def enrich_public_funded(funding, public_funded_investors):
-  funding[InvestorConstants.public_funded_label] = funding['Investors'].apply(get_public_funded, args=(public_funded_investors, ))
+  funding[Labels.public_funded] = funding[Labels.fund_investors].apply(get_public_funded, args=(public_funded_investors, ))
   return funding
 
 def filter_announced_year(funding, start_year, end_year):
-  funding = funding[pd.notna(funding[FundConstants.year_label])]
-  funding = funding[funding[FundConstants.year_label] >= start_year]
-  funding = funding[funding[FundConstants.year_label] < end_year]
+  funding = funding[pd.notna(funding[Labels.fund_announced_year])]
+  funding = funding[funding[Labels.fund_announced_year] >= start_year]
+  funding = funding[funding[Labels.fund_announced_year] < end_year]
 
   return funding
-
-def filter_currency(funding, currency):
-  return funding[funding['Money Raised Currency'] == currency] 

@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 import config as Config
-import constants.industry as IndustryConstants
+import constants.labels as Labels
 
 # Fill
 
@@ -21,8 +21,9 @@ def fill_range(series):
 # Growth
 
 def get_growth(series):
-  growth = series.pct_change() * 100
-  growth.replace([np.inf, -np.inf], None, inplace=True)
+  # growth = series.pct_change() * 100
+  growth = series.pct_change()
+  growth.replace([np.inf, -np.inf], 100, inplace=True)
   
   return growth
 
@@ -64,10 +65,12 @@ def get_year_share(year_count, year_total):
 
 # Filter
 
-def filter_industry_group(df, industry_group):
-  filtered_df = df[df[IndustryConstants.industry_group_label].apply(lambda industry_groups: industry_group in industry_groups)]
+def filter(df, filter, filter_col):
+  filtered_df = df[df[filter_col].apply(lambda filter_list: filter in filter_list)]
   return filtered_df
 
-def filter_industry(df, industry):
-  filtered_df = df[df[IndustryConstants.industry_label].apply(lambda industries: industry in industries)]
-  return filtered_df
+# Rolling Average
+
+def rolling(series):
+  rolling_avg = series.rolling(window=Config.window_size).mean()
+  return rolling_avg

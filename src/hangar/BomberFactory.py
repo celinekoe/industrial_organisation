@@ -1,40 +1,50 @@
-import hangar.Frame as Frame
 
-import constants.firm as FirmConstants
-import constants.fund as FundConstants
+import hangar.DisplayModule as DisplayModule
+import hangar.ScoutModule as ScoutModule
+import hangar.SignalsModule as SignalsModule
 
-class FirmBomber(Frame.Bomber):
-  def __init__(self, firms=None, macro=None, return_after=None, refurb=None):
-    super().__init__(macro)
-    if refurb:
-      self._refurbish(refurb)
-    else:
-      self.frame = 'Firm'
-      self.scout(firms, return_after)
+class Bomber(DisplayModule.Display, ScoutModule.Scouter, SignalsModule.Signals):
+  def __init__(self, targets, target_col, return_after):
+    self.frame = ''
+    self.year_col = None
+    self.targets = targets
+    self.target_col = target_col
+    self.return_after = return_after
 
-  def scout(self, firms, return_after=None):
-    super().scout(firms, FirmConstants.year_label, return_after)
+    self.i_map = {}
+    self.year_count = None
+    self.year_count_growth = None
+    self.year_count_growth_beta = None
 
-  def identify(self, return_after=None):
-    super().identify(return_after)
-  
-  def report(self):
-    super().report()
+    self.year_count_map = {}
+    self.year_count_beta_map = {}
+    self.year_count_growth_map = {}
+    self.year_count_growth_lagged_map = {}
+    self.year_count_growth_beta_map = {}
+    self.year_count_share_map = {}
+    self.year_count_share_beta_map = {}
+    self.year_count_share_growth_map = {}
+    self.year_count_share_growth_beta_map = {}
 
-class FundBomber(Frame.Bomber):
-  def __init__(self, funds=None, macro=None, return_after=None, refurb=None):
-    super().__init__(macro)
-    if refurb:
-      self._refurbish(refurb)
-    else:
-      self.frame = 'Fund'
-      self.scout(funds, return_after)
+    self.rolling_coef_map = {}
+    self.trend = None
 
-  def scout(self, funds, return_after=None):
-    super().scout(funds, FundConstants.year_label, return_after)
+  def _refurbish(self, refurb):
+    props = [attr for attr in dir(refurb) if not attr.startswith('__') and not callable(getattr(refurb, attr))]
+    for prop in props:
+      setattr(self, prop, getattr(refurb, prop))
 
-  def identify(self, return_after=None):
-    super().identify(return_after)
-  
-  def report(self):
-    super().report()
+  def scout(self, df):
+    super().scout(df)
+
+  def identify(self):
+    super().identify()
+
+  def report(self, macro):
+    super().report(macro)
+
+  def detailed_report(self, macro):
+    super().detailed_report(macro)
+
+  def sample(self, i, macro, detailed=False):
+    super().sample(i, macro, detailed)

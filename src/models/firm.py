@@ -1,22 +1,21 @@
 import pandas as pd
 import whois
 
-import constants.firm as FirmConstants
+import constants.labels as Labels
 import constants.industry as IndustryConstants
-import constants.investor as InvestorConstants
 
 import utils.date as DateUtils
+import utils.datatype as dtUtils
 import utils.location as LocationUtils
-import utils.common as CommonUtils
 
 def enrich_firms(firms):
-  firms['Country'] =  firms['Headquarters Location'].apply(LocationUtils.get_country)
+  firms[Labels.country] =  firms[Labels.firm_location].apply(LocationUtils.get_country)
 
-  firms = DateUtils.set_year(firms, FirmConstants.founded_date_label, FirmConstants.year_label)
+  firms = DateUtils.set_year(firms, Labels.firm_founded_date, Labels.firm_founded_year)
 
-  firms[IndustryConstants.industry_label] =  firms[IndustryConstants.industry_label].apply(CommonUtils.string_to_list)
-  firms[IndustryConstants.industry_group_label] =  firms[IndustryConstants.industry_group_label].apply(CommonUtils.string_to_list)
-  firms[IndustryConstants.STEM_label] = firms[IndustryConstants.industry_label].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
+  firms[Labels.industries] =  firms[Labels.industries].apply(dtUtils.string_to_list)
+  firms[Labels.industry_groups] =  firms[Labels.industry_groups].apply(dtUtils.string_to_list)
+  firms[Labels.STEM] = firms[Labels.industries].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
 
   return firms
 
@@ -44,13 +43,13 @@ def get_domain_created_year_from_map(url, url_map):
   return url_map.get(url)
 
 def enrich_founded_year(firms, domain_created_year):
-  firms['Domain Created Year'] =  firms['Website'].apply(get_domain_created_year_from_map, args=(domain_created_year,))
-  firms['Founded Year'].fillna(firms['Domain Created Year'], inplace=True)
+  firms[Labels.firm_domain_created_year] =  firms[Labels.firm_website].apply(get_domain_created_year_from_map, args=(domain_created_year,))
+  firms[Labels.firm_founded_year].fillna(firms[Labels.firm_domain_created_year], inplace=True)
   return firms
 
 def get_public_funded(top_investors, public_funded_investors):
   if isinstance(top_investors, str):
-    top_investors = CommonUtils.string_to_list(top_investors)
+    top_investors = dtUtils.string_to_list(top_investors)
     for top_investor in top_investors:
       if top_investor in public_funded_investors:
         return True
@@ -58,15 +57,15 @@ def get_public_funded(top_investors, public_funded_investors):
   return False
 
 def enrich_public_funded(firms, public_funded_investors):
-  firms[InvestorConstants.public_funded_label] = firms['Top 5 Investors'].apply(get_public_funded, args=(public_funded_investors,))
+  firms[Labels.public_funded] = firms[Labels.firm_top_investors].apply(get_public_funded, args=(public_funded_investors,))
   return firms
 
-def filter_for_profit(firms, for_profit=True):
-  firms = firms[firms['Company Type'] == 'For Profit']
+def filter_for_profit(firms):
+  firms = firms[firms[Labels.firm_type] == 'For Profit']
   return firms
 
 def filter_founded_year(firms, start_year, end_year):
-  firms = firms[pd.notna(firms['Founded Year'])]
-  firms = firms[firms['Founded Year'] >= start_year]
-  firms = firms[firms['Founded Year'] < end_year]
+  firms = firms[pd.notna(firms[Labels.firm_founded_year])]
+  firms = firms[firms[Labels.firm_founded_year] >= start_year]
+  firms = firms[firms[Labels.firm_founded_year] < end_year]
   return firms

@@ -1,19 +1,16 @@
 
 import pandas as pd
-import copy
 
-import constants.dirs as Const
+import constants.dirs as DirConstants
 
 import models.firm as FirmModel
 import models.investor as InvestorModel
 import models.funding as FundingModel
 
-import utils.prep.args as Args
-import utils.prep.macro as MacroUtils
+import utils.args as Args
 import utils.domain as Domain
 import utils.file as File
 import utils.logger as Logger
-
 
 def prep_country(args):
   country_dir = File.get_country_dir(f"{args['country_name']}")
@@ -49,6 +46,15 @@ def prep_funding():
 
   File.write_pickle(f"funding", funding)
 
+def prep_real_gdp():
+  real_gdp = File.read_real_gdp(DirConstants.real_gdp_dir)
+
+  File.write_pickle(f"real_gdp", real_gdp)
+
+def prep_fed_rate():
+  fed_rate = File.read_fed_rate(DirConstants.fed_rate_dir)
+  File.write_pickle(f"fed_rate", fed_rate)
+
 @Logger.timer
 def main(args):
   if args['country']:
@@ -64,9 +70,8 @@ def main(args):
     prep_investors()
 
   if args['macro']:
-    MacroUtils.prep_real_gdp()
-    MacroUtils.prep_real_gdp_growth()
-    MacroUtils.prep_fed_rate()
+    prep_real_gdp()
+    prep_fed_rate()
     
 if __name__ == "__main__":
   args = Args.get_prep_args()
