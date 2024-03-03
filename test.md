@@ -1,1 +1,0 @@
-\text{beta}_{it} = \alpha_{i} + \beta_{1} \text{industry_group}_{it} + \sum_{j=1}^{J} \gamma_{j} \text{keys}_{jt} + \sum_{k=1}^{K} \delta_{k} \text{year}_{kt} + u_{it}
