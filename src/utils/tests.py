@@ -47,9 +47,6 @@ def prep_panel(df, control=None, control_col=None):
                var_name=Config.entity_exog_label,
                value_name='value') \
                 .dropna().reset_index(drop=True)
-  
-  # Get rolling mean
-  df['rolling_value'] = df['value'].rolling(window=Config.window_size).mean()
 
   # Panel regression requires multi-index with entity and time for entity and time effects
   df[Config.entity_label] = df[Config.entity_exog_label]
@@ -57,7 +54,7 @@ def prep_panel(df, control=None, control_col=None):
   df.set_index([Config.entity_label, Config.time_label], inplace=True)
 
   # Normalise time column or constant coefficient will be silly
-  df[Config.time_exog_norm_label] = df[Config.time_exog_label] - (Config.start_year + Config.window_size - 1) + 1
+  df[Config.time_exog_norm_label] = df[Config.time_exog_label] - (Config.start_year)
 
   # Add a constant to the regression
   df[Config.const_exog_label] = 1
@@ -70,36 +67,29 @@ def prep_panel(df, control=None, control_col=None):
   # print(df)
   return df
 
-def panel(df, control_col=None, entities=False, rolling=True):
+def panel(df, control_col=None):
   # Specify panel regression model
 
   # Specify endog_col
-  endog_col = None
-
-  if rolling:
-    endog_col = 'rolling_value'
-  else:
-    endog_col = 'value'
-
+  endog_col = 'value'
   endog_df = df[endog_col]
 
-  if entities:
-    exog_cols = [Config.const_exog_label, Config.time_exog_norm_label, Config.entity_exog_label]
-    entity_effects = False
-  else:
-    exog_cols = [Config.const_exog_label, Config.time_exog_norm_label]
-    entity_effects = True
+  exog_cols = [Config.const_exog_label, Config.time_exog_norm_label, Config.entity_exog_label]
 
   # Specify exog_cols
-  if control_col:
-    exog_cols = exog_cols + [control_col]
-
+  exog_cols = exog_cols + [control_col]
   exog_df =  df[exog_cols]
 
-  model = PanelOLS(endog_df, exog_df, entity_effects=entity_effects)
+  model = PanelOLS(endog_df, exog_df)
 
   # Clustering assumes heterogeneity within entities but independence between entitites
   results = model.fit(cov_type='clustered', cluster_entity=True)
   print(f'results: {results}')
+
+  # coefficients = results.params
+  # print(coefficients.year_norm)
+
+  # sorted_coefficients = coefficients.reindex(coefficients.abs().sort_values(ascending=False).index)
+  # print(sorted_coefficients)
 
   return results

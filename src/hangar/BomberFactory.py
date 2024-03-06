@@ -12,11 +12,14 @@ class Bomber(ScoutModule.Scouter):
     self.i_map = {}
     self.year_count = None
     self.year_count_growth = None
-    self.year_count_growth_beta = None
+    self.year_volatility = None
 
     self.year_count_map = {}
     self.year_count_growth_map = {}
+    self.year_count_growth_rolling_map = {}
     self.year_count_growth_beta_map = {}
+    self.year_count_growth_beta_abs_map = {}
+    self.year_volatility = {}
 
   def _refurbish(self, refurb):
     props = [attr for attr in dir(refurb) if not attr.startswith('__') and not callable(getattr(refurb, attr))]

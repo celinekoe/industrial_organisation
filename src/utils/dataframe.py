@@ -24,9 +24,8 @@ def fill_range(series):
 # Growth
 
 def get_growth(series):
-  # growth = series.pct_change() * 100
   growth = series.pct_change()
-  growth.replace([np.inf, -np.inf], 100, inplace=True)
+  growth.replace([np.inf, -np.inf], None, inplace=True)
   
   return growth
 
@@ -36,7 +35,8 @@ def _get_grouped_count(df, group_col):
   return df.groupby(group_col).size()
 
 def get_year_count(df, year_col, start_year=None, end_year=None):
-  year_count = _get_grouped_count(df, [year_col])
+  year_count = _get_grouped_count(df, [year_col]) + Config.fudge_factor
+
   if start_year and end_year:
     year_count = fill_range(year_count)
   

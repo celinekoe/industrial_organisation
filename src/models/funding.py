@@ -12,6 +12,7 @@ def enrich_industry_group(industries, industry_industry_group_map):
   for industry in industries:
     if industry in industry_industry_group_map:
       industry_groups.extend(industry_industry_group_map[industry])
+      
   return list(set(industry_groups))
 
 def enrich(funding):
@@ -24,6 +25,7 @@ def enrich(funding):
   funding[Labels.STEM] = funding[Labels.industries].apply(lambda industries: any(industry in IndustryConstants.STEM_industries for industry in industries))
 
   funding = DateUtils.set_year(funding, Labels.fund_announced_date, Labels.fund_announced_year)
+  funding = DateUtils.set_month(funding, Labels.fund_announced_date, Labels.fund_announced_month)
 
   return funding
 
@@ -38,6 +40,7 @@ def get_public_funded(investors, public_funded_investors):
 
 def enrich_public_funded(funding, public_funded_investors):
   funding[Labels.public_funded] = funding[Labels.fund_investors].apply(get_public_funded, args=(public_funded_investors, ))
+
   return funding
 
 def filter_announced_year(funding, start_year, end_year):

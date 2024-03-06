@@ -1,12 +1,11 @@
 country = 'united_states'
 
-window_size = 3
-
 start_year = 1960
 # start_year = 1990
-start_year = start_year - window_size + 1 # Include window
-end_year = 2020 # Exclusive
+end_year = 2024 # Exclusive
 year_range = range(start_year, end_year)
+fudge_factor = 100
+window_size = 3
 
 # Panel
 const_exog_label = 'const'

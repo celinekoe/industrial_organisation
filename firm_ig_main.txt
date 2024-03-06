@@ -1,0 +1,75 @@
+results:                           PanelOLS Estimation Summary                           
+================================================================================
+Dep. Variable:                  value   R-squared:                        0.0169
+Estimator:                   PanelOLS   R-squared (Between):              1.0000
+No. Observations:                2970   R-squared (Within):               0.0021
+Date:                Wed, Mar 06 2024   R-squared (Overall):              0.0169
+Time:                        02:59:26   Log-likelihood                -1.179e+04
+Cov. Estimator:             Clustered                                           
+                                        F-statistic:                      1.0025
+Entities:                          49   P-value                           0.4692
+Avg Obs:                       60.612   Distribution:                 F(50,2919)
+Min Obs:                       48.000                                           
+Max Obs:                       62.000   F-statistic (robust):          6.919e+29
+                                        P-value                           0.0000
+Time periods:                      62   Distribution:                 F(50,2919)
+Avg Obs:                       47.903                                           
+Min Obs:                       45.000                                           
+Max Obs:                       49.000                                           
+                                                                                
+                                             Parameter Estimates                                             
+=============================================================================================================
+                                           Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+-------------------------------------------------------------------------------------------------------------
+const                                         3.1239     0.3179     9.8253     0.0000      2.5005      3.7473
+year_norm                                     0.0193     0.0088     2.1877     0.0288      0.0020      0.0366
+industry.Advertising                         -0.1703     0.0030    -57.197     0.0000     -0.1761     -0.1644
+industry.Agriculture and Farming             -1.0285  1.188e-14 -8.655e+13     0.0000     -1.0285     -1.0285
+industry.Apps                                 7.4860     0.0150     498.08     0.0000      7.4565      7.5155
+industry.Artificial Intelligence (AI)        -1.4947     0.0549    -27.202     0.0000     -1.6025     -1.3870
+industry.Biotechnology                       -1.3298     0.0020    -664.43     0.0000     -1.3337     -1.3259
+industry.Blockchain and Cryptocurrency       -1.3660     0.0704    -19.414     0.0000     -1.5040     -1.2281
+industry.Clothing and Apparel                -0.1961     0.0022    -87.635     0.0000     -0.2005     -0.1918
+industry.Commerce and Shopping               -1.0345  1.176e-14   -8.8e+13     0.0000     -1.0345     -1.0345
+industry.Community and Lifestyle             -1.3814     0.0016    -876.70     0.0000     -1.3845     -1.3783
+industry.Consumer Electronics                 1.7625     0.0038     463.13     0.0000      1.7550      1.7699
+industry.Consumer Goods                      -0.3385  1.153e-14 -2.937e+13     0.0000     -0.3385     -0.3385
+industry.Content and Publishing              -0.4563     0.0044    -103.28     0.0000     -0.4650     -0.4477
+industry.Data and Analytics                  -0.8108  1.153e-14 -7.035e+13     0.0000     -0.8108     -0.8108
+industry.Design                              -1.5045  1.223e-14  -1.23e+14     0.0000     -1.5045     -1.5045
+industry.Education                           -1.0727  1.155e-14 -9.285e+13     0.0000     -1.0727     -1.0727
+industry.Energy                              -1.4025  1.212e-14 -1.157e+14     0.0000     -1.4025     -1.4025
+industry.Events                              -1.0583     0.0044    -240.28     0.0000     -1.0669     -1.0496
+industry.Financial Services                   3.5636  1.141e-14  3.124e+14     0.0000      3.5636      3.5636
+industry.Food and Beverage                   -0.6867     0.0040    -170.20     0.0000     -0.6946     -0.6787
+industry.Gaming                              -1.4157     0.0108    -131.05     0.0000     -1.4368     -1.3945
+industry.Government and Military             -0.5484     0.0065    -83.788     0.0000     -0.5613     -0.5356
+industry.Hardware                             0.9570  1.214e-14  7.886e+13     0.0000      0.9570      0.9570
+industry.Health Care                         -0.1120  1.178e-14 -9.508e+12     0.0000     -0.1120     -0.1120
+industry.Information Technology              -0.9312  1.154e-14 -8.072e+13     0.0000     -0.9312     -0.9312
+industry.Internet Services                    0.8927     0.0010     856.01     0.0000      0.8906      0.8947
+industry.Lending and Investments             -0.0659     0.0009    -69.402     0.0000     -0.0678     -0.0640
+industry.Manufacturing                       -1.0059  1.206e-14  -8.34e+13     0.0000     -1.0059     -1.0059
+industry.Media and Entertainment              2.1333  1.299e-14  1.642e+14     0.0000      2.1333      2.1333
+industry.Messaging and Telecommunications    -1.0506     0.0116    -90.675     0.0000     -1.0733     -1.0279
+industry.Mobile                              -1.8342     0.0042    -437.09     0.0000     -1.8424     -1.8259
+industry.Music and Audio                     -0.4839  1.189e-14 -4.069e+13     0.0000     -0.4839     -0.4839
+industry.Natural Resources                   -0.6803     0.0151    -45.139     0.0000     -0.7098     -0.6507
+industry.Navigation and Mapping              -0.1113     0.0074    -15.044     0.0000     -0.1258     -0.0968
+industry.Other                               -1.4988     0.0030    -495.84     0.0000     -1.5047     -1.4928
+industry.Payments                            -1.5811     0.0038    -420.06     0.0000     -1.5885     -1.5738
+industry.Platforms                           -1.4692     0.0076    -193.91     0.0000     -1.4841     -1.4544
+industry.Privacy and Security                -1.1691     0.0037    -312.92     0.0000     -1.1764     -1.1618
+industry.Professional Services                1.1665  1.196e-14  9.754e+13     0.0000      1.1665      1.1665
+industry.Real Estate                         -0.3365  1.191e-14 -2.826e+13     0.0000     -0.3365     -0.3365
+industry.Sales and Marketing                 -0.9019  1.205e-14 -7.488e+13     0.0000     -0.9019     -0.9019
+industry.Science and Engineering             -1.3853  1.194e-14  -1.16e+14     0.0000     -1.3853     -1.3853
+industry.Social Impact                       -0.3262     0.0044    -74.074     0.0000     -0.3349     -0.3176
+industry.Software                             1.8740  1.249e-14    1.5e+14     0.0000      1.8740      1.8740
+industry.Sports                              -1.7106  1.171e-14  -1.46e+14     0.0000     -1.7106     -1.7106
+industry.Sustainability                      -0.5172     0.0082    -63.296     0.0000     -0.5332     -0.5012
+industry.Transportation                       1.0128  1.137e-14   8.91e+13     0.0000      1.0128      1.0128
+industry.Travel and Tourism                  -1.4782  1.182e-14 -1.251e+14     0.0000     -1.4782     -1.4782
+industry.Video                                0.1690     0.0010     162.08     0.0000      0.1670      0.1711
+fed_rate                                     -0.0856     0.0594    -1.4419     0.1494     -0.2020      0.0308
+=============================================================================================================

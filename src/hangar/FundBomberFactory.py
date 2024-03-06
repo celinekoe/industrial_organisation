@@ -9,4 +9,5 @@ class FundBomber(BomberFactory.Bomber):
     else:
       self.frame = 'Funds'
       self.year_col = Labels.fund_announced_year
+      self.month_col = Labels.fund_announced_month
       self.scout(funds)

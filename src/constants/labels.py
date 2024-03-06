@@ -25,6 +25,7 @@ investment_stage = 'Investment Stage'
 # Fund Labels
 fund_announced_date = 'Announced Date'
 fund_announced_year = 'Announced Year'
+fund_announced_month = 'Announced Month'
 fund_location = 'Organization Location'
 fund_industries = 'Organization Industries'
 fund_investors = 'Investor Names'
