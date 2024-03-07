@@ -1,11 +1,13 @@
 country = 'united_states'
 
 start_year = 1960
-# start_year = 1990
+# start_year = 1994
 end_year = 2024 # Exclusive
+# end_year = 2019
 year_range = range(start_year, end_year)
 fudge_factor = 100
 window_size = 3
+min_count = 500 + fudge_factor
 
 # Panel
 const_exog_label = 'const'

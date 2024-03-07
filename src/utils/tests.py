@@ -2,43 +2,6 @@ from linearmodels.panel import PanelOLS
 
 import config as Config
 
-def _get_valid_loc(series):
-  valid_loc = 0
-
-  if series.isna().any():
-    last_year_index = series.index[series.isna()].max()
-    valid_loc = series.index.get_loc(last_year_index) + 1
-
-  return valid_loc
-
-def _get_valid_series(series):
-  valid_index = _get_valid_loc(series)
-  valid_series = series[valid_index:]
-
-  return valid_series
-
-def get_valid_map(map):
-  # Get initial min length, including invalid values
-  min_length = min(len(series) for series in map.values())
-  for key, series in map.items():
-    valid_series = _get_valid_series(series)
-    if len(valid_series) < min_length:
-      min_length = len(valid_series)
-
-  print(min_length)
-
-  # Get map with matching min length
-  valid_map = {}
-  indices = None
-  for key, series in map.items():
-    valid_series = _get_valid_series(series)
-    valid_map[key] = series.tail(min_length)
-
-    if indices is None:
-      indices = valid_series.index
-
-  return valid_map
-
 def prep_panel(df, control=None, control_col=None):
   # Convert df to long data format for panel regression
   # Time column needs to be an int
@@ -74,22 +37,25 @@ def panel(df, control_col=None):
   endog_col = 'value'
   endog_df = df[endog_col]
 
-  exog_cols = [Config.const_exog_label, Config.time_exog_norm_label, Config.entity_exog_label]
+  # exog_cols = [Config.const_exog_label, Config.time_exog_norm_label, Config.entity_exog_label]
+  exog_cols = [Config.const_exog_label, Config.time_exog_norm_label]
 
   # Specify exog_cols
-  exog_cols = exog_cols + [control_col]
+  if control_col is not None:
+    exog_cols = exog_cols + [control_col]
+
   exog_df =  df[exog_cols]
 
-  model = PanelOLS(endog_df, exog_df)
+  model = PanelOLS(endog_df, exog_df, entity_effects=True)
 
   # Clustering assumes heterogeneity within entities but independence between entitites
   results = model.fit(cov_type='clustered', cluster_entity=True)
   print(f'results: {results}')
 
-  # coefficients = results.params
+  coefficients = results.params
   # print(coefficients.year_norm)
 
-  # sorted_coefficients = coefficients.reindex(coefficients.abs().sort_values(ascending=False).index)
-  # print(sorted_coefficients)
+  sorted_coefficients = coefficients.reindex(coefficients.abs().sort_values(ascending=False).index)
+  print(sorted_coefficients)
 
   return results

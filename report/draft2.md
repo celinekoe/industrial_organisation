@@ -6,53 +6,72 @@
 
 ## Introduction
 
->"At what price would I have refused to pay? $50? $70? While the cutoff is unclear, $34 wasn’t enough. I glumly handed over my credit card, and got even glummer when we discovered that the flavor was mediocre, too. My ice cream was none too sweet, and according to my son and daughter, the bobas tasted 'funny.'[...] Most people would blame the free market for the bad result. I, in contrast, blame myself. [...] For all their wonder, free markets aren’t wonderful enough to protect people from lack of common sense. If consumers place orders without checking prices, then cough up whatever vendors ask after the fact, the outcome will be poor."
+>"At what price would I have refused to pay? $50? $70? While the cutoff is unclear, $34 wasn’t enough. I glumly handed over my credit card, and got even glummer when we discovered that the flavor was mediocre, too. My ice cream was none too sweet, and according to my son and daughter, the bobas tasted 'funny.' ... Most people would blame the free market for the bad result. I, in contrast, blame myself. ... **For all their wonder, free markets aren’t wonderful enough to protect people from lack of common sense**. If consumers place orders without checking prices, then cough up whatever vendors ask after the fact, the outcome will be poor."
 
 [Anatomy of a Rip-Off, 2024]
 
-In 2019, WeWork raised $1 billion from Softbank, raising its equity valuation to $47 billion. In 2023, WeWork declared bankruptcy, reducing its equity valuation to $0. WeWork founder Adam Neumann walked away with $1.7 billion in stock sales and non-recourse loans [Adam Neumann Wants We Back, 2024]. Start-up unicorns Uber, Lyft, WeWork, Pinterest, and Snapchat have consistently failed to be profitable, with Uber's cumulative losses approaching $25 billion. In other cases, as in Theranos, Luckin Coffee, and Wirecard, start-ups commited outright fraud. [The Crisis of Venture Capital, 2021]
+In 2019, WeWork raised $1 billion from Softbank, raising its equity valuation to $47 billion. In 2023, WeWork declared bankruptcy, reducing its equity valuation to $0. WeWork founder Adam Neumann walked away with $1.7 billion in stock sales and non-recourse loans [Adam Neumann Wants We Back, 2024]. Start-up unicorns Uber, Lyft, WeWork, Pinterest, and Snapchat have consistently failed to be profitable, with Uber's cumulative losses approaching $25 billion. In other cases, as in Theranos, Luckin Coffee, and Wirecard, start-ups commited outright fraud [The Crisis of Venture Capital, 2021].
 
-The truth of economics is that resources are scarce. Therefore the job of economic actors including firms and investors is to usefully allocate those scarce resources. When hype substitutes judgement of profit, potential, and loss, billions of dollars and labout hours are not invested into the real innovation that makes economies grow.
+The fundamental truth of economics is that resources are scarce. Therefore the job of economic actors - firms, investors, consumers, regulators - is to *usefully* allocate those scarce resources. When hype substitutes judgement of profit, potential, and loss, billions of dollars and millions of labour-hours[] are not invested into the scientific[], technological[], and organisational advances[] that make societies grow[Concrete Economics, 2016].
 
-Regular consumers of financial news may have the impression, as I have, that hypes of firms with bad fundamentals are becoming increasingly common over time. But media attention is often a poor measure of truth. Have firm founders and investors actually become more prone to following hypes over time? This paper attempts to answer the question with a panel regression of firm founding and funding data from Crunchbase, between the years 1960 and 2019. Hype is modelled as the response parameter $\beta_{i,t}$, of firm founders and investors to an industry's potential, which is modelled as growth in the previous period. If growth in period A and period B are the same, we would expect the growth in period A+1 and period B+1 to also be the same if the response parameter is constant.
+Regular consumers of financial news may have the impression that the hyping of firms with bad fundamentals has become increasingly common in recent times. But the New York Times[] is often a poor barometer of truth. Have firm founders and start-up investors really become more prone to following hypes over time? This paper attempts to answer the question with a panel regression of firm and funding data from Crunchbase. In the panel regression, I model hype as the growth volatility variable $\beta_{i,t}$, which I regress against an index of years. Hypes, which are characterised by sharp peaks and crashes in behaviour, are well-captured by the concept of volatility, so greater growth volatility should indicate a stronger effect of hype.
 
-Using the above model, I found that (...)
+Controlling for the federal funds rate and industry fixed effects, I find that there is an effect of 0.0007 on growth volatility in firms founded per additional year between 1960 and 2023, for a total effect of 0.0441 (median of medians for each industry: 0.0357), and an effect of 0.0033 on growth volatility in funding rounds announced per additional year between 1960 and 2023, for total effect of 0.207 (median of medians: 0.0469). A more conservative estimate of effect size using a restricted time period with more reliable data finds an effect of 0.0004 in firms founded and 0.0027 in funding rounds announced between 1994 and 2023.
 
 ## Literature Review
 
+### Understanding Hype
+
 To describe the change in the dynamics of hypes over time, we must first describe what hypes are.
 
-Hypes occur when technological innovation, regulatory changes, or other historical discontinuities cause new possibilities to exist in a field, drawing entrepreneurs and investors to enter the field[Theory of Economic Development, 1934]. They are therefore a natural and often positive force in technological development, driving funding of further innovation and building agglomerative communities of practitioners[Designing The Future, 1999]. But when the underlying promise of a hype is false, resources are wasted on non-productive investments[Concrete Economics, 2016]. Even when the underlying promise of a hype is true, but is not ready to be realised, disappointment can cause a backlash against a field, harming its nascent development[Avoiding Another AI Winter].
+Hypes occur when technological innovation, regulatory changes, or other historical discontinuities cause new possibilities to exist in a field, drawing entrepreneurs and investors to enter the field (Shumpeter, 1934)[]. They are therefore a natural part of technological development, driving funding of innovation and the building of communities of practitioners[Designing The Future, 1999]. But when the underlying promise of a hype is false, (...)[]. Even when the promise is true, if it is not ready to be realised, disappointment can cause a backlash against a field, damaging its nascent development[Avoiding Another AI Winter].
 
-["The conditions under which entrepreneurs may appear - neglecting the general economic and social conditions of the competitive economy - [...] may be briefly and incompletely formulated as the existence of new possibilities more advantageous from the private economic standpoint - a condition which must always be fulfilled; the limited accessibility of these possibilities because of the personal qualifications and external circumstances which are necessary; and an economic situation which allows tolerably reliable calculation. Why entrepreneurs appear under those conditions is [...] the fact that anyone seizes a gain when it is immediately before his eyes"]
+I draw a distinction here between bubbles and hypes, though the term 'bubble' is often also used to describe what I term a 'hype'. I follow the standard definition of a bubble as a deviation of asset prices from fundamentals, and define hype more broadly as over-indexing or "following" behaviour, where individual agents act in a highly correlated way because they are following the same signal. This results in sharp peaks and crashes as supposedly individual actors all move in the same direction at once []. This definition of hype is agnostic as to whether the signal is a good measure of fundamentals.
 
-I will draw a distinction here between bubbles and hypes, though the term 'bubble' is often also used to describe what I will term a 'hype'. I will use the definition of a bubble as a deviation of asset prices from fundamentals, and separately define hype more broadly as a short-term, sharp rise of some expression of positive expectations - which may or may not be based on fundamentals - followed by a sharp fall. I draw this distinction because in my analysis, I will not attempt to control for fundamentals such as profit. This is because the data I use includes a wide range of industries, and would require much more detailed analysis of heterogenous fundamentals before they can be taken into account.
+I draw this distinction between bubbles and hypes because I will not attempt to control for fundamentals in my analysis. This is because the data I use includes a wide range of industries, and would require much more careful analysis of heterogenous fundamentals before fundamentals can be taken into account.
 
-My justification for not doing fundamentals analysis is two-fold. First, I believe it is reasonable to assume that any trend in hype found across a wide range of industries would be independent of industry-specific fundamentals. If we further establish that there has not been an a matching trend in returns on investment over time, it is reasonable to state that any trend in hype is at least somewhat suspect from a fundamentals perspective. Given that there is some indication that returns on investment have been decreasing over time (...)
+My justification for not doing fundamentals analysis is two-fold.
 
-Second, hype, or exuberance, has been studied as an explosive autoregressive process without reference to fundamentals in other contexts, such as exchange rates[Are There Bubbles In Exchange Rates?, 2017] and stock prices[Explosive Behaviour In The 1990s NASDAQ, 2011]. And regardless of whether a particular hype is well-justified, understanding the dynamics and changes in dynamics of hype is empirically useful. If hype has indeed been "speeding up", one possible outcome is that the startup ecosystem becomes more unstable, as money lurches from one industry to another.
+First, I believe it is reasonable to assume that any trend in hype found across a wide range of industries would be independent of industry-specific fundamentals. If we further establish that there has not been an a matching trend in returns on investment over time, it is reasonable to claim that any trend in hype is at least somewhat suspect from a fundamentals perspective. Given that there is some indication that returns on investment have been decreasing over time (...)
 
-Describing the behaviour of hypes is also an industry on it's own. Gartner, one of the leading consulting firms on technological strategy, with an revenue of $5.1 billion as of 2023, uses its hype cycle model to advise the R&D decisions of large companies[Scrutinising Gartner's Hype Cycle Approach, 2010]. Gartner's hype cycle model describes interest in a technology as driven separately by a bell curve unfounded hype and an s-curve of technology maturity. When combined, the curves produce a hype cycle with a peak of inflated expectations as hype rises, a trough of disillusionment as hype falls before a technology is mature enough for mass adoption, and a slower rise to a plateaus of productivity as the technology finally matures.
+Second, hype, or exuberance, has been studied as an explosive autoregressive process without reference to fundamentals in other contexts, such as exchange rates[Are There Bubbles In Exchange Rates?, 2017] and stock prices[Explosive Behaviour In The 1990s NASDAQ, 2011].
+
+Third, regardless of whether hypes are well-justified, understanding the dynamics and changes in dynamics of hype is empirically useful. If hype has indeed been "speeding up", one possible outcome is that the start-up ecosystem becomes more unstable, as money lurches from one industry to another, *even if each industry being funded is more deserving than the last*. In studying the dynamics of systems, relative rates of change can matter as much rates of change. Stock market bubbles can be described (...)[].
+
+Fourth, describing and understanding the behaviour of hypes is viewed as necessary enough to be an industry on its own. Gartner, one of the leading consulting firms on technological strategy, with an revenue of $5.1 billion as of 2023, uses its hype cycle model to advise the R&D decisions of large companies[Scrutinising Gartner's Hype Cycle Approach, 2010].
+
+While Gartner's model is of questionable reliability, with technologies dropping in and out between years[Scrutinising Gartner's Hype Cycle Approach, 2010], I agree with its use as a conceptual baseline to deviate from in understanding hype in some of the literature I discuss below. Therefore, it is necessary to describe this model.
+
+Gartner's hype cycle model describes interest in a technology as driven separately by a bell curve of unfounded hype and an s-curve of technology maturity. When combined, the curves produce a hype cycle with a peak of inflated expectations as hype rises, a trough of disillusionment as hype falls before a technology is mature enough for mass adoption, and a slower rise to a plateaus of productivity as the technology finally matures.
 
 <img src="media/gartner-hype-cycle.png" width="400"/>
 
-While the model is of questionable reliability, with technologies disappearing from the model between years[Scrutinising Gartner's Hype Cycle Approach, 2010], I agree with its use as a conceptual baseline to deviate from in the hype dynamics literature. 
+The literature on technology hype is, unfortunately, fairly limited.
 
-The hype dynamics literature is unfortunately fairly limited.
+[The Sociology Of Expectations In Science And Technology, 2006] outlines the importance of expectations for technological innovation, where there isn't a clear distinction between hype and underlying fundamentals, and where evaluating an unrealised technology often involves realising said technology. Expressions of future expectations, therefore, are used strategically to guide technical and scientific activity; attract outside interest and investment; justify the production of measurements, calculations, tests, and pilot projects; calibrate beliefs about opportunities and risks; and generally coordinate activities between disparate actors.
 
-[The Sociology Of Expectations In Science And Technology, 2006] outlines the importance of expectations for technological innovation, where there isn't a clear distinction between hype and underlying fundamentals, and where evaluating an unrealised technology often involves realising said technology. The authors state that expressions of *future expectations*, rather than functioning as *purely honest descriptions of truth*, are *used strategically to guide technical and scientific activity*; attract outside interest and investment; justify the production of measurements, calculations, tests, and pilot projects; calibrate beliefs about opportunities and risks; and generally coordinate activities between disparate actors.
+[Designing The Future, 1999] provides a case study of the US Defense Advanced Research Projects Agency (DARPA) strategically using expectations in an attempt to establish the field of neural computing/neural networks. The case study describes DARPA canvassing research activities in neural computing and inviting a broad cross-section of corporate, military, and civilian technical decision makers to learn about the new field, culminating in a report published in 1988[]. This report hyped the field through such claims as neural computing representing "the dawn of a new era in computers", as well as referencing growing interest in the field from conferences, start-ups, venture capital, nations, and Nobel Laureates.
 
-[Designing The Future, 1999] provides a case study of the US Defense Advanced Research Projects Agency (DARPA) strategically using expectations in an attempt to establish the field of neural computing/neural networks. The case study describes DARPA canvassing research activities in neural computing and inviting a broad cross-section of corporate, military, and civilian technical decision makers to learn about the new field, culminating in a report published in 1988[]. This report hyped the field through such claims as neural computing representing "the dawn of a new era in computers", as well as referencing growing interest in the field from conferences, start-ups, venture capital, nations, and Nobel Laureates. It is of interest to note that the report also attempted to qualify its own hype, to avoid a repeat of the 1970s and 1980s 'AI winter', where high public expectations preceded a backlash from investors and funding agencies as the AI technology of the time failed to live up to expectations.
+It is of interest to note that the report also attempted to qualify its own hype, to avoid a repeat of the 1970s and 1980s 'AI winter', where high public expectations of artificial intelligence technology preceded a backlash from investors and funding agencies as the technology failed to live up to expectations[].
 
-[With the benefit of hindsight, I will note that AlphaGo's victory over Lee Sedol in Go and the public release of ChatGPT 3.5, happened in 2016 and 2022 respectively. Both events are generally considered milestones in AI development [The Mystery of Go, 1965], and both AIs used forms of neural networks.]
+[Avoiding Another AI Winter, 2010] argues that the AI winter was a confluence of multiple factors resulting in a disproportionately strong backlash. DARPA, after a period of significant funding for US-based AI research, experienced a change in management, who felt other fields deserved a chance at funding, such as the then emerging field of supercomputing. At the same time, the Lighthill Report[Lighthill Report, 1973], commissioned by the United Kingdom's Science Research Council, negatively reviewed the state of AI progress, leading to cuts of AI research funding in the UK and further cuts in the US.
 
-[Avoiding Another AI Winter, 2010] argues that the AI winter was a confluence of multiple factors resulting in a disproportionately strong backlash. DARPA, after a period of significant funding for US-based AI research, experienced a change in management, who felt other fields deserved a chance at funding, such as the emerging area of supercomputing. At the same time, the Lighthill Report[Lighthill Report, 1973], commissioned by the United Kingdom's Science Research Council, negatively reviewed the state of AI progress which led to cuts of AI research funding in the UK and further cuts in the US. Hendley argues that these funding cuts in the 1970s resulted in a lack of new research available for transition to industry in the 1980s, which was then interpreted as the failure of commercialisation of the field.
+Hendley argues that these funding cuts in the 1970s resulted in a lack of new research available for transition to industry in the 1980s, which was then interpreted as the failure of commercialisation of the field.
 
-[What Happens After A Hype, 2010] describes a framework of hype that distinguished between media activities, as well as different types of expectation: project-specific expectations, general technological expectations, and broader social framing such as ethical debates. It describes hype around stationary fuel cells in Germany, using German language newspapers, finding that while there was hype and disappointment of media attention and general expectations, positive social framing of fuel cell technology limited the negative effect of disappointment on innovative activities. [Comparing Technological Hype Cycles, 2013] uses this framework and empirically describes differences in hype dynamics of three technologies using quantitative and qualitative analysis of New York Times articles: voice over internet protocol (VoIP), gene therapy, and high temperature superconductivity, finding that (...).
+[What Happens After A Hype, 2010] describes a framework of hype that distinguished between media activities, as well as different types of expectation: project-specific expectations, general technological expectations, and broader social framing such as ethical debates. It describes hype around stationary fuel cells in Germany, finding that while there was hype and disappointment of media attention and general expectations, positive social framing of fuel cell technology limited the negative effect of disappointment on innovative activities. [Comparing Technological Hype Cycles, 2013] expands on this framework and describes differences in hype dynamics of three technologies: voice over internet protocol (VoIP), gene therapy, and high temperature superconductivity, finding that (...).
+
+### In The Shadow Of The Great Stagnation
+
+If there has been a rise in fundamentally unsound hype, we might speculate its causes:
+- (...)
+
+For our purposes, we do not have to (...)
 
 Other literature provide useful context for interpretation of hype. Well-founded hype, directed on the basis on highly technical feasibility studies such as in the DARPA neural computing report should not be treated the same as speculative hype with weak empirical basis. It is difficult to evaluate whether a technology will ultimately prove fruitful and when - five decades passed between the Lighthill report declaring the failure of AI research and the public release of ChatGPT 3.5 - but it should not be impossible to determine WeWork was fundamentally a real-estate company and Uber was fundamentally a taxi-service company, with fundamentally the same cost structures [What's Behind Technological Hype, 2019]. Technology does not have to be 'soft' to be overhyped. Hyperloops [The Hyperloop Is Dead For Real This Time], which are faster but more expensive than already expensive high-speed magnetic levitation trains, provide an example of overhyped 'hard' technology and a regular reminder that 'better' technologies do not necessarily justify their added costs [This plane could cross the Atlantic in 3.5 hours. Why did it fail?, 2016].
 
-[Killing The Golden Goose, 2015] describes the decline in scientific research by large firms between 1980 and 2007, finding that publications by scientists in large firms, weighted by citation count, have declined across a range of industries; the premium of publications in the acquisition price of firms have decreased; and publications by scientists acquired by large firms have decreased. It attributes this decline not to a decline of the usefulness of scientific research to innovation, but to increased global competition and narrower firm scope. The authors situate the decline in scientific research by large firms within a broader literature describing a strategic shift by firms since the 1980s, from in-house research to outsourced research, through a mix of contracts, licences, alliances, and acquisitions with universities and start-ups, diverting resources from research to their theoretical advantage in large scale development and commercialisation. [The Changing Technology of Technological Change, 1994] explains the shift as improved scientific understanding and instrumentation allowing innovation to be developed through the application of abstract knowledge, rather than trial-and-error experimentation. Innovation developed through trial-and-error is sensitive to local context and tacit knowledge. The authors give the example of the Bessemeer steel-making process, which did not work well when first adapted to Britain, where the ores used lacked the acidic medium the process required. By contrast, innovation developed on the basis of abstract knowledge is easier to replicate in different contexts, allowing for the division of innovative labour.
+[Killing The Golden Goose, 2015] describes the decline in scientific research by large firms between 1980 and 2007, finding that publications by scientists in large firms, weighted by citation count, have declined across a range of industries; the premium of publications in the acquisition price of firms have decreased; and publications by scientists acquired by large firms have decreased. It attributes this decline not to a decline of the usefulness of scientific research to innovation, but to increased global competition and narrower firm scope. The authors situate the decline in scientific research by large firms within a broader literature describing a strategic shift by firms since the 1980s, from in-house research to outsourced research, through a mix of contracts, licences, alliances, and acquisitions with universities and start-ups, diverting resources from research to their theoretical advantage in large scale development and commercialisation.
+
+[The Changing Technology of Technological Change, 1994] explains the shift as improved scientific understanding and instrumentation allowing innovation to be developed through the application of abstract knowledge, rather than trial-and-error experimentation. Innovation developed through trial-and-error is sensitive to local context and tacit knowledge. The authors give the example of the Bessemeer steel-making process, which did not work well when first adapted to Britain, where the ores used lacked the acidic medium the process required. By contrast, innovation developed on the basis of abstract knowledge is easier to replicate in different contexts, allowing for the division of innovative labour.
 
 The changes in the structure of innovation must be contextualised with the apparent decline in the scientific and technological capability of public and private actors in the United States since the 1970s, which is the grist of many publications in recent years. [Is the Rate of Scientific Progress Slowing Down?, 2016] summarise studies on the decline in productivity growth in the United State since the 1970s, observing that total factor productivity (TFP) growth averaged 2-3% per year from 1919 to 1948, around 2% from 1948 to 1973, then declining after 1973 to an average of about 0.5% per year. This increased briefly to 2% per year in the mid-1990s to early 2000s, before falling again to less than 1% per year. The authors also address concerns that TFP measures, and the GDP measures they are based off of, underestimate gains in output and welfare from internet services, as these services often involve the purchase of goods, require the purchase of electronic devices, or otherwise displace spending from one sector to another; all behaviours which would be captured by GDP measure. However, the authors also caution that the concept of TFP is itself often not well-defined. A hospital equipping its surgeons with iPads increase output, but the gain is attributed to capital input rather than scientific and technological advance.
 
@@ -88,93 +107,156 @@ The classification of industries and "industry groups" (Groups of related indust
 
 (...)
 
-Panel regression was done on both firm and funding data using a calculated variable $\beta_{ig,t}$ as the variable of interest. $\beta_{ig,t}$ was calculated as the multiple of the previous growth rate $g_{ig, t-1}$ in terms of *firms founded* or *funding rounds announced* in an industry group in a year to get the current growth rate $g_{ig, t}$: $g_{ig, t} = \beta_{ig, t} g_{ig, t-1}$. $\beta_{ig,t}$ represents the responsiveness of firm founders or investors to the potential of an industry group, represented by its growth rate in the previous period. This construction was necessary to model the responsiveness as a potentially changeable variable, rather than an average over time. High positive $\beta_{ig, t}$s represent strong "trend-following" in either positive or negative growth, while high negative $\beta_{ig, t}$s represent strong corrections. Since a sharp peak and a sharp crash are both symptoms of hype, but a sharp peak followed by sharp crash will result in an average $\beta_{ig, t}$ of 0, I will use the absolute value of $\beta_{ig, t}$ instead. As a robustness check, I will also perform the regression using raw values.
+Panel regression was done on both firm and funding data using a calculated variable $\beta_{i,t}$ as the variable of interest. $\beta_{i,t}$ was calculated as the multiple of the previous growth rate $g_{ig, t-1}$ in terms of *firms founded* or *funding rounds announced* in an industry group in a year to get the current growth rate $g_{ig, t}$: $g_{ig, t} = \beta_{ig, t} g_{ig, t-1}$. $\beta_{i,t}$ represents the responsiveness of firm founders or investors to the potential of an industry group, represented by its growth rate in the previous period. This construction was necessary to model the responsiveness as a potentially changeable variable, rather than an average over time. High positive $\beta_{ig, t}$s represent strong "trend-following" in either positive or negative growth, while high negative $\beta_{ig, t}$s represent strong corrections. Since a sharp peak and a sharp crash are both symptoms of hype, but a sharp peak followed by sharp crash will result in an average $\beta_{ig, t}$ of 0, I will use the absolute value of $\beta_{ig, t}$ instead. As a robustness check, I will also perform the regression using raw values.
 
 This is the final form of the panel regression:
-$$\beta_{ig,t} = c + \alpha_{ig} D_ig + \gamma t + \delta IR_t + \epsilon_{ig, t}$$
-\beta_{ig,t} of an industry group in a year between 1960 and 2023 will be regressed on a constant, an industry group fixed effect, a time effect, the federal funds rate that year as a control, and an error term. Year is normalised to be the actual year of firm founding or funding round announced minus the start year. This allows the coefficient of year to be interpretable as the effect of each additional year from the start year on the response parameter.
+$$\beta_{i,t} = c + \alpha_{i} + \gamma t + \delta r_t + \epsilon_{i, t}$$
+The growth volatility \beta_{i,t} of an industry in each year will be regressed, a time variable t and a federal funds rate variable $r_t$ as a control, with a constant $c$ and an industry fixed effect $\alpha_{i}$ also specified. Year is normalised to be the year a firm is founded or a funding round announced minus the start year. This allows the coefficient of year to be interpretable as the effect of each additional year from the start year on the response parameter. I use industry fixed effects instead of coefficients of each industry since the growth volatity of each industry differs significantly between industries, so the difference in effect of an industry from a reference industry will not be interpretable.
 
 ### Results and Interpretation
 
-Table 1 and Table 2 are the results of the panel regressions on $\beta_{ig,t}$ of firms founded and funding rounds announced respsectively. For the sake of brevity, I will only include the coefficients and p-value of the constant term, the year term, and the federal funds rate term, and include the full regressions in the Appendix. (...)
+Table 1 and Table 2 are the results of the panel regressions on growth volatility $\beta_{i,t}$ of firms founded and funding rounds announced respectively. Note that the year coefficients are larger than they initially seem. A year coefficient of 0.0033, as in Table 2, will be multiplied by the 63 year difference between the start and end years. This gives a total effect of 0.207 in the last period compared to the first period. For reference, some of the industries with the highest median growth volatility for funding rounds announced are Ethereum at 0.288, Bitcoin at 0.253, and Cannabis at 0.175, with a median of medians of 0.0469.
 
-Table 1: Firms Founded
+For firms founded, the industries with the highest median growth volatility are Advertising at 0.101, Dental at 0.0979, and Publishing at 0.0956, with a median of medians of 0.0357.
+
+The federal funds rate coefficients are small for both firms founded and funding rounds announced, and removing the federal funds rate control from the regressions do not significantly alter the results. This finding is slightly strange since we might expect the federal funds rate to affect money supply and therefore willingness to invest. This result seems more reasonable when we plot the federal funds rate against time. There was a clear change in interest rate regime between the period 1960-1980, where interest rates were consistently increasing, and the period 1980-2023, where interest rates were consistently decreasing.
+
+<img src="plots/Federal%20Funds%20Rate.png" width="400"/>
+
+If no or few industries have such strong trends in growth volatility, the correlation of the federal funds rate to growth volatility will be weak. Therefore the small federal funds rate coefficients suggest that the internal dynamics of each industry matter more to growth volatility than macroeconomic factors like federal funds rates.
+
+The $R^2$ of the regressions are relatively small, though I would argue still large enough to be empirically meaningful, at 0.085 for firms founded and 0.113 for funding rounds announced.
+
+Table 1: Firms Founded (1960-2023)
 ```
-=============================================================================================================
-                                           Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
--------------------------------------------------------------------------------------------------------------
-const                                         3.1046     0.3226     9.6244     0.0000      2.4721      3.7371
-year_norm                                     0.0193     0.0088     2.1877     0.0288      0.0020      0.0366
-fed_rate                                     -0.0856     0.0594    -1.4419     0.1494     -0.2020      0.0308
-=============================================================================================================
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0280     0.0014     19.977     0.0000      0.0253      0.0308
+year_norm      0.0007  3.377e-05     19.846     0.0000      0.0006      0.0007
+fed_rate      -0.0001  9.237e-05    -1.1982     0.2308     -0.0003   7.037e-05
+==============================================================================
+R-squared:                        0.0850
 ```
-Panel regression of firms founded returns the coefficient of year as 0.0193, at p < 0.05. This effect size is larger than it seems, since the difference between the start year and the end year is the coefficient multiplied by 60 years. This gives an effect of 1.158 in the last period compared to the first period, which is about the same size as the median industry group coefficient. The max industry group coefficients belong to Apps at 7.486, followed by Financial Services at 3.563, and Media and Entertainment at 2.133. The min industry group coefficients belong to Mobile at -1.834, Sports at -1.710, and Payments at -1.581. The p-values of all industry group coefficients are close to 0.
+The year coefficient is 0.0007 at p < 0.05, for a total effect of 0.0441 between 1960 and 2023. We find an increase in volatility in firms founded in this period, though not as strongly as funding rounds announced.
 
-It should be noted the industry group coefficient is not easily interpretable, as it is the *difference* in effect of an industry group from the baseline industry group Administrative Services.
-
-Although we obtain relatively large coefficients, the $R^2$ of the model is very small, at 0.0169. I suspect this is an issue with model specification rather than a finding of no effect.
-
-The nature of hypes is that they do not occur at all periods. Treating all time periods equally potentially muddles strong effects in one period with no effects (because there was no hype) in another. A possible future corrective is to restrict the panel regression to hype periods of each industry group, though that would introduce reliability problems as hype periods of different industry groups will likely not overlap, so the time coefficient of each period would be estimated with a smaller set of datapoints.
-
-Table 2: Funding Rounds Announced
+Table 2: Funding Rounds Announced (1960-2023)
 ```
-=============================================================================================================
-                                           Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
--------------------------------------------------------------------------------------------------------------
-const                                         0.5872     1.0272     0.5716     0.5677     -1.4278      2.6021
-year_norm                                     0.0469     0.0191     2.4625     0.0139      0.0095      0.0843
-fed_rate                                     -0.0464     0.0622    -0.7462     0.4557     -0.1685      0.0756
-=============================================================================================================
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const         -0.1050     0.0076    -13.905     0.0000     -0.1198     -0.0902
+year_norm      0.0033     0.0001     23.704     0.0000      0.0030      0.0036
+fed_rate       0.0008     0.0003     2.7866     0.0053      0.0002      0.0014
+==============================================================================
+R-squared:                        0.1137
 ```
-Panel regression of funding rounds announced returns the coefficient of year as 0.0469 at p < 0.05, which gives an effect of 2.814 in the last period compared to the first period, which is larger than any industry group coefficient except for Blockchain and Cryptocurrency at 3.385 and Consumer Goods at 2.901. However, the $R^2$ of the model is very small, at 0.0325. For the reasons stated above, I suspect this is an issue with model specification rather than a finding of no effect.
+The year coefficient is 0.0033 at p < 0.05, for a total effect of 0.207 between 1960 and 2023. We find an increase in volatility in funding rounds announced in this period.
 
 ### Robustness Checks
 
-#### Grouped by Industry
-Firm I
-Fund I
-
 #### Restricted Period (Excluding 2019-2023)
-Firm IG
-Fund IG
+
+Table 3: Firms Founded (1960-2018)
+```
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0264     0.0014     19.335     0.0000      0.0237      0.0290
+year_norm      0.0007   3.47e-05     21.007     0.0000      0.0007      0.0008
+fed_rate   -6.578e-05  9.178e-05    -0.7167     0.4735     -0.0002      0.0001
+==============================================================================
+R-squared:                        0.0946
+```
+The year coefficient is 0.0007 at p < 0.05, for a total effect of 0.406 between 1960 and 2018. We find an increase in volatility in firms founded in this period.
+
+Table 4: Funding Rounds Announced (1960-2018), Grouped by Industry
+```
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const         -0.0546     0.0087    -6.2649     0.0000     -0.0716     -0.0375
+year_norm      0.0025     0.0002     14.504     0.0000      0.0021      0.0028
+fed_rate      -0.0030     0.0003    -9.9727     0.0000     -0.0036     -0.0024
+==============================================================================
+R-squared:                        0.0819
+```
+The year coefficient is 0.0025 at p < 0.05, for a total effect of 0.145 between 1960 and 2018. We find an increase in volatility in funding rounds announced in this period.
 
 #### Restricted Period (Only Including 1994-2023)
-Firm IG
-Fund IG
 
+Table 5: Firms Founded (1994-2023)
+```
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0529     0.0021     24.617     0.0000      0.0487      0.0571
+year_norm      0.0004     0.0001     4.1199     0.0000      0.0002      0.0007
+fed_rate      -0.0007     0.0003    -2.5711     0.0101     -0.0012     -0.0002
+==============================================================================
+R-squared:                        0.0121
+```
+The year coefficient is 0.0004 at p < 0.05, for a total effect of 0.0116 between 1994 and 2023. We find an increase in volatility in firms founded in this period.
+
+Table 6: Funding Rounds Announced (1994-2023), Grouped by Industry
+```
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0167     0.0037     4.4672     0.0000      0.0094      0.0241
+year_norm      0.0027     0.0002     13.551     0.0000      0.0023      0.0031
+fed_rate       0.0023     0.0003     6.5702     0.0000      0.0016      0.0029
+==============================================================================
+R-squared:                        0.0648
+```
+The year coefficient is 0.0027 at p < 0.05, for a total effect of 0.0783 between 1994 and 2023. We find an increase in volatility in funding rounds announced in this period.
+
+For both firms founded and funding rounds, the year coefficient and the $R^2$, which suggests that a large part of the effect found in previous regressions came from years between 1960 and 1993, where less data was available and estimates are probably less reliable. I would therefore conclude the results of the restricted regressions between 1994-2023 are closest to the true effects. Since the median of medians do not change significantly between the non-restricted and the restricted regressions, we may conclude that there is still a relatively strong time effect.
 
 ### Limitations
 
 The limitations of the data and methodology chosen are as follows:
-- Crunchbase's labelling of industries and industry groups is done by the firms themselves, for the purpose of being easily searchable. This biases the labels towards more trendy industries and industry groups. Multiple labels are also allowed, resulting in the double counting of industries and industry groups, especially for trendy industries and industry groups. A future study can use a different source of labelling, such as The Refinitiv Business Classification.
-- Counts are used instead of sums of firm estimated revenue or money raised in funding rounds, as not all firms and founding rounds have the data. This may distort the results if there are differences in trends between the counts and sums e.g. the number of funding rounds have increased, while the money raised in the average funding round has decreased. A future study can use sums instead.
-- The series being analysed are "jagged" due to the annual frequency of the source data. This may distort the results if e.g. there was a peak and a crash within a single year. A peak and a crash within a single year represents a strong trend, but the year will be wrongly classified as non-trending. As Crunchbase provides granular dates for funding rounds, a future study can use a monthly frequency instead.
-- The hype response parameter may be misspecified. (...)
-- The panel regression may be misspecified. (...)
-
-There are also other research questions we may try to answer:
-
-
-Monthly data
-Supplement with (...), fix categorisation
-Supplement with Compustat
-Venture capital specifically
-Government actors specifically
-IPOs
-Media attention
-Narrower studies
-Measures of instability
-Suitability of investors
-"Always a little bubbly"
-Stocks and flows of experience
-Rational pricing
-Take it or leave it
-More uncertainty
+- Crunchbase's labelling of industries is done by the firms themselves, for the purpose of being easily searchable. This biases the labels towards more trendy industries. Multiple labels are also allowed, resulting in the double counting of industries. We might imagine a hypothetical trend-following startup labelling itself an AI *and* a Bitcoin startup for extra hype points. These possible biases were not corrected for in the analysis. A future study might use a different source of labelling, such as The Refinitiv Business Classification.
+- The analysis almost certainly aggregates very different firms together in the same industry. A future study might do a deeper analysis of smaller, more specific groupings to avoid potential confounders.
+- Counts of firms founded and funding rounds announced were used instead of sums of firm estimated revenue or money raised in funding rounds, as not all firms and founding rounds have monetary data. This may distort results if there are differences in trends between the counts and sums e.g. the number of funding rounds have increased, while the total money raised remained the same. A future study might use sums instead.
+- Volatility was used as a measure of hype. This means we can't conclude that hype leads to volatility from this study, or we would be assuming our own conclusion. An alternative measure for hype might be the tendency of firms founded/funding rounds announced to follow leading investors, news events, IPOs, or other indicators. A future study might then correlate both measures.
+- It might also be interesting to study whether those indicators have gotten more or less accurate over time.
+- The analysis aggregates different classes of investors together. A potential future research question might be to ask if there are differences in hype response between e.g. venture capitalists and government investors.
 
 ### Conclusion
 
 (...)
 
+### References
+
+[] Schumpeter, J. (1934). Theory of Economic Development. As an aside, I found Schumpeter's quote about entrepreneurship quite brilliant: "The conditions under which entrepreneurs may appear - neglecting the general economic and social conditions of the competitive economy - ... may be briefly and incompletely formulated as the existence of new possibilities more advantageous from the private economic standpoint - a condition which must always be fulfilled; the limited accessibility of these possibilities because of the personal qualifications and external circumstances which are necessary; and an economic situation which allows tolerably reliable calculation. **Why entrepreneurs appear under those conditions is ... the fact that anyone seizes a gain when it is immediately before his eyes**"
+
+[] With the benefit of hindsight, I will note that AlphaGo's victory over Lee Sedol in Go and the public release of ChatGPT 3.5, happened in 2016 and 2022 respectively. Both events are generally considered milestones in AI development [The Mystery of Go, 1965], and both AIs used forms of neural networks.
+
 ### Appendix
 
-(...)
+Appendix 1: Firms Founded (1960-2023), Grouped by Industry Group
+```
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0830     0.0082     10.114     0.0000      0.0669      0.0991
+year_norm   8.698e-05     0.0002     0.3732     0.7090     -0.0004      0.0005
+fed_rate       0.0007     0.0004     1.9116     0.0560  -1.821e-05      0.0014
+==============================================================================
+R-squared:                        0.0011
+```
+The year coefficient is close to 0. We do not find any increase in volatility in firms founded between 1960 and 2023 when firms are grouped by industry group.
+
+Appendix 2: Funding Rounds Announced (1960-2023), Grouped by Industry Group
+```
+==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.1258     0.0285     4.4111     0.0000      0.0699      0.1818
+year_norm      0.0006     0.0005     1.1092     0.2675     -0.0005      0.0016
+fed_rate      -0.0076     0.0014    -5.4448     0.0000     -0.0103     -0.0048
+==============================================================================
+squared:                        0.0254
+```
+The year coefficient is 0.0006 at p > 0.05. We do not find any increase in volatility in funding rounds announced between 1960 and 2023 when funding rounds are grouped by industry group.

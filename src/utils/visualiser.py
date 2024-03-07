@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import config as Config
 
-def plot_labels(plt, title, ylab, ylim, legend=False, grid=True):
+def plot_labels(plt, title, ylab, ylim, grid=True):
   plt.title(title)
   plt.xlabel('Year')
   plt.ylabel(ylab)
@@ -10,9 +10,6 @@ def plot_labels(plt, title, ylab, ylim, legend=False, grid=True):
   plt.xlim(Config.start_year - 5, Config.end_year)
   if ylim:
     plt.ylim(ylim)
-
-  if legend:
-    plt.legend(loc='lower left')
 
   if grid:
     plt.grid(True)
