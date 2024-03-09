@@ -4,7 +4,7 @@ import pandas as pd
 import config as Config
 
 # Data Frame
-def map_to_df(map):
+def df(map):
   return pd.DataFrame(map) 
 
 # Fill

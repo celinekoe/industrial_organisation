@@ -12,6 +12,8 @@ def enrich_firms(firms):
   firms[Labels.country] =  firms[Labels.firm_location].apply(LocationUtils.get_country)
 
   firms = DateUtils.set_year(firms, Labels.firm_founded_date, Labels.firm_founded_year)
+  firms = DateUtils.set_year(firms, Labels.firm_exit_date, Labels.firm_exit_year)
+  firms = DateUtils.set_year(firms, Labels.firm_closed_date, Labels.firm_closed_year)
 
   firms[Labels.industries] =  firms[Labels.industries].apply(dtUtils.string_to_list)
   firms[Labels.industry_groups] =  firms[Labels.industry_groups].apply(dtUtils.string_to_list)

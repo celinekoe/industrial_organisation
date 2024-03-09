@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>draft3.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="the-signal-and-the-noise-hype-in-the-age-of-the-great-stagnation">The Signal and The Noise: Hype in the Age of the Great Stagnation</h1>
+<h2 id="abstract">Abstract</h2>
+<p>Regular consumers of financial news may have the impression that the hyping of start-ups with bad fundamentals has become increasingly common in recent times. But have start-up founders and investors really become more prone to following hypes, or is this just another popular economic myth? Using Crunchbase data, I attempt to answer this question with a panel regression of growth volatility of start-ups founded or funding rounds raised in the United States against an index of years. Growth volatility was chosen as the variable as interest since hypes are characterised by sharp peaks and crashes in behaviour, which is captured by the concept of volatility.</p>
+<p>Controlling for the federal funds rate and industry fixed effects, I find that there is an effect of 0.0007 on growth volatility of start-ups founded per added year between 1960 and 2023, for a total effect of 0.0441 between the start and end years (median of medians for each industry: 0.0357), and an effect of 0.0033 on growth volatility of funding rounds raised per added year between 1960 and 2023, for total effect of 0.207 (median of medians: 0.0469). A more conservative estimate of effect size for a restricted time period with more reliable data finds a per year effect of 0.0004 on growth volatility of start-ups founded and 0.0027 on growth volatility of funding rounds raised.</p>
+<h2 id="1-introduction">1. Introduction</h2>
+<h3 id="11-background">1.1 Background</h3>
+<p>In 2019, WeWork raised $1 billion from Softbank, raising its equity valuation to $47 billion. In 2023, WeWork declared bankruptcy, reducing its equity valuation to $0. WeWork founder Adam Neumann walked away with $1.7 billion in stock sales and non-recourse loans (Levine, 2024)[1]. Start-up unicorns Uber, Lyft, WeWork, Pinterest, and Snapchat have consistently failed to be profitable, with Uber's cumulative losses approaching $25 billion. In other cases, as in Theranos, Luckin Coffee, and Wirecard, start-ups commited outright fraud (Funk, 2021)[2]. The fundamental truth of economics is that resources are scarce. Thus the fundamental job of economic actors - firms, investors, consumers, regulators - is to <em>usefully</em> allocate those scarce resources. When hype substitutes judgement of profit, potential, and loss, billions of dollars and labour-hours are not invested into the scientific, technological, and organisational advances that make societies grow (Cohen &amp; DeLong, 2016)[3].</p>
+<p>Hypes, by themselves, are not inherently negative. Hypes occur whenever technological innovation, regulatory changes, or other discontinuities create new possibilities in a field, drawing entrepreneurs and investors to enter the field (Schumpeter, 1934)[4]. They are therefore a natural part of technological development, driving the funding of innovation and the building of communities of practice (Guice, 1999)[5]. But when the underlying promise of a hype is false, or even when the promise is true but too early to be realised, hypes can direct resources towards confident fraudsters away from more qualified founders (...)[6], and disappointment can damage the development of a nascent field (Hendler, 2008)[7].</p>
+<p>Determining whether or not a hype is sound is non-trivial. In technological innovation, there often isn't a clear distinction between hype and underlying fundamentals, and evaluating an unrealised technology often involves realising said technology (Borup et. al., 2016)[8]. While WeWork and Uber are/were fundamentally real-estate and taxi service companies pretending to be technology companies (Funk, 2019)[9], other examples are less obvious. The AI Winters of the 1970s and 1980s followed from the Lighthill Report concluding in 1973 that &quot;in no part of the field have discoveries made so far produced the major impact that was then promised.&quot; (Hendler, 2008)[7] It took five decades after the Lighthill Report for OpenAI to release ChatGPT 3.5, with the app reaching an adoption rate of 100 million users in two months, faster than any other app in history (Hu, 2023)[10].</p>
+<p>If by some measure we find that there has been a rise in hypes, we might speculate upon the causes of their rise. We might, for example, attribute an increase in hypes to changes in the strategies chosen by start-up founders and investors, particularly in the tech industry.</p>
+<p>Prioritising risky growth over guaranteed profits, rather than a careless oversight, is/was the explicit strategy of start-up founders and investors. In an essay titled &quot;Startup = Growth&quot;, leading Silicon Valley venture capitalist Paul Graham wrote: &quot;Growing too slowly is particularly dangerous in a business with network effects, which the best startups usually have to some degree.&quot; (Graham, 2012)[11]. This strategy is not without merit. As of 2021, Microsoft, Apple, Amazon, Netflix, Alphabet, and Meta represented more than 25 percent of the S&amp;P's total market capitalisation (Funk, 2021)[2], and all six firms benefit greatly from network effects[12].</p>
+<p>The incentives of venture capital funds are also a potential cause of an increase in hypes. Venture capital funds collect percentage fees on assets under management (AUM), in addition to profit incentives (Mauboussin &amp; Callahan, 2020)[13]. Further, as a venture capital fund's AUM rises, returns may be expected to fall, since the needs of a start-up to expand do not necessarily scale with the needs of a venture capital fund to invest (Graham, 2005)[14] Thus, as venture capital funds grow larger, they may be incentivised to raise even more capital over improving the allocation of their existing capital (Harrison, 2022)[15]. Venture capital funds are also incentivised to discourage start-ups under their management from having funding rounds that lower their valuation, since lower valuations result in a write-down of AUM and therefore loss of fees (Levine, 2023)[16].</p>
+<p>Bad strategy is the most optimistic potential cause of an increase in hypes, since in theory markets should self-correct by reducing the willingness of start-up founders to found and investors to fund unprofitable start-ups. There is some evidence of a correction in the start-up sector in 2022/2023, with reports of multiple well-funded and highly-valuated start-ups closing or exiting at much lower valuations in 2023 (Griffith, 2023)[17]. The tech industry has also experienced large layoffs, totalling 160k in 2022 and 260 (Layoffs.fyi, 2024)[18], with most of the layoffs falling on the start-ups outside Big Tech (Francis &amp; Pipe, 2024)[19].</p>
+<p>The less optimistic potential cause is structural: More money, chasing less &quot;good&quot; investments. In the U.S., state and local government pension funds have an estimated $4.5 trillion AUM (Mauboussin &amp; Callahan, 2020)[13], compared to the U.S. nominal GDP of $25 trillion in 2023 (CEIC, 2024)[20]. University endowments have a further $600 billion AUM. As U.S. 30-year Treasury bond yields declined from 15% in 1981 to a low of 1.2% in 2020, institutional investors increased returns by re-allocating assets into riskier investments like buyout and venture funds, with state and local government pension funds increasing asset allocation in &quot;alternative assets&quot; from 7% in 1990 to 29% in 2019. Pension funds, in particular, are under pressure to make up for $1.6 trillion to $6 trillion of unfunded pension liabilities (Mauboussin &amp; Callahan, 2020)[13]. Similarly, Softbank could not have invested into Uber and WeWork at a premium without $60 billion of investment by of Saudi Arabia's and Abu Dhabi's sovereign wealth funds (Jones, 2022)[21].</p>
+<p>Even as the supply of funds for investment have grown at a faster rate, the rate of growth of &quot;good&quot; investments have slowed. Cowen (2011)[22] describes a decline in yearly total factor productivity growth from 2-3% per year from 1919 to 1948, to less than 1% per year since 1973, which Cowen attributes to a decline in real innovation. Bloom et. al (2020)[23] describes a decline in research productivity in the same period. At the same time, large firms have shifted their R&amp;D investment away from fundamental &quot;Research&quot; and towards commercial &quot;Development&quot;, outsourcing research to universities and start-ups (Pisano, 2010)[24].</p>
+<p>While this shift theoretically combines the advantage of large corporations in commercialisation and small start-ups in innovation (Arora &amp; Gambardella, 1994)[25], Pisano (2010)[24] describes the challenges facing science-based start-ups. Science-based start-ups, such as in biotechnology, require large investments &gt;$1 billion over long time periods &gt;10 years, with uncertain payoff schedules. Venture capital funds, meanwhile, are structured for liquidity events within 5-10 years (Harrison, 2022)[15], and manage risk by limiting investments in individual start-ups. Meanwhile, universities are regularly criticised by researchers for bureaucratic and risk-averse funding mechanisms (Guzey, 2019)[26]. The University of Pennsylvania infamously demoted Katalin Karikó, one of the principal researchers behind mRNA technology, from tenure track after she failed to receive grant funding for her research (Garde, 2010)[27].</p>
+<p>For the purposes of this paper, I will not attempt to determine whether strategic or structural causes are more relevant, or how persistent they are. Very smart people in the public and private sector are aware of these issues and have made efforts to address them. Moderna raised $40 million from venture capital funds in 2012 before any of their drugs had reached human trials, and raised more then $2 billion before going public in 2018 pre-COVID-19 (Garde, 2010)[27] More recently, Stanford, UC-Berkeley and UC-San Francisco jointly launched the Arc Institute with $650 million in funding, with plans to give 10 to 15 core investigators eight years of funding to pursue research without external pressure to commercialise or obtain grant funding (Mast, 2022)[28].</p>
+<p>It is sufficient for me to state that in so far as structural imbalances between the supply and demand of capital persist or worsen, it is likely a period of hypes will return. The most recent correction in the tech industry occured in 2022/2023, after the U.S. Federal Reserve hiked the effective federal funds rate to control inflation, from about 4.33% in 2022 and 5.33% in 2023 (Smith, 2023)[29]. With the easing of inflation from a peak of 9.1% in 2022 to 3.1% in 2024 (Trading Economics, 2024)[30], there will be increased political pressure to lower the federal funds rate (Dennis, 2023)[31], which will remove the proximate restraint on hype. An aging population with a longer lifespan and fewer children will simultaneously increase investable funds as older adults accumulate more wealth with age (...)[32], put more pressure on pension systems to find higher returns, and potentially shrink the pool of &quot;good&quot; investments as population aging reduces productivity growth (Maestas et. al, 2016)[33].</p>
+<h3 id="12-contributions-to-the-literature">1.2 Contributions to the Literature</h3>
+<p>The contributions of this paper are: (1) To bring together a useful collection of facts and mental models about hype from disparate threads of research, which I have covered in the previous section, and (2) To establish the fact that there has been an increase in hype from 1960-2023, as measured by growth volatility of start-ups founded or funding rounds raised, which will be covered in the Results section. As far as I'm aware, this specific measure of hype in the start-up sector has not been used before, although the use of some measure of volatility as a measure of &quot;bubbliness&quot; is not new (Steinert &amp; Leifer, 2010)[34].</p>
+<p>Finally, before I describe my findings about hype, I must first define what hypes are.</p>
+<p>What are hypes? Though the words &quot;bubble&quot; and &quot;hype&quot; are often conflated, I follow the definition of a bubble as a deviation of asset prices from fundamentals, and define hype more broadly as over-indexing or &quot;herd&quot; behaviour, where individual agents act in a highly correlated way because they are following the same signal. This results in sharp peaks and crashes as supposedly individual actors all move in the same direction at once. This definition of hype is agnostic as to whether the triggering signal is a good measure of fundamentals.</p>
+<p>I draw this distinction between bubbles and hypes because I will not attempt to control for fundamentals in my subsequent analysis. This is because the data I use includes a wide range of industries, and would require much more careful analysis of heterogenous fundamentals before the fundamentals can be properly considered. My justification for not doing fundamentals analysis are as follows.</p>
+<p>First, I believe it is reasonable to assume that any trend in hype found across a wide range of industries would be independent of industry-specific fundamentals. If we further establish that there has not been an a matching trend in returns on investment over time, it is reasonable to claim that any trend in hype is at least somewhat suspect from a fundamentals perspective. Given that venture capital funds' returns on investment have been decreasing over time, with the public market equivalent returns for venture capital funds, adjusted for size, sector, and leverage averaging to 1 from 2000-2013 (Mauboussin &amp; Callahan, 2020)[13], we might find an increase in hype not well-justified[35].</p>
+<p>Second, hype, or exuberance, has been studied as an explosive autoregressive process without reference to fundamentals in other contexts, such as exchange rates (Yang &amp; Oxley, 2017)[36] and stock prices (Phillips et. al. 2011)[37].</p>
+<p>Third, regardless of whether hypes are well-justified, understanding the dynamics and changes in dynamics of hype is empirically useful. In complex systems, relative rates of change can matter as much as rates of change. Stock market bubbles can, for example, be described as optimistic investors overwhelming pessimistic investors. Ofek &amp; Richarson (2012)[38] describe how in the lead up to the Dot-Com Bubble there was substantial interest in shorting internet stocks, but a large portion of internet stocks were insider's shares which were restricted from sale. Similarly, the pre-IPO start-ups funded by venture capital funds cannot be shorted. If and when hypes attract over-optimistic investors too much faster than the market can correct itself, it would not be unexpected for valuations to deviate from fundamentals [39].</p>
+<p>Fourth, economic actors are interested in describing and understanding the behaviour of hypes. Gartner is one of the leading consulting firms on technological strategy, with an revenue of $5.1 billion as of 2023, and Gartner's hype cycle model is used to advise the R&amp;D decisions of large corporations (Steinert &amp; Leifer, 2010)[33]</p>
+<h2 id="2-data-and-methodology">2. Data and Methodology</h2>
+<p>Firm and funding data was obtained from the venture capital database Crunchbase. Federal funds rate data was sourced from CEIC. The firm dataset includes all 1.2 million US firms available from Crunchbase, filtered to only include for-profit companies founded between 1960 and 2023 (inclusive). Where the founding date was not available from Crunchbase, I supplemented the data with the date of domain registration from WHOIS, a public protocol to access domain registration details. The funding data set includes all 620k funding rounds available from Crunchbase, filtered to only include funding rounds between 1960 and 2023. Since we only start to have &gt;100 funding rounds a year in 1994, I will also perform the regression only including years 1994-2023 as a robustness check.</p>
+<p>Niculaescu et. al (2023)[40] show that Crunchbase is already established in the literature with its use in multiple papers, and that Crunchbase provides good coverage of seed and early-stage venture capital investments, but not later-stage VC funding. This represents a bias in the data set, so a possible future approach would be to supplement Crunchbase data with Refinitiv data which has better coverage of later-stage VC funding.</p>
+<p>The classification of industries was also obtained from Crunchbase. But Crunchbase allows for and even encourages start-ups to label themselves as belonging to multiple industries to be easy to search. This leads to an overcount in total cound of firms founded in funding rounds raised, as well as overcount in trendy industries. I do not control for this, so it's possible that any observed change over time is the result of changes in labelling over time. A possible future approach would be to use The Refinitiv Business Classification instead, which assigns only one industry per company based on factors such as main source of revenue (Niculaescu et. al, 2023)[40].</p>
+<p>The start year of 1960 was chosen as the earliest 'round' year where macroeconomic data was available. The end year was chosen to exclude 2024, which is an incomplete year. Some consideration was given as to whether to include the COVID-19 period from 2019-2023, which resulted in a collapse of firm founding independently of hype dynamics. I ultimately chose to include it as funding rounds increased throughout this period, and many of the perceived excesses of start-up hype also happened during this period. As a robustness check, I will also perform the regression excluding 2019-2023.</p>
+<img src="file:///Users/celine/Projects/IO/report/plots/Firm: Count.png" width="400">
+<img src="file:///Users/celine/Projects/IO/report/plots/Fund: Count.png" width="400">
+<p>Since the count of firms founded or funds raised in a year can be very small in some industries, especially before 1994, I attempted to regularise the data by adding 100 to all yearly counts. This prevents artificially high growth in the early period off of a small absolute count. This manipulation should not affect the actual results, since it will not have much effect on years with higher counts. If there is an effect, it should disadvantage my hypothesis that hype has increased, since adding a constant to the count should reduce the growth of the count and therefore growth volatility. I also dropped the firms and funding rounds belonging to a very small number of industries which, across all years, never had more than 500 + 100 firms founded or funds raised per year.</p>
+<p>Panel regression was done on both firm and funding data using the growth volatility variable $\beta_{i,t}$ as the variable of interest. $\beta_{i,t}$ was calculated as the rolling standard deviation of the three period window $t-3$, $t-2$, $t-1$. As mentioned previously, hypes are characterised by sharp peaks and crashes in behaviour, which is captured by the concept of volatility.</p>
+<p>This is the final form of the panel regression:
+$$\beta_{i,t} = c + \alpha_{i} + \gamma t + \delta r_t + \epsilon_{i, t}$$
+The growth volatility \beta_{i,t} of an industry in each year will be regressed on a time variable $t$ and a federal funds rate variable $r_t$ as a control, with a constant $c$ and an industry fixed effect. Year is normalised to be the year a firm is founded or a funding round announced minus the start year. This allows the coefficient of year to be interpretable as the effect of each additional year from the start year on the response parameter. I use industry fixed effects instead of coefficients of each industry since the growth volatity of each industry likely differs significantly between industries, so the interpretation of the coefficient as the difference in effect of an industry from a reference industry will not hold.</p>
+<h2 id="3-results-and-interpretation">3. Results and Interpretation</h2>
+<p>Table 1 and Table 2 are the results of the panel regressions on growth volatility $\beta_{i,t}$ of firms founded and funding rounds announced respectively. Note that the year coefficients are larger than they initially seem. A year coefficient of 0.0033, as in Table 2, will be multiplied by the 63 year difference between the start and end years. This gives a total effect of 0.207 in the last period compared to the first period. For reference, some of the industries with the highest median growth volatility for funding rounds announced are Ethereum at 0.288, Bitcoin at 0.253, and Cannabis at 0.175, with a median of medians of 0.0469.</p>
+<p>For firms founded, the industries with the highest median growth volatility are Advertising at 0.101, Dental at 0.0979, and Publishing at 0.0956, with a median of medians of 0.0357.</p>
+<p>The federal funds rate coefficients are small for both firms founded and funding rounds announced, and removing the federal funds rate control from the regressions do not significantly alter the results. This finding is slightly strange since we might expect the federal funds rate to affect money supply and therefore willingness to invest. This result seems more reasonable when we plot the federal funds rate against time. There was a clear change in interest rate regime between the period 1960-1980, where interest rates were consistently increasing, and the period 1980-2023, where interest rates were consistently decreasing.</p>
+<img src="file:///Users/celine/Projects/IO/report/plots/Federal Funds Rate.png" width="400">
+<p>If no or few industries have such strong trends in their own growth volatility, the correlation of the federal funds rate to growth volatility will be weak. Therefore the small federal funds rate coefficients suggest that the internal dynamics of each industry matter more to growth volatility than macroeconomic factors like federal funds rates.</p>
+<p>The $R^2$ of the regressions are relatively small, though I would argue still large enough to be empirically meaningful, at 0.085 for firms founded and 0.113 for funding rounds announced.</p>
+<p>Table 1: Firms Founded (1960-2023)</p>
+<pre class="hljs"><code><div>==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0280     0.0014     19.977     0.0000      0.0253      0.0308
+year_norm      0.0007  3.377e-05     19.846     0.0000      0.0006      0.0007
+fed_rate      -0.0001  9.237e-05    -1.1982     0.2308     -0.0003   7.037e-05
+==============================================================================
+R-squared:                        0.0850
+</div></code></pre>
+<p>The year coefficient is 0.0007 at p &lt; 0.05, for a total effect of 0.0441 between 1960 and 2023. We find an increase in volatility in firms founded in this period, though not as strongly as funding rounds announced.</p>
+<p>Table 2: Funding Rounds Announced (1960-2023)</p>
+<pre class="hljs"><code><div>==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const         -0.1050     0.0076    -13.905     0.0000     -0.1198     -0.0902
+year_norm      0.0033     0.0001     23.704     0.0000      0.0030      0.0036
+fed_rate       0.0008     0.0003     2.7866     0.0053      0.0002      0.0014
+==============================================================================
+R-squared:                        0.1137
+</div></code></pre>
+<p>The year coefficient is 0.0033 at p &lt; 0.05, for a total effect of 0.207 between 1960 and 2023. We find an increase in volatility in funding rounds announced in this period.</p>
+<h2 id="4-robustness-checks">4. Robustness Checks</h2>
+<h3 id="41-restricted-period-excluding-2019-2023">4.1 Restricted Period (Excluding 2019-2023)</h3>
+<p>Table 3: Firms Founded (1960-2018)</p>
+<pre class="hljs"><code><div>==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0264     0.0014     19.335     0.0000      0.0237      0.0290
+year_norm      0.0007   3.47e-05     21.007     0.0000      0.0007      0.0008
+fed_rate   -6.578e-05  9.178e-05    -0.7167     0.4735     -0.0002      0.0001
+==============================================================================
+R-squared:                        0.0946
+</div></code></pre>
+<p>The year coefficient is 0.0007 at p &lt; 0.05, for a total effect of 0.406 between 1960 and 2018. We find an increase in volatility in firms founded in this period.</p>
+<p>Table 4: Funding Rounds Announced (1960-2018), Grouped by Industry</p>
+<pre class="hljs"><code><div>==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const         -0.0546     0.0087    -6.2649     0.0000     -0.0716     -0.0375
+year_norm      0.0025     0.0002     14.504     0.0000      0.0021      0.0028
+fed_rate      -0.0030     0.0003    -9.9727     0.0000     -0.0036     -0.0024
+==============================================================================
+R-squared:                        0.0819
+</div></code></pre>
+<p>The year coefficient is 0.0025 at p &lt; 0.05, for a total effect of 0.145 between 1960 and 2018. We find an increase in volatility in funding rounds announced in this period.</p>
+<h3 id="42-restricted-period-only-including-1994-2023">4.2 Restricted Period (Only Including 1994-2023)</h3>
+<p>Table 5: Firms Founded (1994-2023)</p>
+<pre class="hljs"><code><div>==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0529     0.0021     24.617     0.0000      0.0487      0.0571
+year_norm      0.0004     0.0001     4.1199     0.0000      0.0002      0.0007
+fed_rate      -0.0007     0.0003    -2.5711     0.0101     -0.0012     -0.0002
+==============================================================================
+R-squared:                        0.0121
+</div></code></pre>
+<p>The year coefficient is 0.0004 at p &lt; 0.05, for a total effect of 0.0116 between 1994 and 2023. We find an increase in volatility in firms founded in this period.</p>
+<p>Table 6: Funding Rounds Announced (1994-2023), Grouped by Industry</p>
+<pre class="hljs"><code><div>==============================================================================
+            Parameter  Std. Err.     T-stat    P-value    Lower CI    Upper CI
+------------------------------------------------------------------------------
+const          0.0167     0.0037     4.4672     0.0000      0.0094      0.0241
+year_norm      0.0027     0.0002     13.551     0.0000      0.0023      0.0031
+fed_rate       0.0023     0.0003     6.5702     0.0000      0.0016      0.0029
+==============================================================================
+R-squared:                        0.0648
+</div></code></pre>
+<p>The year coefficient is 0.0027 at p &lt; 0.05, for a total effect of 0.0783 between 1994 and 2023. We find an increase in volatility in funding rounds announced in this period.</p>
+<p>For both firms founded and funding rounds, the year coefficient and the $R^2$ decreased, which suggests that a large part of the effect found in previous regressions came from years between 1960 and 1993, where less data was available and estimates are probably less reliable. I would therefore conclude the results of the restricted regressions between 1994-2023 are closest to the true effects. Since the median of medians do not change significantly between the non-restricted and the restricted regressions, we may conclude that there is still a relatively strong time effect.</p>
+<h2 id="5-limitations-and-discussion">5. Limitations and Discussion</h2>
+<p>The limitations of the data and methodology chosen are as follows:</p>
+<ul>
+<li>Crunchbase's labelling of industries is done by the firms themselves, for the purpose of being easu tp search. This biases the labels towards more trendy industries. Multiple labels are also allowed, resulting in the double counting of industries. We might imagine a hypothetical trend-following startup labelling itself an AI <em>and</em> a Bitcoin startup for extra hype points. These possible biases were not corrected for in the analysis. A future study might use a different source of labelling, such as The Refinitiv Business Classification.</li>
+<li>The analysis almost certainly aggregates very different firms together in the same industry. A future study might do a deeper analysis of smaller, more specific groupings to avoid potential confounders.</li>
+<li>The analysis aggregates different classes of investors together. A potential future research question might be to ask if there are differences in hype response between e.g. venture capitalists and government investors. There may also be a bias in the funding data skewing towards seed- and early-stage venture capital funding (Niculaescu et. al (2023)).</li>
+<li>Counts of firms founded and funding rounds announced were used instead of sums of firm estimated revenue or money raised in funding rounds, as not all firms and founding rounds have monetary data. This may distort results if there are differences in trends between the counts and sums e.g. the number of funding rounds have increased, while the total money raised remained the same. A future study might use sums instead.</li>
+<li>Volatility was used as a measure of hype. This means we can't conclude that hype leads to volatility from this study, or we would be assuming our own conclusion. An alternative measure for hype might be the tendency of firms founded/funding rounds announced to follow leading investors, news events, IPOs, or other indicators. A future study might then correlate both measures.
+<ul>
+<li>It might also be interesting to study whether those indicators have gotten more or less accurate over time. One possible extension of the mental model developed in the introduction is that an increase in the surplus of funds looking for investments will result in a lot of noise in the investing environment, that further drives an over-indexing on a few signals that somewhat work. While we might expect an increase in the number of investors in the stock market to increase the liquidity and therefore the efficiency of the market, a few very large venture capital funds backed by a small number of institutional investors with increasing investment time horizons may be lumpy enough to produce unexpected effects.</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-conclusion">6. Conclusion</h3>
+<p>(...)</p>
+<h2 id="7-references">7. References</h2>
+<p>[1] Levine, M. (2024). Adam Neumann Wants We Back. Bloomberg Opinion. https://www.bloomberg.com/opinion/articles/2024-02-06/adam-neumann-wants-we-back</p>
+<p>[2] Funk, J. (2021). The Crisis of Venture Capital: Fixing America’s Broken Start-up System. American Affairs Journal. https://americanaffairsjournal.org/2021/02/the-crisis-of-venture-capital-fixing-americas-broken-start-up-system/</p>
+<p>[3] Cohen, S. S. &amp; DeLong, J. B. (2016). Concrete Economics: The Hamilton Approach to Economic Growth and Policy</p>
+<p>[4] Schumpeter, J. (1934). Theory of Economic Development. As an aside, I found Schumpeter's quote about entrepreneurship quite brilliant: &quot;The conditions under which entrepreneurs may appear - neglecting the general economic and social conditions of the competitive economy - ... may be briefly and incompletely formulated as the existence of new possibilities more advantageous from the private economic standpoint - a condition which must always be fulfilled; the limited accessibility of these possibilities because of the personal qualifications and external circumstances which are necessary; and an economic situation which allows tolerably reliable calculation. Why entrepreneurs appear under those conditions is ... the fact that anyone seizes a gain when it is immediately before his eyes&quot;</p>
+<p>[5] Guice, J. (1999) Designing the future: the culture of new trends in science and technology. Research Policy, 28(1):81-98</p>
+<p>[6] (...)</p>
+<p>[7] Hendler, J. (2008). Avoiding Another AI Winter. IEEE Intelligent Systems. 23:2-4</p>
+<p>[8] Borup, M, Brown, N, Konrad, K &amp; Van Lente, H. (2006). The Sociology of Expectations in Science and Technology. Technology Analysis &amp; Strategic Management. 18:285-298</p>
+<p>[9] Funk, J. (2019). What’s Behind Technological Hype?. Issues in Science and Technology. https://issues.org/behind-technological-hype/</p>
+<p>[10] Hu, K. (2023). ChatGPT sets record for fastest-growing user base - analyst note. Reuters. https://www.reuters.com/technology/chatgpt-sets-record-fastest-growing-user-base-analyst-note-2023-02-01/</p>
+<p>[11] Graham, P. (2012). Startup = Growth. https://paulgraham.com/growth.html. Graham distinguishes between start-ups and &quot;service businesses&quot;: &quot;Let's start with a distinction that should be obvious but is often overlooked: not every newly founded company is a startup. Millions of companies are started every year in the US. Only a tiny fraction are startups. Most are service businesses — restaurants, barbershops, plumbers, and so on. These are not startups, except in a few unusual cases. A barbershop isn't designed to grow fast. Whereas a search engine, for example, is.&quot;</p>
+<p>[12] I should note, however, that all six firms all six firms except for Amazon achieved profitability in 5-6 years, with Amazon achieving profitability in 10 years. Contrast these firms with Uber, which posted its first annual profit in 2024, after 15 years[41]. All six except for Meta were also founded before 2000, with Meta, then Facebook, being founded in 2004 (Funk, 2021)[2]. This period corresponds to the period of 2% yearly productivity growth in the mid-1990s to early 2000s, before a return to &lt;1% yearly productivity growth (Cowen, 2011)[22]. Smith (2023)[29] argues that the the 2010s tech boom resulted from the scaling of the internet, and as such, it was the firms which owned the platforms undergirding the internet profited the most from this boom</p>
+<p>[13] Mauboussin, M. J. &amp; Callahan, D. (2020). Public to Private Equity in the United States: A Long-Term Look. Morgan Stanley</p>
+<p>[14] Graham, P. (2005). A Unified Theory of VC Suckage. https://paulgraham.com/venturecapital.html. Quote: &quot;The huge investments themselves are something founders would dislike, if they realized how damaging they can be. VCs don't invest $x million because that's the amount you need, but because that's the amount the structure of their business requires them to invest. ... Google survived enormous VC funding because it could legitimately absorb large amounts of money. They had to buy a lot of servers and a lot of bandwidth to crawl the whole Web. Less fortunate startups just end up hiring armies of people to sit around having meetings.&quot;</p>
+<p>[15] Harrison, K. (2022). The Blackstone of Innovation. Investing 101 Substack. https://investing1012dot0.substack.com/p/the-blackstone-of-innovation</p>
+<p>[16] Levine, M. (2023). Private Markets Don’t Like to Go Down. Bloomberg Opinion. https://www.bloomberg.com/opinion/articles/2023-01-04/private-markets-don-t-like-to-go-down</p>
+<p>[17] Griffith, E. (2023). From Unicorns to Zombies: Tech Start-Ups Run Out of Time and Money. The New York Times. https://www.nytimes.com/2023/12/07/technology/tech-startups-collapse.html</p>
+<p>[18] Layoffs.fyi. (2024). https://layoffs.fyi/. I should note that Microsoft, Apple, Amazon, Netflix, Alphabet, and Meta contributed only 70k of those 420k layoffs, and have still grown headcounts significantly since COVID-19. (Francis &amp; Pipe, 2024)[19]. This supports the observation that &quot;Big Tech&quot; dominates the healthy parts of the tech industry. For all the bluster about disruption in the tech industry, the most successful start-ups are defined by their acquisition by &quot;Big Tech&quot; (Ginger et. al., 2023)[42].</p>
+<p>[19] Francis, T. &amp; Pipe A. (2024). Tech Layoffs Keep Coming. Why Is Head Count Barely Budging?. The Wall Street Journal. https://www.wsj.com/economy/jobs/tech-layoffs-keep-coming-why-is-head-count-barely-budging-760a314b</p>
+<p>[20] United States Nominal GDP. (2024). CEIC. https://www.ceicdata.com/en/indicator/united-states/nominal-gdp</p>
+<p>[21] Jones, R. (2022). SoftBank Vision Fund Drew Big Persian Gulf Investors. Their Bets Are Floundering. https://www.wsj.com/articles/softbank-vision-fund-drew-big-persian-gulf-investors-their-bets-are-floundering-11660500235</p>
+<p>[22] Cowen, T. (2011). The Great Stagnation: How America Ate All the Low-Hanging Fruit of Modern History, Got Sick, and Will (Eventually) Feel Better. I should note that I used a more recent paper of Cowen's as my main reference (Cowen &amp; Southwood, 2019)[43]. I cite the earlier book to show that concerns over slower productivity growth have been around for a while. The earliest I'm aware of is Gordon (2000)[44], though there are likely even earlier studies</p>
+<p>[23] Bloom, N., Jones, C. I., Reenen, J. V. &amp; Webb, M. (2020). Are Ideas Getting Harder to Find?. American Economic Review. 110(4):1104-44.</p>
+<p>[24] Pisano, Gary. (2010). The Evolution of Science-Based Business: Innovating How We Innovate. Industrial and Corporate Change. 19. 465-482. 10.2139/ssrn.1545806. Quote: &quot;Throughout much of the 20th century, a number of large US enterprises, including DuPont, Corning, Dow, General Electric, Westinghouse, Xerox, Kodak, IBM, and of course AT&amp;T, created corporate research laboratories capable of pursuing leading edge science. A small number of Nobel Prize winners in Chemistry and in Physics even came from industrial laboratories. ... Increasingly competitive markets, combined with a shift in corporate governance principles that placed greater emphasis on maximizing sort‐term shareholder returns, lead to the shuttering or curtailing of corporate research laboratories, including those at Xerox, Kodak, IBM, and GE. And even DuPont, by the 1980s, was asking its research laboratories to focus more on the commercial needs of the existing businesses.&quot; It should be noted that a shift in proportion of industry funding of R&amp;D from &quot;Research&quot; to &quot;Development&quot; does not imply an absolute decrease in basic research funding. As Smith (2022)[46] notes, basic research funding in the U.S. as a percentage of GDP has been increasing over time, with a slight federal funding decline being compensated for by funding from universities, non-profits, and industry</p>
+<p>[25] Arora, A. &amp; Gambardella A. (1994). The changing technology of technological change: general and abstract knowledge and the division of innovative labour. Research Policy. 23(5):523-532. The paper contains a fascinating description of how improved improved scientific understanding and instrumentation allowed innovation to be developed through the application of abstract knowledge, rather than trial-and-error experimentation. The authors give the Bessemeer steel-making process as an example  of how innovation developed through trial-and-error is sensitive to local context and tacit knowledge. When the process was first imported to Britain, it did not work well because, unknown to Bessemer, the ores used lacked the acidic medium the process required. By contrast, innovation developed on the basis of abstract knowledge is easier to replicate in different contexts, allowing for the division of innovative labour.</p>
+<p>[26] Guzey, A. (2019). How Life Sciences Actually Work: Findings of a Year-Long Investigation. https://guzey.com/how-life-sciences-actually-work/.</p>
+<p>[27] Garde, D. &amp; Saltzman, J. (2020). The story of mRNA: How a once-dismissed idea became a leading technology in the Covid vaccine race. STAT &amp; Boston Globe. https://www.statnews.com/2020/11/10/the-story-of-mrna-how-a-once-dismissed-idea-became-a-leading-technology-in-the-covid-vaccine-race/</p>
+<p>[28] Mast, J. (2022). Inside the multibillion-dollar, Silicon Valley-backed effort to reimagine how the world funds (and conducts) science. Endpoints News. https://endpts.com/inside-the-multibillion-dollar-silicon-valley-backed-effort-to-reimagine-how-the-world-funds-and-conducts-science/</p>
+<p>[29] Smith, N. (2023). The U.S. economy shrugged off the tech bust. Noahpinion Substack. https://www.noahpinion.blog/p/the-us-economy-shrugged-off-the-tech</p>
+<p>[30] Trading Economics (2024). United States Inflation Rate. https://tradingeconomics.com/united-states/inflation-cpi</p>
+<p>[31] Dennis, S. T. (2023). Elizabeth Warren Wants Biden’s Next Fed Pick to Counter Powell’s ‘Extreme’ Rate Hikes. Bloomberg News. https://www.bloomberg.com/news/articles/2023-03-02/elizabeth-warren-wants-biden-s-next-fed-pick-to-counter-powell-s-rate-hikes</p>
+<p>[32] (...)</p>
+<p>[33] Maestas, N., Mullen, K. J. &amp; Powell, D. (2016) The Effect of Population Aging on Economic Growth, the Labor Force and Productivity. National Bureau of Economic Research. Working paper</p>
+<p>[34] Steinert, M. &amp; Leifer, L. (2010). Scrutinizing Gartner's hype cycle approach. Picmet 2010 Technology Management for Global Economic Growth. 1-13</p>
+<p>[35] Although data is only provided up to 2013, at a first pass I do not expect that it increased after 2013. Of the 73 unicorns and ex-unicorns founded after 2013, only 6 were profitable in 2019 and 7 in 2020 (Funk, 2021)[2]. Mauboussin &amp; Callahan (2020)[13] also indicate that start-up exits by IPO have significantly higher returns than exits via M&amp;A. But it is exits via M&amp;A which have become dominant since 2000 for start-ups funded by venture capital, from about 50% in 2000 to about 10% in 2019.</p>
+<p>[36] Yang, H. &amp; Oxley, L. (2017). Are there bubbles in exchange rates? Some new evidence from G10 and emerging market economies. Economic Modelling. 64:419-442. https://doi.org/10.1016/j.econmod.2017.02.022</p>
+<p>[37] Phillips, P. C. B., Wu, Y., &amp; Yu, J. (2011). Explosive Behavior In The 1990s NASDAQ: When Did Exuberance Escalate Asset Values? International Economic Review, 52(1):201–226</p>
+<p>[38] Ofek, E. &amp; Richardson, M. (2002). Dotcom Mania: The Rise and Fall of Internet Stock Prices. Journal of Finance. 58.</p>
+<p>[39] There is something subtly tricky about this point. Namely, it's difficult to determine a priori what the idea relative speeds of hype and correction should be. Correction mechanisms which are overtuned for risk-prevention will prevent innovation (Garde, 2010)[27]. Correction mechanisms which are undertuned will encourage fraud (Funk, 2021)[2]. On the face of it, we are caught on the horns of a dilemma. However, it should be evident that more skilled start-up founders and investors are better able to recognise innovative leaps without taking undue risks, even with slower correction mechanisms. Moderna was founded in 2010, not long after the first key breakthrough in mRNA research were published in 2005 (Garde, 2010)[27]. DARPA promoted the field of neural computing/neural networks - the backbone of recent AI/ML breakthroughs like ChatGPT - only after conducting a study of R&amp;D activities in related fields involving hundreds of researchers (Guice, 1999)[5]. Funk (2021) echoes a common complaint about the lack of actual skill in large parts of the start-up ecosystem when he states: &quot;The poor performance of VCs and start-ups and the corresponding sense that they are mostly trend-chasing copycats are both indirect results of superficial training, and so part of the blame for these problems must fall on business schools and universities.&quot; The version of it I've heard is: Most start-up founders build what they know, and since most start-up founders are 20-something Ivy Leaguge graduates who don't know anything and use a lot of B2C apps, they build a lot of B2C apps.</p>
+<p>[40] Niculaescu, C., Sangiorgi, I &amp; Bell, A. (2023). A Tale of Two Crises: Venture Capital Funding During the Global Financial Crisis and Covid-19 Pandemic</p>
+<p>[41] Chowdhury, H. (2024). Uber's smooth operator Dara Khosrowshahi has done something Travis Kalanick never could: turn a profit. Business Insider. https://www.businessinsider.com/uber-ceo-dara-khosrowshahi-helped-turn-billion-dollar-profit-2024-2</p>
+<p>[42] Ginger, Z. J., Mario, L., Liad W. (2023). How Do Top Acquirers Compare in Technology Mergers? New Evidence from an S&amp;P Taxonomy. International Journal of Industrial Organization. 89</p>
+<p>[43] Cowen, T. &amp; Southwood, B. (2019). Is the Rate of Scientific Progress Slowing Down?. GMU Working Paper in Economics. 21-13</p>
+<p>[44] Gordon, R. J. (2000). Does the &quot;New Economy&quot; Measure Up to the Great Inventions of the Past?. Journal of Economic Perspectives. 14(4):49-74</p>
+<p>[45] Smith, N. (2022). America needs more basic research. Noahpinion Substack. https://www.noahpinion.blog/p/america-needs-more-basic-research</p>
+
+</body>
+</html>

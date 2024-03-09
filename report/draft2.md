@@ -2,43 +2,50 @@
 
 ## Abstract
 
-(...)
-
-## Introduction
-
->"At what price would I have refused to pay? $50? $70? While the cutoff is unclear, $34 wasn’t enough. I glumly handed over my credit card, and got even glummer when we discovered that the flavor was mediocre, too. My ice cream was none too sweet, and according to my son and daughter, the bobas tasted 'funny.' ... Most people would blame the free market for the bad result. I, in contrast, blame myself. ... **For all their wonder, free markets aren’t wonderful enough to protect people from lack of common sense**. If consumers place orders without checking prices, then cough up whatever vendors ask after the fact, the outcome will be poor."
-
-[Anatomy of a Rip-Off, 2024]
-
 In 2019, WeWork raised $1 billion from Softbank, raising its equity valuation to $47 billion. In 2023, WeWork declared bankruptcy, reducing its equity valuation to $0. WeWork founder Adam Neumann walked away with $1.7 billion in stock sales and non-recourse loans [Adam Neumann Wants We Back, 2024]. Start-up unicorns Uber, Lyft, WeWork, Pinterest, and Snapchat have consistently failed to be profitable, with Uber's cumulative losses approaching $25 billion. In other cases, as in Theranos, Luckin Coffee, and Wirecard, start-ups commited outright fraud [The Crisis of Venture Capital, 2021].
 
 The fundamental truth of economics is that resources are scarce. Therefore the job of economic actors - firms, investors, consumers, regulators - is to *usefully* allocate those scarce resources. When hype substitutes judgement of profit, potential, and loss, billions of dollars and millions of labour-hours[] are not invested into the scientific[], technological[], and organisational advances[] that make societies grow[Concrete Economics, 2016].
 
-Regular consumers of financial news may have the impression that the hyping of firms with bad fundamentals has become increasingly common in recent times. But the New York Times[] is often a poor barometer of truth. Have firm founders and start-up investors really become more prone to following hypes over time? This paper attempts to answer the question with a panel regression of firm and funding data from Crunchbase. In the panel regression, I model hype as the growth volatility variable $\beta_{i,t}$, which I regress against an index of years. Hypes, which are characterised by sharp peaks and crashes in behaviour, are well-captured by the concept of volatility, so greater growth volatility should indicate a stronger effect of hype.
+Regular consumers of financial news may have the impression that the hyping of firms with bad fundamentals has become increasingly common in recent times. But have start-up founders and investors really become more prone to following hypes over time, or is this just another popular economic myth? This paper attempts to answer the question with a panel regression of firm and funding data from Crunchbase. In the panel regression, I model hype as the growth volatility of firms founded or funding rounds raised, which I regress against an index of years. Growth volatility was chosen as the variable as interest since hypes are characterised by sharp peaks and crashes in behaviour, which is well-captured by the concept of volatility. Growth over profits has also been the explicit strategy of start-up founders and investors (...)[]. Although this strategy has become increasingly disfavoured since (...)[], I argue there may be structural factors (...).
 
-Controlling for the federal funds rate and industry fixed effects, I find that there is an effect of 0.0007 on growth volatility in firms founded per additional year between 1960 and 2023, for a total effect of 0.0441 (median of medians for each industry: 0.0357), and an effect of 0.0033 on growth volatility in funding rounds announced per additional year between 1960 and 2023, for total effect of 0.207 (median of medians: 0.0469). A more conservative estimate of effect size using a restricted time period with more reliable data finds an effect of 0.0004 in firms founded and 0.0027 in funding rounds announced between 1994 and 2023.
+Controlling for the federal funds rate and industry fixed effects, I find that there is an effect of 0.0007 on growth volatility of start-ups founded per additional year between 1960 and 2023, for a total effect of 0.0441 between the start and end year (median of medians for each industry: 0.0357), and an effect of 0.0033 on growth volatility of funding rounds raised per additional year between 1960 and 2023, for total effect of 0.207 between the start and end year (median of medians: 0.0469). A more conservative estimate of effect size using a restricted time period with more reliable data finds a per year effect of 0.0004 on growth volatility of start-ups founded and 0.0027 on growth validatity of funding rounds raised between 1994 and 2023.
 
-## Literature Review
+## Introduction
 
-### Understanding Hype
+>"At what price would I have refused to pay? $50? $70? While the cutoff is unclear, $34 wasn’t enough. I glumly handed over my credit card, and got even glummer when we discovered that the flavor was mediocre, too. My ice cream was none too sweet, and according to my son and daughter, the bobas tasted 'funny.' ... Most people would blame the free market for the bad result. I, in contrast, blame myself. ... **For all their wonder, free markets aren’t wonderful enough to protect people from lack of common sense. If consumers place orders without checking prices, then cough up whatever vendors ask after the fact, the outcome will be poor.**"
 
-To describe the change in the dynamics of hypes over time, we must first describe what hypes are.
+[Anatomy of a Rip-Off, 2024]
 
-Hypes occur when technological innovation, regulatory changes, or other historical discontinuities cause new possibilities to exist in a field, drawing entrepreneurs and investors to enter the field (Shumpeter, 1934)[]. They are therefore a natural part of technological development, driving funding of innovation and the building of communities of practitioners[Designing The Future, 1999]. But when the underlying promise of a hype is false, (...)[]. Even when the promise is true, if it is not ready to be realised, disappointment can cause a backlash against a field, damaging its nascent development[Avoiding Another AI Winter].
+To understand the change in hypes over time, we must understand what hypes are. Hypes, by themselves, are not inherently negative. Hypes occur whenever technological innovation, regulatory changes, or other historical discontinuities cause new possibilities to exist in a field, drawing entrepreneurs and investors to enter the field (Shumpeter, 1934)[]. They are therefore a natural part of technological development, driving funding of innovation and the building of communities of practitioners[Designing The Future, 1999]. But when the underlying promise of a hype is false, or even when the promise is true but too early to be realised, hypes can favour confident fraudsters at the expense of more qualified start-ups[], and disappointment can damage the development of a field[Avoiding Another AI Winter].
 
-I draw a distinction here between bubbles and hypes, though the term 'bubble' is often also used to describe what I term a 'hype'. I follow the standard definition of a bubble as a deviation of asset prices from fundamentals, and define hype more broadly as over-indexing or "following" behaviour, where individual agents act in a highly correlated way because they are following the same signal. This results in sharp peaks and crashes as supposedly individual actors all move in the same direction at once []. This definition of hype is agnostic as to whether the signal is a good measure of fundamentals.
+I draw a distinction here between bubbles and hypes, though the term 'bubble' is often also used to describe what I will term a "hype". I follow the standard definition of a bubble as a deviation of asset prices from fundamentals, and define hype more broadly as over-indexing or "herd" behaviour, where individual agents act in a highly correlated way because they are following the same signal. This results in sharp peaks and crashes as supposedly individual actors all move in the same direction at once[]. This definition of hype is agnostic as to whether the triggering signal is a good measure of fundamentals.
 
-I draw this distinction between bubbles and hypes because I will not attempt to control for fundamentals in my analysis. This is because the data I use includes a wide range of industries, and would require much more careful analysis of heterogenous fundamentals before fundamentals can be taken into account.
-
-My justification for not doing fundamentals analysis is two-fold.
+I draw this distinction between bubbles and hypes because I will not attempt to control for fundamentals in my analysis. This is because the data I use includes a wide range of industries, and would require much more careful analysis of heterogenous fundamentals before fundamentals can be taken into account. My justification for not doing fundamentals analysis are as follows.
 
 First, I believe it is reasonable to assume that any trend in hype found across a wide range of industries would be independent of industry-specific fundamentals. If we further establish that there has not been an a matching trend in returns on investment over time, it is reasonable to claim that any trend in hype is at least somewhat suspect from a fundamentals perspective. Given that there is some indication that returns on investment have been decreasing over time (...)
 
 Second, hype, or exuberance, has been studied as an explosive autoregressive process without reference to fundamentals in other contexts, such as exchange rates[Are There Bubbles In Exchange Rates?, 2017] and stock prices[Explosive Behaviour In The 1990s NASDAQ, 2011].
 
-Third, regardless of whether hypes are well-justified, understanding the dynamics and changes in dynamics of hype is empirically useful. If hype has indeed been "speeding up", one possible outcome is that the start-up ecosystem becomes more unstable, as money lurches from one industry to another, *even if each industry being funded is more deserving than the last*. In studying the dynamics of systems, relative rates of change can matter as much rates of change. Stock market bubbles can be described (...)[].
+Third, regardless of whether hypes are well-justified, understanding the dynamics and changes in dynamics of hype is empirically useful. If hype has indeed been "speeding up", one possible outcome is that the start-up ecosystem becomes more unstable, as money lurches from one industry to another, *even if each industry being funded is more deserving than the last*. In complex systems, relative rates of change can matter as much as rates of change. Stock market bubbles can be described (...)[].
 
-Fourth, describing and understanding the behaviour of hypes is viewed as necessary enough to be an industry on its own. Gartner, one of the leading consulting firms on technological strategy, with an revenue of $5.1 billion as of 2023, uses its hype cycle model to advise the R&D decisions of large companies[Scrutinising Gartner's Hype Cycle Approach, 2010].
+(Self-correcting)
+
+Fourth, economic actors care about describing and understanding the behaviour of hypes. Gartner - one of the leading consulting firms on technological strategy with an revenue of $5.1 billion as of 2023 - uses its hype cycle model to advise the R&D decisions of large companies[Scrutinising Gartner's Hype Cycle Approach, 2010].
+
+If there has been a rise in fundamentally unsound hype, we might speculate its causes:
+- (Moral hazard)
+- ()
+
+For our purposes, we do not have to (...)
+
+
+## Literature Review
+
+(...)
+
+Stock buybacks
+
+### Understanding Hype
 
 While Gartner's model is of questionable reliability, with technologies dropping in and out between years[Scrutinising Gartner's Hype Cycle Approach, 2010], I agree with its use as a conceptual baseline to deviate from in understanding hype in some of the literature I discuss below. Therefore, it is necessary to describe this model.
 
@@ -62,10 +69,6 @@ Hendley argues that these funding cuts in the 1970s resulted in a lack of new re
 
 ### In The Shadow Of The Great Stagnation
 
-If there has been a rise in fundamentally unsound hype, we might speculate its causes:
-- (...)
-
-For our purposes, we do not have to (...)
 
 Other literature provide useful context for interpretation of hype. Well-founded hype, directed on the basis on highly technical feasibility studies such as in the DARPA neural computing report should not be treated the same as speculative hype with weak empirical basis. It is difficult to evaluate whether a technology will ultimately prove fruitful and when - five decades passed between the Lighthill report declaring the failure of AI research and the public release of ChatGPT 3.5 - but it should not be impossible to determine WeWork was fundamentally a real-estate company and Uber was fundamentally a taxi-service company, with fundamentally the same cost structures [What's Behind Technological Hype, 2019]. Technology does not have to be 'soft' to be overhyped. Hyperloops [The Hyperloop Is Dead For Real This Time], which are faster but more expensive than already expensive high-speed magnetic levitation trains, provide an example of overhyped 'hard' technology and a regular reminder that 'better' technologies do not necessarily justify their added costs [This plane could cross the Atlantic in 3.5 hours. Why did it fail?, 2016].
 

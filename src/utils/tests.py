@@ -1,6 +1,17 @@
 from linearmodels.panel import PanelOLS
+import statistics
 
 import config as Config
+
+def median(map):
+  median_values = {name: series.median() for name, series in map.items()}
+  sorted_median = sorted(median_values.items(), key=lambda x: x[1], reverse=True)
+
+  print("Median values for each Series:")
+  print(sorted_median)
+
+  median_value = statistics.median(value for key, value in sorted_median)
+  print("Median value of median values:", median_value)
 
 def prep_panel(df, control=None, control_col=None):
   # Convert df to long data format for panel regression

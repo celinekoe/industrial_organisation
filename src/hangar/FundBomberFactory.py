@@ -7,7 +7,7 @@ class FundBomber(BomberFactory.Bomber):
     if refurb:
       self._refurbish(refurb)
     else:
-      self.frame = 'Funds'
+      self.frame = Labels.fund_frame
       self.year_col = Labels.fund_announced_year
       self.month_col = Labels.fund_announced_month
       self.scout(funds)
